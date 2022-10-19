@@ -10,6 +10,7 @@ module.exports = {
     siteUrl: `https://github.com/MTraveller`,
   },
   plugins: [
+    `gatsby-plugin-netlify`,
     `gatsby-plugin-postcss`,
     `gatsby-plugin-image`,
     {
