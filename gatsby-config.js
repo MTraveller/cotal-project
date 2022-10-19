@@ -10,7 +10,6 @@ module.exports = {
     siteUrl: `https://github.com/MTraveller`,
   },
   plugins: [
-    `gatsby-plugin-netlify`,
     `gatsby-plugin-postcss`,
     `gatsby-plugin-image`,
     {
@@ -25,5 +24,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-styled-components`,
     },
+    `gatsby-plugin-netlify`,
+    "gatsby-plugin-vercel-deploy",
   ],
 };
