@@ -1,3 +1,7 @@
+const dotenv = require("dotenv");
+
+dotenv.config({ path: "src/api/.env" });
+
 module.exports = {
   siteMetadata: {
     title: `Cotal - Connecting Talent`,
