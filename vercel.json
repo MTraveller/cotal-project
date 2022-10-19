@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/users/_user",
+      "destination": "/pages/users/[slug].js"
+    }
+  ]
+}
