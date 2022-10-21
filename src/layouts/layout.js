@@ -5,12 +5,14 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import * as React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import * as React from "react";
+import PropTypes from "prop-types";
+import { useStaticQuery, graphql } from "gatsby";
+import { ToastContainer } from "react-toastify";
 
-import Header from "./header"
-import "./layout.css"
+import Header from "../components/header";
+import "react-toastify/dist/ReactToastify.min.css";
+import "./layout.css";
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -21,10 +23,11 @@ const Layout = ({ children }) => {
         }
       }
     }
-  `)
+  `);
 
   return (
     <>
+      <ToastContainer />
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <div
         style={{
@@ -43,14 +46,16 @@ const Layout = ({ children }) => {
           © {new Date().getFullYear()} &middot; Built with
           {` `}
           <a href="https://www.gatsbyjs.com">Gatsby</a>
+          {` - `} Made by{` `}
+          <a href="https://github.com/MTraveller">@MTraveller</a>
         </footer>
       </div>
     </>
-  )
-}
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
-export default Layout
+export default Layout;
