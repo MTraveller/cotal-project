@@ -3,7 +3,7 @@ import { Link } from "gatsby";
 
 import http from "../../services/httpService";
 import Seo from "../../components/seo";
-import config from "../../config.json";
+import { apiUrl } from "../../config.json";
 
 const UserPage = ({ serverData }) => {
   if (!serverData.message) {
@@ -59,9 +59,7 @@ export default UserPage;
 
 export async function getServerData({ params }) {
   try {
-    const res = await http.get(
-      `${config.apiEndpoint}/profiles/${params.slug}/`
-    );
+    const res = await http.get(`${apiUrl}/profiles/${params.slug}/`);
 
     return {
       props: res.data,
