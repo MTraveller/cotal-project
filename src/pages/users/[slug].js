@@ -1,46 +1,79 @@
 import * as React from "react";
 import { Link } from "gatsby";
 
-import Layout from "../../components/layout";
+import http from "../../services/httpService";
 import Seo from "../../components/seo";
+import config from "../../config.json";
 
 const UserPage = ({ serverData }) => {
-  console.log(serverData);
-  return (
-    <>
-      <Seo title={`${serverData.slug}`} />;
-      <Layout>
-        <h1>
-          This page is <b>User Page</b>
-        </h1>
+  if (!serverData.message) {
+    console.log("HELLO - serverData");
+    console.log(serverData);
+
+    if (!serverData.detail) {
+      return (
+        <>
+          <Seo
+            title={serverData?.slug ? serverData.slug : serverData?.detail}
+          />
+          <h1>
+            This page is <b>User Page</b>
+          </h1>
+          <p>
+            This page is for the user{" "}
+            <code>
+              {serverData?.slug ? serverData.slug : serverData?.detail}
+            </code>{" "}
+            on the DRF db.
+          </p>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Seo title={serverData.detail} />
+          <h1>Oops.. User does not exist!</h1>
+          <p>
+            Error: <code>{serverData.detail}</code>
+          </p>
+          <br />
+          <Link to="/">Go back to the homepage</Link>
+        </>
+      );
+    }
+  } else {
+    return (
+      <>
+        <Seo title={`Error`} />
+        <h1>Sorry an unexpected error happened.</h1>
         <p>
-          This page is for the user <code>{serverData.slug}</code> on the DRF
-          db.
+          Error: <code>{serverData.message}</code>
         </p>
         <Link to="/">Go back to the homepage</Link>
-      </Layout>
-    </>
-  );
+      </>
+    );
+  }
 };
 
 export default UserPage;
 
-export async function getServerData(props) {
+export async function getServerData({ params }) {
   try {
-    const res = await fetch(
-      `http://127.0.0.1:3000/rest/profiles/${props.params.slug}/`
+    const res = await http.get(
+      `${config.apiEndpoint}/profiles/${params.slug}/`
     );
-    if (!res.ok) {
-      throw new Error(`Response failed`);
+
+    return {
+      props: res.data,
+    };
+  } catch (ex) {
+    if (ex.response && ex.response.data) {
+      return {
+        props: ex.response.data,
+      };
     }
     return {
-      props: await res.json(),
-    };
-  } catch (error) {
-    return {
-      status: 500,
-      headers: {},
-      props: {},
+      props: ex,
     };
   }
 }
