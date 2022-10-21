@@ -1,13 +1,13 @@
-import * as React from "react";
-import { Link } from "gatsby";
+import * as React from 'react';
+import { Link } from 'gatsby';
 
-import http from "../../services/httpService";
-import Seo from "../../components/seo";
-import { apiUrl } from "../../config.json";
+import http from '../../services/httpService';
+import Seo from '../../components/seo';
+import { apiUrl } from '../../config.json';
 
 const UserPage = ({ serverData }) => {
   if (!serverData.message) {
-    console.log("HELLO - serverData");
+    console.log('UserPage');
     console.log(serverData);
 
     if (!serverData.detail) {
@@ -20,10 +20,10 @@ const UserPage = ({ serverData }) => {
             This page is <b>User Page</b>
           </h1>
           <p>
-            This page is for the user{" "}
+            This page is for the user{' '}
             <code>
               {serverData?.slug ? serverData.slug : serverData?.detail}
-            </code>{" "}
+            </code>{' '}
             on the DRF db.
           </p>
         </>
