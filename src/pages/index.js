@@ -1,12 +1,22 @@
-import * as React from "react";
-import Seo from "../components/seo";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Seo from '../components/seo';
+import LoginForm from '../components/LoginForm';
 
-const IndexPage = () => (
-  <>
-    <Seo title="Home" />
-    <h1>Welcome to Cotal</h1>
-  </>
-);
+const DivStyles = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  align-items: center;
+`;
+
+const IndexPage = () => {
+  return (
+    <DivStyles>
+      <h1>Welcome to Cotal</h1>
+      <LoginForm />
+    </DivStyles>
+  );
+};
 
 export const Head = () => <Seo title="Home" />;
 
