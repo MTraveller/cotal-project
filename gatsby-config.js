@@ -25,5 +25,11 @@ module.exports = {
       resolve: `gatsby-plugin-styled-components`,
     },
     `gatsby-plugin-netlify`,
+    {
+      resolve: `gatsby-plugin-layout`,
+      options: {
+        component: require.resolve(`./src/layouts/layout`),
+      },
+    },
   ],
 };
