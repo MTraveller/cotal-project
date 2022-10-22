@@ -1,6 +1,4 @@
-const dotenv = require("dotenv");
-
-dotenv.config({ path: "src/api/.env" });
+require('dotenv').config();
 
 module.exports = {
   siteMetadata: {
