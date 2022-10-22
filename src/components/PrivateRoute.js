@@ -8,6 +8,7 @@ import { isLoggedIn } from '../services/authService';
 const PrivateRoute = ({ component: Component, location, ...rest }) => {
   if (!isLoggedIn() && location.pathname !== `/`) {
     navigate('/');
+    console.log('NOT LOGGED IN!');
     return null;
   }
 
