@@ -5,7 +5,10 @@ const apiEndpoint = `${process.env.API_URL}/auth/jwt/create`;
 /*  Initial auth service from Gatsby's tutorial:
  *  https://www.gatsbyjs.com/tutorial/authentication-tutorial/
  */
-export const isBrowser = () => typeof window !== 'undefined';
+export const isBrowser = () => {
+  const hasWindow = typeof window !== 'undefined' ? true : false;
+  return hasWindow;
+};
 
 export const getUser = () =>
   isBrowser() && window.localStorage.getItem('cotalUser')
