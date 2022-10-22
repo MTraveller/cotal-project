@@ -1,6 +1,6 @@
 import React from 'react';
 import { navigate } from 'gatsby';
-import { isLoggedIn } from '../services/auth';
+import { isLoggedIn } from '../services/authService';
 
 // Private route from Gatsby's
 // private route example, source:
