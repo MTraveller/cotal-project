@@ -4,7 +4,7 @@ import { Link } from 'gatsby';
 import http from '../../services/httpService';
 import Seo from '../../components/seo';
 
-const UserPage = ({ serverData }) => {
+function UserPage({ serverData }) {
   if (!serverData.message) {
     console.log('UserPage');
     console.log(serverData);
@@ -52,7 +52,7 @@ const UserPage = ({ serverData }) => {
       </>
     );
   }
-};
+}
 
 export default UserPage;
 

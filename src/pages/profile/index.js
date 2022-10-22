@@ -10,7 +10,7 @@ const DivStyles = styled.div`
   align-items: center;
 `;
 
-const ProfilePage = () => {
+function ProfilePage() {
   return (
     <>
       <DivStyles>
@@ -23,7 +23,7 @@ const ProfilePage = () => {
       </Router>
     </>
   );
-};
+}
 
 export const Head = () => <Seo title="Profile" />;
 
