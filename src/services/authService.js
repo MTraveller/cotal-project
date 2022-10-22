@@ -1,7 +1,6 @@
 import http from './httpService';
-import { apiUrl } from '../config.json';
 
-const apiEndpoint = `${apiUrl}/auth/jwt/create`;
+const apiEndpoint = `${process.env.API_URL}/auth/jwt/create`;
 
 export function login(email, password) {
   return http.post(apiEndpoint, {
