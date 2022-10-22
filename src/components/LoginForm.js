@@ -1,8 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Joi from 'joi';
 
 const LoginForm = () => {
+  const [account, setAccount] = useState({
+    email: '',
+    password: '',
+  });
+
+  const schema = Joi.object({
+    email: Joi.string().email({
+      minDomainSegments: 2,
+      tlds: { allow: false },
+    }),
+    password: Joi.string()
+      .pattern(new RegExp('^[a-zA-Z0-9]{6,30}$'))
+      .required(),
+  });
+
+  //TODO: validate login form!
+  const validate = () => {};
+
+  const handleChange = ({ currentTarget: input }) => {
+    setAccount({ ...account, [input.name]: input.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Submit Clicked!');
+    const { email, password } = account;
+    //login(email, password)
+  };
+
   return (
-    <form className="mt-8 space-y-6">
+    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
       {/* 
       Initial form sourced from: 
       https://tailwindui.com/components/application-ui/forms/sign-in-forms
@@ -17,11 +47,13 @@ const LoginForm = () => {
             id="email-address"
             name="email"
             type="email"
+            value={account.email}
             autoComplete="email"
             autoFocus
             required
             className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             placeholder="Email address"
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -32,10 +64,12 @@ const LoginForm = () => {
             id="password"
             name="password"
             type="password"
+            value={account.password}
             autoComplete="current-password"
             required
             className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             placeholder="Password"
+            onChange={handleChange}
           />
         </div>
       </div>
