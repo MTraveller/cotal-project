@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Seo from '../components/seo';
 import LoginForm from '../components/LoginForm';
