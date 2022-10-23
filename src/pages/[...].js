@@ -3,16 +3,14 @@ import { Router } from '@reach/router';
 import PrivateRoute from '../components/PrivateRoute';
 import Feed from '../components/Feed';
 import ProfileDetail from '../components/ProfileDetail';
+import NotFoundPage from './404';
 
-const endPoints = ['/feed/', '/profile/me/'];
-
-const App = ({ location }) => {
-  const path = location.pathname;
-  if (!endPoints.includes(path)) console.log('Not Included');
+const App = () => {
   return (
     <Router>
       <PrivateRoute path="/feed/" component={Feed} />
       <PrivateRoute path="/profile/me/" component={ProfileDetail} />
+      <NotFoundPage default />
     </Router>
   );
 };
