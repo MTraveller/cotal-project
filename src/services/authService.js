@@ -37,7 +37,7 @@ export const handleLogin = async (email, password) => {
 
 export const isLoggedIn = () => {
   let user = getUser();
-  if (!user?.access) return !user?.access;
+  if (user?.access) return !!user?.access;
 
   http
     .get(apiTestTokenEndpoint, {
@@ -46,7 +46,7 @@ export const isLoggedIn = () => {
       },
     })
     .catch((ex) => {
-      if (ex.response.status === 401) {
+      if (ex.response.status === 401 && user?.access) {
         http
           .post(apiRefreshEndpoint, {
             refresh: user.refresh,
@@ -58,8 +58,9 @@ export const isLoggedIn = () => {
             setUser(user);
           });
       }
-    });
 
+      return null;
+    });
   return !!user.access;
 };
 
