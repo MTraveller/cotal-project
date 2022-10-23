@@ -40,13 +40,11 @@ export const isLoggedIn = async () => {
 
   let res = '';
   try {
-    if (user.access) {
-      res = await http.get(apiTestMeEndpoint, {
-        headers: {
-          Authorization: `JWT ${user.access}`,
-        },
-      });
-    }
+    res = await http.get(apiTestMeEndpoint, {
+      headers: {
+        Authorization: `JWT ${user.access}`,
+      },
+    });
   } catch (ex) {
     if (user.access && ex.response.data.messages[0].message) {
       res = await http.post(apiRefreshEndpoint, {
