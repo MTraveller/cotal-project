@@ -1,11 +1,11 @@
 import React from 'react';
 import { Router } from '@reach/router';
 import PrivateRoute from '../components/PrivateRoute';
-import ProfileDetails from '../components/ProfileDetails';
+import ProfileDetail from '../components/ProfileDetail';
 
-const Profile = () => (
+const Profile = (rest) => (
   <Router>
-    <PrivateRoute path="/profile/me" component={ProfileDetails} />
+    <PrivateRoute path="/profile/me" component={ProfileDetail} {...rest} />
   </Router>
 );
 
