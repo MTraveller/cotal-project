@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Joi from 'joi';
+import { handleLogin } from '../services/authService';
 
 const LoginForm = () => {
   const [account, setAccount] = useState({
@@ -26,9 +27,8 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submit Clicked!');
     const { email, password } = account;
-    //login(email, password)
+    handleLogin(email, password);
   };
 
   return (
