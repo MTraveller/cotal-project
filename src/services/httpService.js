@@ -10,7 +10,7 @@ axios.interceptors.response.use(null, error => {
   
   if (!expectedError) {
     toast.error(
-      "Woah.. An unexpected error, please try again! Contact us if the issue persists: https://cotal.com/contact"
+      `Woah.. An unexpected error, ${error.message}! Contact us if the issue persists: support@cotal.com`
     );
   }
 
