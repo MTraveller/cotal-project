@@ -1,5 +1,6 @@
 import React from 'react';
 import { navigate } from 'gatsby';
+import { toast } from 'react-toastify';
 import { isLoggedIn } from '../services/authService';
 
 // Private route from Gatsby's
@@ -8,6 +9,7 @@ import { isLoggedIn } from '../services/authService';
 const PrivateRoute = ({ component: Component, location, ...rest }) => {
   if (!isLoggedIn() && location.pathname !== `/`) {
     navigate('/');
+    toast('Please login, to continue.');
     return null;
   }
 
