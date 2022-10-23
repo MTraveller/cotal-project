@@ -4,11 +4,9 @@ import { Link } from 'gatsby';
 import http from '../services/httpService';
 import Seo from './seo';
 
-const ProfileDetails = async () => {
-  const res = await http.get(`${process.env.API_URL}/profiles/me/`);
+const ProfileDetail = (rest) => {
   console.log('ProfileDetails');
-  console.log(res);
-
+  console.log(rest);
   return (
     <>
       <Seo title="Me" />
@@ -16,10 +14,10 @@ const ProfileDetails = async () => {
         This page is <b>User Page</b>
       </h1>
       <p>
-        This page is for the user <code>{res.statusText}</code> on the DRF db.
+        This page is for the user <code>hello</code> on the DRF db.
       </p>
     </>
   );
 };
 
-export default ProfileDetails;
+export default ProfileDetail;
