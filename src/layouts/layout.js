@@ -1,18 +1,11 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import { useStaticQuery, graphql } from 'gatsby';
+import { ToastContainer } from 'react-toastify';
 
-import * as React from "react";
-import PropTypes from "prop-types";
-import { useStaticQuery, graphql } from "gatsby";
-import { ToastContainer } from "react-toastify";
-
-import Header from "../components/header";
-import "react-toastify/dist/ReactToastify.min.css";
-import "./layout.css";
+import Header from '../components/header';
+import 'react-toastify/dist/ReactToastify.min.css';
+import './layout.css';
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
