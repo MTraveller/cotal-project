@@ -5,7 +5,7 @@ import Feed from '../components/Feed';
 import ProfileDetail from '../components/ProfileDetail';
 import NotFoundPage from './404';
 
-const App = () => {
+function App() {
   return (
     <Router>
       <PrivateRoute path="/feed/" component={Feed} />
@@ -13,6 +13,6 @@ const App = () => {
       <NotFoundPage default />
     </Router>
   );
-};
+}
 
 export default App;
