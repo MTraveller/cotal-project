@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Joi from 'joi';
+import { navigate } from 'gatsby';
+import { globalHistory } from '@gatsbyjs/reach-router/lib/history';
 import { handleLogin } from '../services/authService';
 
 const LoginForm = () => {
@@ -25,10 +27,11 @@ const LoginForm = () => {
     setAccount({ ...account, [input.name]: input.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = account;
-    handleLogin(email, password);
+    await handleLogin(email, password);
+    navigate(globalHistory.location.pathname);
   };
 
   return (
