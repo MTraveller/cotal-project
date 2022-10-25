@@ -5,9 +5,9 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import * as React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import { useStaticQuery, graphql } from 'gatsby';
 
 function Seo({ description, title, children }) {
   const { site } = useStaticQuery(
@@ -22,10 +22,10 @@ function Seo({ description, title, children }) {
         }
       }
     `
-  )
+  );
 
-  const metaDescription = description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
+  const metaDescription = description || site.siteMetadata.description;
+  const defaultTitle = site.siteMetadata?.title;
 
   return (
     <>
@@ -40,16 +40,16 @@ function Seo({ description, title, children }) {
       <meta name="twitter:description" content={metaDescription} />
       {children}
     </>
-  )
+  );
 }
 
 Seo.defaultProps = {
   description: ``,
-}
+};
 
 Seo.propTypes = {
   description: PropTypes.string,
   title: PropTypes.string.isRequired,
-}
+};
 
-export default Seo
+export default Seo;
