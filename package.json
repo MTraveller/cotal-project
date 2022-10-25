@@ -1,16 +1,15 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "cotal",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Cotal is a social networking app for junior talents to connect.",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Mahmoud Tantouri https://linkedin.com/in/mtantouri",
   "dependencies": {
     "axios": "^1.1.3",
     "babel-plugin-styled-components": "^2.0.7",
     "dotenv": "^16.0.3",
     "gatsby": "^4.24.0",
     "gatsby-plugin-image": "^2.24.0",
-    "gatsby-plugin-layout": "^3.24.0",
     "gatsby-plugin-manifest": "^4.24.0",
     "gatsby-plugin-netlify": "^5.0.1",
     "gatsby-plugin-sharp": "^4.24.0",
@@ -27,12 +26,12 @@
   "devDependencies": {
     "autoprefixer": "^10.4.12",
     "gatsby-plugin-postcss": "^5.24.0",
-    "postcss": "^8.4.17",
+    "postcss": "^8.4.18",
     "prettier": "^2.7.1",
-    "tailwindcss": "^3.1.8"
+    "tailwindcss": "^3.2.1"
   },
   "keywords": [
-    "gatsby"
+    "cotal"
   ],
   "license": "0BSD",
   "scripts": {
@@ -46,9 +45,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/MTraveller/cotal"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/MTraveller/cotal/issues"
   }
 }
