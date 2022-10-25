@@ -9,7 +9,7 @@ function UserPage({ serverData }) {
     console.log('UserPage');
     console.log(serverData);
 
-    if (!serverData.detail) {
+    if (!serverData?.detail) {
       return (
         <>
           <Seo
