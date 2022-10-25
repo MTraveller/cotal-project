@@ -9,11 +9,10 @@ const apiTestTokenEndpoint = `${process.env.API_URL}/`;
  */
 export const isBrowser = () => typeof window !== 'undefined';
 
-export const getUser = () => {
-  return isBrowser() && window.localStorage.getItem('cotalUser')
+export const getUser = () =>
+  isBrowser() && window.localStorage.getItem('cotalUser')
     ? JSON.parse(window.localStorage.getItem('cotalUser'))
     : {};
-};
 
 const setUser = (user) =>
   window.localStorage.setItem('cotalUser', JSON.stringify(user));
@@ -37,7 +36,7 @@ export const handleLogin = async (email, password) => {
 
 export const isLoggedIn = () => {
   let user = getUser();
-  if (user?.access) return !!user?.access;
+  if (user?.access === undefined) return null;
 
   http
     .get(apiTestTokenEndpoint, {
@@ -61,6 +60,7 @@ export const isLoggedIn = () => {
 
       return null;
     });
+
   return !!user.access;
 };
 
