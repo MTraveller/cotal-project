@@ -4,7 +4,7 @@ module.exports = {
   siteMetadata: {
     title: `Cotal - Connecting Talent`,
     description: `Cotal is where talents gather to reach a common goal, to connect with like minded people and join forces with one another.`,
-    author: `@MTraveller`,
+    author: `Mahmoud Tantouri`,
     siteUrl: `https://github.com/MTraveller`,
   },
   plugins: [
@@ -20,14 +20,20 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
-      resolve: `gatsby-plugin-styled-components`,
-    },
-    `gatsby-plugin-netlify`,
-    {
-      resolve: `gatsby-plugin-layout`,
+      resolve: `gatsby-plugin-manifest`,
       options: {
-        component: require.resolve(`./src/layouts/layout`),
+        name: `cotal`,
+        short_name: `cotal`,
+        start_url: `/`,
+        background_color: `#663399`,
+        // This will impact how browsers show your PWA/website
+        // https://css-tricks.com/meta-theme-color-and-trickery/
+        // theme_color: `#663399`,
+        display: `minimal-ui`,
+        icon: `src/images/fff.png`, // This path is relative to the root of the site.
       },
     },
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-netlify`,
   ],
 };
