@@ -2,7 +2,6 @@ import * as React from 'react';
 // import { Link } from 'gatsby';
 
 // import http from '../services/httpService';
-import ClientOnly from '../../hooks/ClientOnly';
 import Seo from '../Seo';
 
 const Feed = (rest) => {
