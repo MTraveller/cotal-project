@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import Joi from 'joi';
 import { navigate } from 'gatsby';
 import { globalHistory } from '@gatsbyjs/reach-router/lib/history';
-import { handleLogin } from '../services/authService';
+import { handleLogin } from '../../services/authService';
 
 const Login = () => {
   const [account, setAccount] = useState({

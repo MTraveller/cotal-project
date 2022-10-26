@@ -2,7 +2,7 @@ import * as React from 'react';
 // import { Link } from 'gatsby';
 
 // import http from '../services/httpService';
-import Seo from './seo';
+import Seo from '../Seo';
 
 const ProfileDetail = (rest) => {
   // console.log('ProfileDetails');
