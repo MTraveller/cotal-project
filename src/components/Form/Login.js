@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 // import Joi from 'joi';
+import { toast } from 'react-toastify';
 import { navigate } from 'gatsby';
 import { globalHistory } from '@gatsbyjs/reach-router/lib/history';
+
 import { handleLogin } from '../../services/authService';
 
 const Login = () => {
+  const previousPath = globalHistory.location.pathname;
+
   const [account, setAccount] = useState({
     email: '',
     password: '',
@@ -29,9 +33,14 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    toast.dismiss();
+
     const { email, password } = account;
     await handleLogin(email, password);
-    navigate(globalHistory.location.pathname);
+
+    if (previousPath === `/`) return navigate(`/feed/`);
+
+    return navigate(previousPath);
   };
 
   return (
