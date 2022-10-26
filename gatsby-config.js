@@ -33,6 +33,7 @@ module.exports = {
         icon: `src/images/fff.png`, // This path is relative to the root of the site.
       },
     },
+    `gatsby-plugin-layout`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-netlify`,
   ],
