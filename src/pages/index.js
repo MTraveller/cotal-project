@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import LoginForm from '../components/LoginForm';
-import Seo from '../components/seo';
+import Login from '../components/Form/Login';
+import Seo from '../components/Seo';
 
 const DivStyles = styled.div`
   display: grid;
@@ -10,15 +10,13 @@ const DivStyles = styled.div`
   align-items: center;
 `;
 
-function IndexPage() {
+export default function IndexPage() {
   return (
     <DivStyles>
       <h1>Welcome to Cotal</h1>
-      <LoginForm />
+      <Login />
     </DivStyles>
   );
 }
 
 export const Head = () => <Seo title="Home" />;
-
-export default IndexPage;
