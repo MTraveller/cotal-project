@@ -8,8 +8,8 @@ import { isLoggedIn } from '../services/authService';
 // https://www.gatsbyjs.com/docs/how-to/routing/client-only-routes-and-user-authentication/
 const PrivateRoute = ({ component: Component, location, ...rest }) => {
   if (!isLoggedIn() && location.pathname !== `/`) {
-    navigate('/');
-    toast('Please login, to continue.');
+    navigate(`/`);
+    toast(`Please login, to continue.`);
     return null;
   }
 
