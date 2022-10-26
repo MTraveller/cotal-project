@@ -1,10 +1,11 @@
 import React from 'react';
-import { Router } from '@gatsbyjs/reach-router';
+import { Router } from '@reach/router';
 
 import PrivateRoute from '../components/PrivateRoute';
-import Feed from '../components/Feed';
+import Feed from '../components/Page/Feed';
 import ProfileDetail from '../components/ProfileDetail';
 import NotFoundPage from './404';
+import IndexPage from '.';
 
 function App({ params }) {
   const currentPath = params['*'];
@@ -13,6 +14,7 @@ function App({ params }) {
     <Router>
       <PrivateRoute path="/feed/" component={Feed} />
       <PrivateRoute path="/profile/me/" component={ProfileDetail} />
+      <IndexPage path="/" />
       <NotFoundPage path={`/${currentPath}`} />
     </Router>
   );
