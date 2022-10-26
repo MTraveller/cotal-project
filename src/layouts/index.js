@@ -4,7 +4,8 @@ import { useStaticQuery, graphql } from 'gatsby';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
-import Header from '../components/header';
+import Header from '../components/Layout/Header';
+import ClientOnly from '../hooks/ClientOnly';
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -18,31 +19,20 @@ const Layout = ({ children }) => {
   `);
 
   return (
-    <>
+    <ClientOnly>
       <ToastContainer />
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: `var(--size-content)`,
-          padding: `var(--size-gutter)`,
-        }}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `var(--space-5)`,
-            fontSize: `var(--font-sm)`,
-          }}
-        >
-          © {new Date().getFullYear()} &middot; Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-          {` - `} Made by{` `}
-          <a href="https://github.com/MTraveller">@MTraveller</a>
-        </footer>
-      </div>
-    </>
+
+      <main>{children}</main>
+
+      <footer>
+        © {new Date().getFullYear()} &middot; Built with
+        {` `}
+        <a href="https://www.gatsbyjs.com">Gatsby</a>
+        {` - `} Made by{` `}
+        <a href="https://github.com/MTraveller">@MTraveller</a>
+      </footer>
+    </ClientOnly>
   );
 };
 
