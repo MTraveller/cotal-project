@@ -9,11 +9,9 @@ axios.interceptors.response.use(null, error => {
     error.response.status < 500;
   
   if (!expectedError) {
-    toast.error(
-      `Woah.. An unexpected error, ${error.message}! Contact us if the issue persists: support@cotal.com`
-    );
+    // TODO: hookup to sentry to capture all unexpected errors!
   }
-
+  
   return Promise.reject(error);
 });
 
