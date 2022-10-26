@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+
 import http from './httpService';
 
 const apiLoginEndpoint = `${process.env.API_URL}/auth/jwt/create/`;
@@ -18,12 +20,24 @@ const setUser = (user) =>
   window.localStorage.setItem('cotalUser', JSON.stringify(user));
 
 export const handleLogin = async (email, password) => {
-  const res = await http.post(apiLoginEndpoint, {
-    email,
-    password,
-  });
+  const res = await http
+    .post(apiLoginEndpoint, {
+      email,
+      password,
+    })
+    .catch((ex) => {
+      if (ex.code === 'ERR_NETWORK') {
+        toast.error(
+          `${ex.message}: This most likely means that our server is currently offline. Please try again later!`
+        );
+      } else if (ex.code === 'ERR_BAD_REQUEST') {
+        toast.warn(`
+          Email and password did not match, please try again!
+        `);
+      }
+    });
 
-  if (res.statusText === 'OK') {
+  if (res?.statusText === 'OK') {
     const data = res.data;
     return setUser({
       access: data.access,
