@@ -13,7 +13,7 @@ function App({ params }) {
   return (
     <Router>
       <PrivateRoute path="/feed/" component={Feed} />
-      <PrivateRoute path="/profile/me/" component={ProfileDetail} />
+      <PrivateRoute path="/profile/" component={ProfileDetail} />
       <IndexPage path="/" />
       <NotFoundPage path={`/${currentPath}`} />
     </Router>
