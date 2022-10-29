@@ -1,84 +1,64 @@
+import { useContext } from 'react';
 import { toast } from 'react-toastify';
 
 import http from './httpService';
+import userLoginHandler from '../api/users/authenticate';
+import { UserContext } from '../context/UserContext';
 
-const apiLoginEndpoint = `${process.env.API_URL}/auth/jwt/create/`;
 const apiRefreshEndpoint = `${process.env.API_URL}/auth/jwt/refresh/`;
 const apiTestTokenEndpoint = `${process.env.API_URL}/`;
 
-/*  Initial auth service from Gatsby's tutorial:
+/**
+ *  Initial auth service from Gatsby's tutorial:
  *  https://www.gatsbyjs.com/tutorial/authentication-tutorial/
  */
-export const isBrowser = () => typeof window !== 'undefined';
+export const isBrowser = () => typeof window !== `undefined`;
 
 export const getUser = () =>
-  isBrowser() && window.localStorage.getItem('cotalUser')
-    ? JSON.parse(window.localStorage.getItem('cotalUser'))
+  isBrowser() && window.localStorage.getItem(`cotalUser`)
+    ? JSON.parse(window.localStorage.getItem(`cotalUser`))
     : {};
 
 const setUser = (user) =>
-  window.localStorage.setItem('cotalUser', JSON.stringify(user));
+  window.localStorage.setItem(`cotalUser`, JSON.stringify(user));
 
 export const handleLogin = async (email, password) => {
-  const res = await http
-    .post(apiLoginEndpoint, {
-      email,
-      password,
-    })
-    .catch((ex) => {
-      if (ex.code === 'ERR_NETWORK') {
-        toast.error(
-          `${ex.message}: This most likely means that our server is currently offline. Please try again later!`
-        );
-      } else if (ex.code === 'ERR_BAD_REQUEST') {
-        toast.warn(`
-          Email and password did not match, please try again!
-        `);
-      }
+  toast.dismiss();
+  const res = await userLoginHandler({ email, password });
+  console.log(`handleLogin`);
+  console.log(res);
+
+  if (res.code === `ERR_NETWORK`) {
+    toast.error(
+      `${res.message}: 
+      This most likely means that our server 
+      is currently offline. Please try again later!`
+    );
+  } else if (res.code === `ERR_BAD_REQUEST`) {
+    toast.warn(`
+      ${res.response.data.detail}!
+    `);
+  }
+
+  if (res?.statusText === `OK`) {
+    const { access, refresh } = res.data;
+    setUser({
+      access,
+      refresh,
     });
 
-  if (res?.statusText === 'OK') {
-    const data = res.data;
-    return setUser({
-      access: data.access,
-      refresh: data.refresh,
-    });
+    return true;
   }
 
   return false;
 };
 
 export const isLoggedIn = () => {
-  let user = getUser();
-  if (user?.access === undefined) return null;
+  const GetIsLoggedIn = () => useContext(UserContext).isLoggedIn;
 
-  http
-    .get(apiTestTokenEndpoint, {
-      headers: {
-        Authorization: `JWT ${user.access}`,
-      },
-    })
-    .catch((ex) => {
-      if (ex.response.status === 401 && user?.access) {
-        http
-          .post(apiRefreshEndpoint, {
-            refresh: user.refresh,
-          })
-          .then((res) => {
-            user['access'] = res.data.access;
-          })
-          .finally(() => {
-            setUser(user);
-          });
-      }
-
-      return null;
-    });
-
-  return !!user.access;
+  return GetIsLoggedIn();
 };
 
-export const handleLogout = (callback) => {
-  setUser({});
-  callback();
+export const handleLogout = () => {
+  return window.localStorage.removeItem('cotalUser');
 };
