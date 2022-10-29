@@ -1,12 +1,8 @@
 import { useContext } from 'react';
 import { toast } from 'react-toastify';
 
-import http from './httpService';
 import userLoginHandler from '../api/users/authenticate';
 import { UserContext } from '../context/UserContext';
-
-const apiRefreshEndpoint = `${process.env.API_URL}/auth/jwt/refresh/`;
-const apiTestTokenEndpoint = `${process.env.API_URL}/`;
 
 /**
  *  Initial auth service from Gatsby's tutorial:
