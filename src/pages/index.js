@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { navigate } from 'gatsby';
 
 import Login from '../components/Form/Login';
 import Seo from '../components/Seo';
+import { isLoggedIn } from '../services/authService';
 
 const DivStyles = styled.div`
   display: grid;
@@ -11,7 +13,9 @@ const DivStyles = styled.div`
 `;
 
 export default function IndexPage() {
-  return (
+  return isLoggedIn() ? (
+    navigate(`/feed/`)
+  ) : (
     <DivStyles>
       <h1>Welcome to Cotal</h1>
       <Login />
