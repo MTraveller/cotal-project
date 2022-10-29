@@ -13,9 +13,9 @@
  *  for a perfect explanation of this issue and how to fix it.
  */
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function ClientOnly({ children }) {
+const ClientOnly = ({ children }) => {
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
@@ -25,4 +25,6 @@ export default function ClientOnly({ children }) {
   if (!hasMounted) return null;
 
   return children;
-}
+};
+
+export default ClientOnly;
