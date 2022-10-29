@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 // import Joi from 'joi';
-import { toast } from 'react-toastify';
 import { navigate } from 'gatsby';
 import { globalHistory } from '@gatsbyjs/reach-router/lib/history';
 
@@ -33,14 +32,13 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    toast.dismiss();
 
     const { email, password } = account;
-    await handleLogin(email, password);
+    const loginRes = await handleLogin(email, password);
 
-    if (previousPath === `/`) return navigate(`/feed/`);
+    if (loginRes && previousPath === `/`) return navigate(`/feed/`);
 
-    return navigate(previousPath);
+    return null;
   };
 
   return (
