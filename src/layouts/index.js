@@ -4,10 +4,12 @@ import { useStaticQuery, graphql } from 'gatsby';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
-import Header from '../components/Layout/Header';
 import ClientOnly from '../hooks/ClientOnly';
+import UserContextProvider, { UserContext } from '../context/UserContext';
+import Header from '../components/Layout/Header';
+import Main from '../components/Layout/Main';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, location }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -21,15 +23,23 @@ const Layout = ({ children }) => {
   return (
     <ClientOnly>
       <ToastContainer />
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-
-      <main>{children}</main>
-
+      <UserContextProvider>
+        <UserContext.Consumer>
+          {(value) => (
+            <>
+              <Header
+                location={location}
+                isLoggedIn={value.isLoggedIn}
+                siteTitle={data.site.siteMetadata?.title || `Title`}
+              />
+              <Main isLoggedIn={value.isLoggedIn} children={children} />
+            </>
+          )}
+        </UserContext.Consumer>
+      </UserContextProvider>
       <footer>
-        © {new Date().getFullYear()} &middot; Built with
+        © {new Date().getFullYear()} &middot; Developed by
         {` `}
-        <a href="https://www.gatsbyjs.com">Gatsby</a>
-        {` - `} Made by{` `}
         <a href="https://github.com/MTraveller">@MTraveller</a>
       </footer>
     </ClientOnly>
