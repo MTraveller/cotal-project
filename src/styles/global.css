@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#gatsby-focus-wrapper {
+  display: grid;
+  grid-template-rows: 0 auto calc(100vh - 100px) auto;
+  align-items: center;
+}
