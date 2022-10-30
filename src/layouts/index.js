@@ -32,7 +32,11 @@ const Layout = ({ children, location }) => {
                 isLoggedIn={value.isLoggedIn}
                 siteTitle={data.site.siteMetadata?.title || `Title`}
               />
-              <Main isLoggedIn={value.isLoggedIn} children={children} />
+              <Main
+                location={location}
+                isLoggedIn={value.isLoggedIn}
+                children={children}
+              />
             </>
           )}
         </UserContext.Consumer>
