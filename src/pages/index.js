@@ -7,9 +7,23 @@ import Seo from '../components/Seo';
 import { isLoggedIn } from '../services/authService';
 
 const DivStyles = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  align-items: center;
+  flex: 1 100%;
+
+  @media all and (min-width: 428px) {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: auto;
+
+    #index-welcome-div {
+      width: min(96%, 600px);
+    }
+
+    form {
+      width: min(96%, 600px);
+    }
+  }
 `;
 
 export default function IndexPage() {
@@ -17,7 +31,12 @@ export default function IndexPage() {
     navigate(`/feed/`)
   ) : (
     <DivStyles>
-      <h1>Welcome to Cotal</h1>
+      <div id="index-welcome-div">
+        <h1>Welcome to Cotal</h1>
+        <p>
+          Where talents join forces with one another to reach a common goal.
+        </p>
+      </div>
       <Login />
     </DivStyles>
   );
