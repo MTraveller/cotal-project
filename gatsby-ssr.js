@@ -4,6 +4,7 @@
  * See: https://www.gatsbyjs.com/docs/ssr-apis/
  */
 
-exports.onRenderBody = ({ setHtmlAttributes }) => {
+exports.onRenderBody = ({ setHtmlAttributes, setBodyAttributes }) => {
   setHtmlAttributes({ lang: `en`, className: `h-full` });
+  setBodyAttributes({ className: `h-full` });
 };
