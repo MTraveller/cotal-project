@@ -10,6 +10,8 @@ import { handleLogout } from '../../services/authService';
  * Initial header was sourced from:
  * https://tailwindui.com/components/application-ui/application-shells/stacked
  */
+const privateRoutes = [`feed`, `profile`];
+
 const user = {
   name: 'Tom Cook',
   email: 'tom@example.com',
@@ -39,7 +41,7 @@ function classNames(...classes) {
 }
 
 const Header = ({ siteTitle, location }) =>
-  location.pathname !== `/` ? (
+  privateRoutes.includes(location.pathname) ? (
     <header>
       <Disclosure as="nav" className="bg-gray-800">
         {({ open }) => (
@@ -209,7 +211,6 @@ const Header = ({ siteTitle, location }) =>
   ) : (
     <header>
       <Link to="/">{siteTitle}</Link>
-      <p>Is "/"</p>
     </header>
   );
 
