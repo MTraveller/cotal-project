@@ -13,7 +13,7 @@
  *  for a perfect explanation of this issue and how to fix it.
  */
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const ClientOnly = ({ children }) => {
   const [hasMounted, setHasMounted] = useState(false);
