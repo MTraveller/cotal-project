@@ -4,7 +4,11 @@ import { navigate } from 'gatsby';
 import { globalHistory } from '@gatsbyjs/reach-router/lib/history';
 
 import { handleRegister } from '../../services/authService';
-import { TopLoginRegisterInput as TopInput } from './Input/TopLoginRegisterInput';
+import {
+  MiddleLoginRegisterInput as MiddleInput,
+  BottomLoginRegisterInput as BottomInput,
+  NameLoginRegisterInput as NameInput,
+} from './input/indexInput';
 
 const Register = ({ form }) => {
   const previousPath = globalHistory.location.pathname;
@@ -52,19 +56,51 @@ const Register = ({ form }) => {
       {/* 
       Initial form sourced from: 
       https://tailwindui.com/components/application-ui/forms/sign-in-forms
-      */}
+    */}
       <div className="-space-y-px rounded-md shadow-sm">
+        <div className="flex items-center">
+          <div className="basis-1/2">
+            <label htmlFor="firstname" className="sr-only">
+              Firstname
+            </label>
+            <NameInput
+              id="firstname"
+              name="firstname"
+              type="text"
+              value={account.firstName}
+              autoComplete="firstname"
+              placeholder="Firstname"
+              onChange={handleChange}
+              borderRadius="rounded-tl-md"
+            />
+          </div>
+          <div className="basis-1/2">
+            <label htmlFor="lastname" className="sr-only">
+              Lastname
+            </label>
+            <NameInput
+              id="lastname"
+              name="lastname"
+              type="text"
+              value={account.lastName}
+              autoComplete="lastname"
+              placeholder="Lastname"
+              onChange={handleChange}
+              borderRadius="rounded-tr-md"
+            />
+          </div>
+        </div>
         <div>
-          <label htmlFor="email-address" className="sr-only">
-            Email address
+          <label htmlFor="username" className="sr-only">
+            Username
           </label>
-          <TopInput
-            id="email-address"
-            name="email"
-            type="email"
-            value={account.email}
-            autoComplete="email"
-            placeholder="Email address"
+          <MiddleInput
+            id="username"
+            name="username"
+            type="text"
+            value={account.username}
+            autoComplete="username"
+            placeholder="Username"
             onChange={handleChange}
           />
         </div>
@@ -72,15 +108,27 @@ const Register = ({ form }) => {
           <label htmlFor="password" className="sr-only">
             Password
           </label>
-          <input
+          <MiddleInput
             id="password"
             name="password"
             type="password"
             value={account.password}
             autoComplete="current-password"
-            required
-            className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-3 md:py-4 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             placeholder="Password"
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="email-address" className="sr-only">
+            Email address
+          </label>
+          <BottomInput
+            id="email-address"
+            name="email"
+            type="email"
+            value={account.email}
+            autoComplete="email"
+            placeholder="Email address"
             onChange={handleChange}
           />
         </div>
