@@ -49,6 +49,10 @@ export const handleLogin = async (email, password) => {
   return false;
 };
 
+export const handleRegister = () => {
+  console.log('Register Clicked!');
+};
+
 export const isLoggedIn = () => {
   const GetIsLoggedIn = () => useContext(UserContext).isLoggedIn;
 
