@@ -4,8 +4,9 @@ import { navigate } from 'gatsby';
 import { globalHistory } from '@gatsbyjs/reach-router/lib/history';
 
 import { handleLogin } from '../../services/authService';
+import { TopLoginRegisterInput as TopInput } from './Input/TopLoginRegisterInput';
 
-const Login = () => {
+const Login = ({ form }) => {
   const previousPath = globalHistory.location.pathname;
 
   const [account, setAccount] = useState({
@@ -26,6 +27,8 @@ const Login = () => {
   // //TODO: validate login form!
   // const validate = () => {};
 
+  const toggleForm = () => form();
+
   const handleChange = ({ currentTarget: input }) => {
     setAccount({ ...account, [input.name]: input.value });
   };
@@ -42,7 +45,7 @@ const Login = () => {
   };
 
   return (
-    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+    <form className="space-y-6" onSubmit={handleSubmit}>
       {/* 
       Initial form sourced from: 
       https://tailwindui.com/components/application-ui/forms/sign-in-forms
@@ -52,14 +55,12 @@ const Login = () => {
           <label htmlFor="email-address" className="sr-only">
             Email address
           </label>
-          <input
+          <TopInput
             id="email-address"
             name="email"
             type="email"
             value={account.email}
             autoComplete="email"
-            required
-            className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-3 md:py-4 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             placeholder="Email address"
             onChange={handleChange}
           />
@@ -82,13 +83,25 @@ const Login = () => {
         </div>
       </div>
 
-      <div className="text-right text-sm">
-        <a
-          href="/reset-password/"
-          className="font-medium text-indigo-600 hover:text-indigo-500"
-        >
-          Forgot your password?
-        </a>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center">
+          <button
+            type="button"
+            className="font-medium text-slate-100 hover:text-slate-300"
+            onClick={toggleForm}
+          >
+            Sign-up
+          </button>
+        </div>
+
+        <div className="text-sm">
+          <a
+            href="#"
+            className="font-medium text-indigo-600 hover:text-indigo-500"
+          >
+            Forgot your password?
+          </a>
+        </div>
       </div>
 
       <div>
