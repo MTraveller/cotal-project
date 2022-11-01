@@ -209,8 +209,10 @@ const Header = ({ siteTitle, location }) =>
       </Disclosure>
     </header>
   ) : (
-    <header>
-      <Link to="/">{siteTitle}</Link>
+    <header className="md:absolute md:top-0 md:left-5">
+      <div className="flex items-center p-3 bg-stone-900 dark:bg-neutral-900 md:bg-inherit text-white/[.2] dark:text-gray-600/[.5]">
+        <Link to="/">{siteTitle}</Link>
+      </div>
     </header>
   );
 
