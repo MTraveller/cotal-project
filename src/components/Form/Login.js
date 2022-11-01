@@ -4,7 +4,10 @@ import { navigate } from 'gatsby';
 import { globalHistory } from '@gatsbyjs/reach-router/lib/history';
 
 import { handleLogin } from '../../services/authService';
-import { TopLoginRegisterInput as TopInput } from './Input/TopLoginRegisterInput';
+import {
+  TopLoginRegisterInput as EmailInput,
+  BottomLoginRegisterInput as PasswordInput,
+} from './input/indexInput';
 
 const Login = ({ form }) => {
   const previousPath = globalHistory.location.pathname;
@@ -55,7 +58,7 @@ const Login = ({ form }) => {
           <label htmlFor="email-address" className="sr-only">
             Email address
           </label>
-          <TopInput
+          <EmailInput
             id="email-address"
             name="email"
             type="email"
@@ -69,14 +72,12 @@ const Login = ({ form }) => {
           <label htmlFor="password" className="sr-only">
             Password
           </label>
-          <input
+          <PasswordInput
             id="password"
             name="password"
             type="password"
             value={account.password}
             autoComplete="current-password"
-            required
-            className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-3 md:py-4 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             placeholder="Password"
             onChange={handleChange}
           />
@@ -107,11 +108,11 @@ const Login = ({ form }) => {
       <div>
         <button
           type="submit"
-          className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          className="group relative flex w-full justify-center rounded-md border border-transparent bg-slate-300 py-3 px-4 text-sm font-medium text-slate-500 hover:text-white hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
         >
           <span className="absolute inset-y-0 left-0 flex items-center pl-3">
             <svg
-              className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
+              className="h-5 w-5 text-slate-500 group-hover:text-white"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
