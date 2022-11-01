@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { navigate } from 'gatsby';
 
-import Login from '../components/Form/Login';
-import Register from '../components/Form/Register';
+import Login from '../components/form/Login';
+import Register from '../components/form/Register';
 import Seo from '../components/Seo';
 import { isLoggedIn } from '../services/authService';
 
