@@ -8,6 +8,7 @@ import ClientOnly from '../hooks/ClientOnly';
 import UserContextProvider, { UserContext } from '../context/UserContext';
 import Header from '../components/Layout/Header';
 import Main from '../components/Layout/Main';
+import Footer from '../components/Layout/Footer';
 
 const Layout = ({ children, location }) => {
   const data = useStaticQuery(graphql`
@@ -41,11 +42,7 @@ const Layout = ({ children, location }) => {
           )}
         </UserContext.Consumer>
       </UserContextProvider>
-      <footer>
-        © {new Date().getFullYear()} &middot; Developed by
-        {` `}
-        <a href="https://github.com/MTraveller">@MTraveller</a>
-      </footer>
+      <Footer location={location} />
     </ClientOnly>
   );
 };
