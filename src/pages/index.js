@@ -20,8 +20,8 @@ export default function IndexPage() {
     navigate(`/feed/`)
   ) : (
     <>
-      <div className="w-full flex md:basis-1/2 items-end md:items-center px-3 sm:px-0 md:border-r-2 border-stone-600">
-        <div className="w-full sm:w-96 md:w-9/12 2xl:w-1/2 mx-auto">
+      <div className="w-full flex lg:basis-1/2 items-end lg:items-center px-3 sm:px-0 lg:border-r-2 border-stone-600">
+        <div className="w-full sm:w-96 lg:w-9/12 2xl:w-1/2 mx-auto">
           <H1Styles className="mb-8 font-black text-slate-300 dark:text-slate-600">
             Welcome to Cotal
           </H1Styles>
@@ -30,8 +30,8 @@ export default function IndexPage() {
           </p>
         </div>
       </div>
-      <div className="w-full md:h-full flex md:basis-1/2 items-start md:items-center px-3 sm:px-0 md:bg-indigo-700 dark:md:bg-indigo-900">
-        <div className="w-full sm:w-96 md:w-9/12 2xl:w-1/2 mx-auto">
+      <div className="w-full lg:h-full flex lg:basis-1/2 items-start lg:items-center px-3 sm:px-0 lg:bg-indigo-700 dark:lg:bg-indigo-900">
+        <div className="w-full sm:w-96 lg:w-9/12 2xl:w-1/2 mx-auto">
           {register ? (
             <Register form={handleForm} />
           ) : (
