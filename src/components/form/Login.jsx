@@ -89,7 +89,7 @@ const Login = ({ form }) => {
           <button
             type="button"
             className="font-medium text-slate-100 hover:text-slate-300"
-            onClick={() => toggleForm}
+            onClick={toggleForm}
           >
             New to Cotal?
           </button>
