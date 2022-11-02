@@ -5,8 +5,8 @@ const apiLoginEndpoint = `${process.env.API_URL}/auth/jwt/create/`;
 export default async function userLoginHandler(req, res) {
   const result = await http
     .post(apiLoginEndpoint, {
-      email: req.email,
-      password: req.password,
+      email: req.account.email,
+      password: req.account.password,
     })
     .then((res) => {
       return res;
