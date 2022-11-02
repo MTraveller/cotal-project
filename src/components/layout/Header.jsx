@@ -10,7 +10,7 @@ import { handleLogout } from '../../services/authService';
  * Initial header was sourced from:
  * https://tailwindui.com/components/application-ui/application-shells/stacked
  */
-const privateRoutes = [`feed`, `profile`];
+const privateRoutes = [`/feed/`, `/my-network/`, `/profile/`];
 
 const user = {
   name: 'Tom Cook',
@@ -20,16 +20,13 @@ const user = {
 };
 
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-  { name: 'Reports', href: '#', current: false },
+  { name: 'Home', href: '/feed/', current: true },
+  { name: 'My Network', href: '/my-network/', current: false },
 ];
 
 const userNavigation = [
   { name: 'Your Profile', href: '/profile/' },
-  { name: 'Settings', href: '#' },
+  { name: 'Settings', href: '/settings/' },
   {
     name: 'Sign out',
     href: '/',
@@ -50,20 +47,16 @@ const Header = ({ siteTitle, location }) =>
               <div className="flex h-16 items-center justify-between">
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
-                    <img
-                      className="h-8 w-8"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                      alt="Your Company"
-                    />
+                    <img className="h-8 w-8" src="" alt="Cotal" />
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
                       {navigation.map((item) => (
-                        <a
+                        <Link
                           key={item.name}
-                          href={item.href}
+                          to={item.href}
                           className={classNames(
-                            item.current
+                            item.href === location.pathname
                               ? 'bg-gray-900 text-white'
                               : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                             'px-3 py-2 rounded-md text-sm font-medium'
@@ -71,7 +64,7 @@ const Header = ({ siteTitle, location }) =>
                           aria-current={item.current ? 'page' : undefined}
                         >
                           {item.name}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -111,8 +104,8 @@ const Header = ({ siteTitle, location }) =>
                           {userNavigation.map((item) => (
                             <Menu.Item key={item.name}>
                               {({ active }) => (
-                                <a
-                                  href={item.href}
+                                <Link
+                                  to={item.href}
                                   className={classNames(
                                     active ? 'bg-gray-100' : '',
                                     'block px-4 py-2 text-sm text-gray-700'
@@ -122,7 +115,7 @@ const Header = ({ siteTitle, location }) =>
                                   }
                                 >
                                   {item.name}
-                                </a>
+                                </Link>
                               )}
                             </Menu.Item>
                           ))}
@@ -148,12 +141,12 @@ const Header = ({ siteTitle, location }) =>
             <Disclosure.Panel className="md:hidden">
               <div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
                 {navigation.map((item) => (
-                  <Disclosure.Button
+                  <Link
                     key={item.name}
                     as="a"
-                    href={item.href}
+                    to={item.href}
                     className={classNames(
-                      item.current
+                      item.href === location.pathname
                         ? 'bg-gray-900 text-white'
                         : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                       'block px-3 py-2 rounded-md text-base font-medium'
@@ -161,7 +154,7 @@ const Header = ({ siteTitle, location }) =>
                     aria-current={item.current ? 'page' : undefined}
                   >
                     {item.name}
-                  </Disclosure.Button>
+                  </Link>
                 ))}
               </div>
               <div className="border-t border-gray-700 pt-4 pb-3">
@@ -170,7 +163,7 @@ const Header = ({ siteTitle, location }) =>
                     <img
                       className="h-10 w-10 rounded-full"
                       src={user.imageUrl}
-                      alt=""
+                      alt={user.name}
                     />
                   </div>
                   <div className="ml-3">
@@ -191,15 +184,15 @@ const Header = ({ siteTitle, location }) =>
                 </div>
                 <div className="mt-3 space-y-1 px-2">
                   {userNavigation.map((item) => (
-                    <Disclosure.Button
+                    <Link
                       key={item.name}
                       as="a"
-                      href={item.href}
+                      to={item.href}
                       className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                       onClick={item.name === `Sign out` ? handleLogout : ''}
                     >
                       {item.name}
-                    </Disclosure.Button>
+                    </Link>
                   ))}
                 </div>
               </div>
