@@ -40,8 +40,7 @@ const Login = ({ form }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { email, password } = account;
-    const loginRes = await handleLogin(email, password);
+    const loginRes = await handleLogin(account);
 
     if (loginRes && previousPath === `/`) return navigate(`/feed/`);
 
@@ -90,7 +89,7 @@ const Login = ({ form }) => {
           <button
             type="button"
             className="font-medium text-slate-100 hover:text-slate-300"
-            onClick={toggleForm}
+            onClick={() => toggleForm}
           >
             New to Cotal?
           </button>
