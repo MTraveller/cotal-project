@@ -37,7 +37,4 @@ module.exports = {
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-netlify`,
   ],
-  flags: {
-    DEV_SSR: true,
-  },
 };
