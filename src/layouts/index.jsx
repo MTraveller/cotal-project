@@ -7,9 +7,9 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 import ClientOnly from '../hooks/ClientOnly';
 import UserContextProvider, { UserContext } from '../context/UserContext';
-import Header from '../components/Layout/Header';
-import Main from '../components/Layout/Main';
-import Footer from '../components/Layout/Footer';
+import Header from '../components/layout/Header';
+import Main from '../components/layout/Main';
+import Footer from '../components/layout/Footer';
 
 let DivStyles = styled.div`
   display: flex;
