@@ -9,15 +9,14 @@ const Feed = (rest) => {
   // console.log(rest);
   return (
     <>
-      <Seo title="Feed" />
-      <h1>
-        This page is <b>Feed Page</b>
-      </h1>
+      <h1>Feed Page</h1>
       <p>
         This feed page is for the user <code>hello</code> on the DRF db.
       </p>
     </>
   );
 };
+
+export const Head = () => <Seo title="Feed" />;
 
 export default Feed;

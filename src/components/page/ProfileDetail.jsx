@@ -9,7 +9,6 @@ const ProfileDetail = (rest) => {
   // console.log(rest);
   return (
     <>
-      <Seo title="Me" />
       <h1>
         This page is <b>User Page</b>
       </h1>
@@ -19,5 +18,7 @@ const ProfileDetail = (rest) => {
     </>
   );
 };
+
+export const Head = () => <Seo title="Profile" />;
 
 export default ProfileDetail;
