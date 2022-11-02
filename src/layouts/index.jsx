@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import tw from 'tailwind-styled-components';
 import styled from 'styled-components';
 import { useStaticQuery, graphql } from 'gatsby';
 import { ToastContainer } from 'react-toastify';
@@ -12,9 +11,20 @@ import Header from '../components/Layout/Header';
 import Main from '../components/Layout/Main';
 import Footer from '../components/Layout/Footer';
 
-let DivStyles = tw.div`
-  flex
-  flex-col
+let DivStyles = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  main {
+    min-height: calc(100% - 135px);
+  }
+
+  footer {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+  }
 `;
 
 const IndexDivStyles = styled.div`
