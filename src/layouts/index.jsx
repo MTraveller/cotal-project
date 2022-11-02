@@ -15,21 +15,14 @@ const IndexDivStyles = styled.div`
   height: 100%;
 
   @media all and (max-width: 1023px) {
-    background-image: linear-gradient(
-      45deg,
-      hsl(0deg 0% 9%) 0%,
-      hsl(240deg 7% 14%) 1%,
-      hsl(244deg 16% 18%) 4%,
-      hsl(242deg 23% 22%) 9%,
-      hsl(241deg 31% 26%) 18%,
-      hsl(242deg 39% 30%) 32%,
-      hsl(241deg 47% 35%) 49%,
-      hsl(238deg 41% 35%) 68%,
-      hsl(234deg 36% 37%) 82%,
-      hsl(229deg 31% 38%) 91%,
-      hsl(225deg 26% 39%) 96%,
-      hsl(221deg 21% 40%) 99%,
-      hsl(218deg 15% 41%) 100%
+    background: rgb(38, 38, 38);
+    background: radial-gradient(
+      circle,
+      rgba(38, 38, 38, 1) 0%,
+      rgba(36, 36, 36, 1) 25%,
+      rgba(34, 34, 34, 1) 50%,
+      rgba(32, 32, 32, 1) 75%,
+      rgba(24, 24, 24, 1) 100%
     );
   }
 `;
