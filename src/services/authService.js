@@ -18,11 +18,9 @@ export const getUser = () =>
 const setUser = (user) =>
   window.localStorage.setItem(`cotalUser`, JSON.stringify(user));
 
-export const handleLogin = async (email, password) => {
+export const handleLogin = async (account) => {
   toast.dismiss();
-  const res = await userLoginHandler({ email, password });
-  console.log(`handleLogin`);
-  console.log(res);
+  const res = await userLoginHandler({ account });
 
   if (res.code === `ERR_NETWORK`) {
     toast.error(
