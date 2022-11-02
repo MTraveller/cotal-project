@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import tw from 'tailwind-styled-components';
 import styled from 'styled-components';
 import { useStaticQuery, graphql } from 'gatsby';
 import { ToastContainer } from 'react-toastify';
@@ -10,6 +11,11 @@ import UserContextProvider, { UserContext } from '../context/UserContext';
 import Header from '../components/Layout/Header';
 import Main from '../components/Layout/Main';
 import Footer from '../components/Layout/Footer';
+
+let DivStyles = tw.div`
+  flex
+  flex-col
+`;
 
 const IndexDivStyles = styled.div`
   height: 100%;
@@ -38,13 +44,15 @@ const Layout = ({ children, location }) => {
     }
   `);
 
+  if (location.pathname === `/`) DivStyles = IndexDivStyles;
+
   return (
     <ClientOnly>
       <ToastContainer />
       <UserContextProvider>
         <UserContext.Consumer>
           {(value) => (
-            <IndexDivStyles>
+            <DivStyles>
               <Header
                 location={location}
                 isLoggedIn={value.isLoggedIn}
@@ -56,7 +64,7 @@ const Layout = ({ children, location }) => {
                 children={children}
               />
               <Footer location={location} />
-            </IndexDivStyles>
+            </DivStyles>
           )}
         </UserContext.Consumer>
       </UserContextProvider>
