@@ -5,7 +5,11 @@ const Footer = ({ location }) =>
     <footer className="lg:absolute lg:bottom-0 lg:left-5">
       <div className="flex items-center p-3 lg:bg-inherit text-white/[.2] dark:text-gray-600/[.5]">
         © {new Date().getFullYear()} &middot; Developed by&nbsp;
-        <a href="https://github.com/MTraveller" target="_blank">
+        <a
+          href="https://github.com/MTraveller"
+          target="_blank"
+          rel="noreferrer"
+        >
           @MTraveller
         </a>
       </div>
@@ -14,7 +18,7 @@ const Footer = ({ location }) =>
     <footer>
       © {new Date().getFullYear()} &middot; Developed by
       {` `}
-      <a href="https://github.com/MTraveller" target="_blank">
+      <a href="https://github.com/MTraveller" target="_blank" rel="noreferrer">
         @MTraveller
       </a>
     </footer>
