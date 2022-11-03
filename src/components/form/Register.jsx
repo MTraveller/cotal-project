@@ -44,7 +44,6 @@ const Register = ({ form }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // const { email, password } = account;
     const registerRes = await handleRegister(account);
 
     if (registerRes && previousPath === `/`) return navigate(`/feed/`);
