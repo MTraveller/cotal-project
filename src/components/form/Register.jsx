@@ -18,8 +18,8 @@ const Register = ({ form }) => {
     username: '',
     password: '',
     email: '',
-    firstName: '',
-    lastName: '',
+    firstname: '',
+    lastname: '',
   });
 
   // const schema = Joi.object({
@@ -44,7 +44,7 @@ const Register = ({ form }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const registerRes = await handleRegister(account);
+    const registerRes = await handleRegister({ account });
 
     if (registerRes && previousPath === `/`) return navigate(`/feed/`);
 
@@ -67,11 +67,11 @@ const Register = ({ form }) => {
               id="firstname"
               name="firstname"
               type="text"
-              value={account.firstName}
+              value={account.firstname}
               autoComplete="firstname"
+              borderRadius="rounded-tl-md"
               placeholder="Firstname"
               onChange={handleChange}
-              borderRadius="rounded-tl-md"
             />
           </div>
           <div className="basis-1/2">
@@ -82,11 +82,11 @@ const Register = ({ form }) => {
               id="lastname"
               name="lastname"
               type="text"
-              value={account.lastName}
+              value={account.lastname}
               autoComplete="lastname"
+              borderRadius="rounded-tr-md"
               placeholder="Lastname"
               onChange={handleChange}
-              borderRadius="rounded-tr-md"
             />
           </div>
         </div>
