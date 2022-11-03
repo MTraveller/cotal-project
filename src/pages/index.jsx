@@ -30,7 +30,7 @@ export default function IndexPage() {
           </p>
         </div>
       </div>
-      <div className="w-full lg:h-full flex lg:basis-1/2 items-start lg:items-center px-3 sm:px-0 lg:bg-indigo-700 dark:lg:bg-indigo-900">
+      <div className="w-full lg:h-full flex lg:basis-1/2 mb-8 lg:mb-0 items-start lg:items-center px-3 sm:px-0 lg:bg-indigo-700 dark:lg:bg-indigo-900">
         <div className="w-full sm:w-96 lg:w-9/12 2xl:w-1/2 mx-auto">
           {register ? (
             <Register form={handleForm} />
