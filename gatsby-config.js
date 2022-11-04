@@ -25,12 +25,12 @@ module.exports = {
         name: `cotal`,
         short_name: `cotal`,
         start_url: `/`,
-        background_color: `#663399`,
+        background_color: `#181818`,
         // This will impact how browsers show your PWA/website
         // https://css-tricks.com/meta-theme-color-and-trickery/
         // theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/fff.png`, // This path is relative to the root of the site.
+        icon: `src/images/logo32.png`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-layout`,
