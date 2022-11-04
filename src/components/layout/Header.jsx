@@ -50,7 +50,7 @@ const Header = ({ siteTitle, location }) =>
                   <div className="flex-shrink-0">
                     <StaticImage
                       className="h-8 w-8"
-                      src="../../images/logo32.png"
+                      src="../../images/logo.png"
                       loading="eager"
                       width={32}
                       quality={95}
