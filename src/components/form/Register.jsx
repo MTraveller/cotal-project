@@ -4,11 +4,7 @@ import { navigate } from 'gatsby';
 import { globalHistory } from '@gatsbyjs/reach-router/lib/history';
 
 import { handleRegister } from '../../services/authService';
-import {
-  MiddleLoginRegisterInput as MiddleInput,
-  BottomLoginRegisterInput as BottomInput,
-  NameLoginRegisterInput as NameInput,
-} from './input/indexInput';
+import { IndexFormInput } from './input/indexInput';
 import { SubmitButton } from './indexButton';
 
 const Register = ({ form }) => {
@@ -35,7 +31,7 @@ const Register = ({ form }) => {
   // //TODO: validate login form!
   // const validate = () => {};
 
-  const toggleForm = () => form();
+  const toggleForm = (e) => form(e.target.name);
 
   const handleChange = ({ currentTarget: input }) => {
     setAccount({ ...account, [input.name]: input.value });
@@ -63,13 +59,13 @@ const Register = ({ form }) => {
             <label htmlFor="firstname" className="sr-only">
               Firstname
             </label>
-            <NameInput
+            <IndexFormInput
               id="firstname"
               name="firstname"
               type="text"
               value={account.firstname}
               autoComplete="firstname"
-              borderRadius="rounded-tl-md"
+              borderRadius="rounded-none rounded-tl-md"
               placeholder="Firstname"
               onChange={handleChange}
             />
@@ -78,13 +74,13 @@ const Register = ({ form }) => {
             <label htmlFor="lastname" className="sr-only">
               Lastname
             </label>
-            <NameInput
+            <IndexFormInput
               id="lastname"
               name="lastname"
               type="text"
               value={account.lastname}
               autoComplete="lastname"
-              borderRadius="rounded-tr-md"
+              borderRadius="rounded-none rounded-tr-md"
               placeholder="Lastname"
               onChange={handleChange}
             />
@@ -94,12 +90,13 @@ const Register = ({ form }) => {
           <label htmlFor="email-address" className="sr-only">
             Email address
           </label>
-          <MiddleInput
+          <IndexFormInput
             id="email-address"
             name="email"
             type="email"
             value={account.email}
             autoComplete="current-email"
+            borderRadius="rounded-none"
             placeholder="Email address"
             onChange={handleChange}
           />
@@ -108,12 +105,13 @@ const Register = ({ form }) => {
           <label htmlFor="username" className="sr-only">
             Username
           </label>
-          <MiddleInput
+          <IndexFormInput
             id="username"
             name="username"
             type="text"
             value={account.username}
             autoComplete="current-username"
+            borderRadius="rounded-none"
             placeholder="Username"
             onChange={handleChange}
           />
@@ -122,12 +120,13 @@ const Register = ({ form }) => {
           <label htmlFor="password" className="sr-only">
             Password
           </label>
-          <BottomInput
+          <IndexFormInput
             id="password"
             name="password"
             type="password"
             value={account.password}
             autoComplete="password"
+            borderRadius="rounded-b-md"
             placeholder="Password"
             onChange={handleChange}
           />
@@ -137,6 +136,7 @@ const Register = ({ form }) => {
       <div className="flex items-start">
         <button
           type="button"
+          name="login"
           className="font-medium text-slate-100 hover:text-slate-300"
           onClick={toggleForm}
         >
