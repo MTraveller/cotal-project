@@ -4,6 +4,7 @@ import { navigate } from 'gatsby';
 
 import Login from '../components/form/Login';
 import Register from '../components/form/Register';
+import Forgot from '../components/form/Forgot';
 import Seo from '../components/Seo';
 import { isLoggedIn } from '../services/authService';
 
@@ -12,9 +13,16 @@ const H1Styles = styled.h1`
 `;
 
 export default function IndexPage() {
-  const [register, setRegister] = useState(false);
+  const [form, setForm] = useState(`login`);
 
-  const handleForm = () => (register ? setRegister(false) : setRegister(true));
+  const handleForm = (name) =>
+    name === `login`
+      ? setForm(`login`)
+      : name === `register`
+      ? setForm(`register`)
+      : name === `forgot`
+      ? setForm(`forgot`)
+      : '';
 
   return isLoggedIn() ? (
     navigate(`/feed/`)
@@ -32,10 +40,14 @@ export default function IndexPage() {
       </div>
       <div className="w-full lg:h-full flex lg:basis-1/2 mb-8 lg:mb-0 items-start lg:items-center px-3 sm:px-0 lg:bg-indigo-700 dark:lg:bg-indigo-900">
         <div className="w-full sm:w-96 lg:w-9/12 2xl:w-1/2 mx-auto">
-          {register ? (
-            <Register form={handleForm} />
-          ) : (
+          {form === `login` ? (
             <Login form={handleForm} />
+          ) : form === `register` ? (
+            <Register form={handleForm} />
+          ) : form === `forgot` ? (
+            <Forgot form={handleForm} />
+          ) : (
+            ''
           )}
         </div>
       </div>
