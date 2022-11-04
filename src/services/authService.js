@@ -74,6 +74,11 @@ export const handleRegister = async (account) => {
   return false;
 };
 
+export const handleResetPassword = (account) => {
+  console.log(account);
+  return `success`;
+};
+
 export const isLoggedIn = () => {
   const GetIsLoggedIn = () => useContext(UserContext).isLoggedIn;
 
