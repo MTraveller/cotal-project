@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import Seo from '../Seo';
 
-const Network = (rest) => {
+const UserNetwork = (rest) => {
   return (
     <>
       <h1>
@@ -18,4 +18,4 @@ const Network = (rest) => {
 
 export const Head = () => <Seo title="My Network" />;
 
-export default Network;
+export default UserNetwork;
