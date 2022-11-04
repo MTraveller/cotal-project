@@ -4,10 +4,7 @@ import { navigate } from 'gatsby';
 import { globalHistory } from '@gatsbyjs/reach-router/lib/history';
 
 import { handleLogin } from '../../services/authService';
-import {
-  TopLoginRegisterInput as EmailInput,
-  BottomLoginRegisterInput as PasswordInput,
-} from './input/indexInput';
+import { IndexFormInput } from './input/indexInput';
 import { SubmitButton } from './indexButton';
 
 const Login = ({ form }) => {
@@ -31,7 +28,7 @@ const Login = ({ form }) => {
   // //TODO: validate login form!
   // const validate = () => {};
 
-  const toggleForm = () => form();
+  const toggleForm = (e) => form(e.target.name);
 
   const handleChange = ({ currentTarget: input }) => {
     setAccount({ ...account, [input.name]: input.value });
@@ -58,12 +55,13 @@ const Login = ({ form }) => {
           <label htmlFor="email-address" className="sr-only">
             Email address
           </label>
-          <EmailInput
+          <IndexFormInput
             id="email-address"
             name="email"
             type="email"
             value={account.email}
             autoComplete="email"
+            borderRadius="rounded-none rounded-t-md"
             placeholder="Email address"
             onChange={handleChange}
           />
@@ -72,12 +70,13 @@ const Login = ({ form }) => {
           <label htmlFor="password" className="sr-only">
             Password
           </label>
-          <PasswordInput
+          <IndexFormInput
             id="password"
             name="password"
             type="password"
             value={account.password}
             autoComplete="current-password"
+            borderRadius="rounded-none rounded-b-md"
             placeholder="Password"
             onChange={handleChange}
           />
@@ -88,6 +87,7 @@ const Login = ({ form }) => {
         <div className="flex items-center">
           <button
             type="button"
+            name="register"
             className="font-medium text-slate-100 hover:text-slate-300"
             onClick={toggleForm}
           >
@@ -96,12 +96,14 @@ const Login = ({ form }) => {
         </div>
 
         <div className="text-sm">
-          <a
-            href="#"
+          <button
+            type="button"
+            name="forgot"
             className="font-medium text-slate-100 hover:text-slate-300"
+            onClick={toggleForm}
           >
             Forgot your password?
-          </a>
+          </button>
         </div>
       </div>
 
