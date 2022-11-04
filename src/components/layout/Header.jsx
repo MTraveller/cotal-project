@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
+import { StaticImage } from 'gatsby-plugin-image';
 
 import { handleLogout } from '../../services/authService';
 
@@ -10,7 +11,7 @@ import { handleLogout } from '../../services/authService';
  * Initial header was sourced from:
  * https://tailwindui.com/components/application-ui/application-shells/stacked
  */
-const privateRoutes = [`/feed/`, `/my-network/`, `/profile/`];
+const privateRoutes = [`/feed/`, `/my-network/`, `/profile/`, `/settings/`];
 
 const user = {
   name: 'Tom Cook',
@@ -40,14 +41,22 @@ function classNames(...classes) {
 const Header = ({ siteTitle, location }) =>
   privateRoutes.includes(location.pathname) ? (
     <header>
-      <Disclosure as="nav" className="bg-gray-800">
+      <Disclosure as="nav" className="bg-slate-900">
         {({ open }) => (
           <>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="flex h-16 items-center justify-between">
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
-                    <img className="h-8 w-8" src="" alt="Cotal" />
+                    <StaticImage
+                      className="h-8 w-8"
+                      src="../../images/logo32.png"
+                      loading="eager"
+                      width={32}
+                      quality={95}
+                      formats={['auto', 'webp', 'avif']}
+                      alt="Cotal"
+                    />
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
