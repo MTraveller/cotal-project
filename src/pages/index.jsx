@@ -24,6 +24,7 @@ export default function IndexPage() {
       ? setForm(`forgot`)
       : '';
 
+  console.log(process.env);
   console.log(process.env.API_URL);
 
   return isLoggedIn() ? (
