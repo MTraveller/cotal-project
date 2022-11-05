@@ -13,16 +13,17 @@ import Footer from '../components/layout/Footer';
 
 let DivStyles = styled.div`
   display: flex;
-  flex-flow: column wrap;
+  flex-direction: column;
   height: 100%;
 
-  main {
+  /* main {
     min-height: calc(100% - 135px);
-  }
+  } */
 
   footer {
     display: flex;
     align-items: center;
+    margin-top: auto;
     padding: 1rem;
   }
 `;
@@ -73,7 +74,7 @@ const Layout = ({ children, location }) => {
       <UserContextProvider>
         <UserContext.Consumer>
           {(value) => (
-            <DivStyles>
+            <DivStyles className="bg-slate-200 dark:bg-slate-700">
               <Header
                 location={location}
                 isLoggedIn={value.isLoggedIn}
