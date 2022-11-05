@@ -1,6 +1,6 @@
 import http from '../../services/httpService';
 
-const apiLoginEndpoint = `${process.env.API_URL}/auth/users/`;
+const apiLoginEndpoint = `${process.env.GATSBY_API_URL}/auth/users/`;
 
 export default async function userRegisterHandler(req, res) {
   const accForAPI = { ...req.account };
