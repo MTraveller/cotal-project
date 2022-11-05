@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import Joi from 'joi';
 import { navigate } from 'gatsby';
-import { globalHistory } from '@gatsbyjs/reach-router/lib/history';
+import { globalHistory } from '@reach/router';
 
 import { handleRegister } from '../../services/authService';
 import { IndexFormInput } from './input/indexInput';

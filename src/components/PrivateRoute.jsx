@@ -1,7 +1,7 @@
 import React from 'react';
 import { navigate } from 'gatsby';
 import { toast } from 'react-toastify';
-import { globalHistory } from '@gatsbyjs/reach-router/lib/history';
+import { globalHistory } from '@reach/router';
 
 import { isLoggedIn } from '../services/authService';
 
