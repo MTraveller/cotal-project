@@ -64,7 +64,7 @@ const Register = ({ form }) => {
               name="firstname"
               type="text"
               value={account.firstname}
-              autoComplete="firstname"
+              autoComplete="given-name"
               borderRadius="rounded-none rounded-tl-md"
               placeholder="Firstname"
               onChange={handleChange}
@@ -79,7 +79,7 @@ const Register = ({ form }) => {
               name="lastname"
               type="text"
               value={account.lastname}
-              autoComplete="lastname"
+              autoComplete="family-name"
               borderRadius="rounded-none rounded-tr-md"
               placeholder="Lastname"
               onChange={handleChange}
@@ -95,7 +95,7 @@ const Register = ({ form }) => {
             name="email"
             type="email"
             value={account.email}
-            autoComplete="current-email"
+            autoComplete="email"
             borderRadius="rounded-none"
             placeholder="Email address"
             onChange={handleChange}
@@ -110,7 +110,7 @@ const Register = ({ form }) => {
             name="username"
             type="text"
             value={account.username}
-            autoComplete="current-username"
+            autoComplete="username"
             borderRadius="rounded-none"
             placeholder="Username"
             onChange={handleChange}
@@ -125,7 +125,7 @@ const Register = ({ form }) => {
             name="password"
             type="password"
             value={account.password}
-            autoComplete="password"
+            autoComplete="current-password"
             borderRadius="rounded-b-md"
             placeholder="Password"
             onChange={handleChange}
