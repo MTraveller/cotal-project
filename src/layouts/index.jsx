@@ -16,10 +16,6 @@ let DivStyles = styled.div`
   flex-direction: column;
   height: 100%;
 
-  /* main {
-    min-height: calc(100% - 135px);
-  } */
-
   footer {
     display: flex;
     align-items: center;
@@ -74,7 +70,7 @@ const Layout = ({ children, location }) => {
       <UserContextProvider>
         <UserContext.Consumer>
           {(value) => (
-            <DivStyles className="bg-slate-200 dark:bg-slate-700">
+            <DivStyles className="bg-slate-200 dark:bg-slate-900">
               <Header
                 location={location}
                 isLoggedIn={value.isLoggedIn}
