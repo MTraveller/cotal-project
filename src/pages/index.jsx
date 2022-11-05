@@ -24,8 +24,6 @@ export default function IndexPage() {
       ? setForm(`forgot`)
       : '';
 
-  console.log(process.env.GATSBY_API_URL);
-
   return isLoggedIn() ? (
     navigate(`/feed/`)
   ) : (
