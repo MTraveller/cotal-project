@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import tw from 'tailwind-styled-components';
 
 const MainStyles = tw.main`
