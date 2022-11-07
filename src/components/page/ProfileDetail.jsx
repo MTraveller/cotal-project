@@ -1,21 +1,20 @@
 import * as React from 'react';
-// import { Link } from 'gatsby';
 
-// import http from '../services/httpService';
+import { TwoSection } from '../layout/template/TwoSection';
+import { PersonalDetails } from './profile-detail/PersonalDetails';
+import { PublicDetails } from './profile-detail/PublicDetails';
 import Seo from '../Seo';
 
-const ProfileDetail = (rest) => {
-  // console.log('ProfileDetails');
-  // console.log(rest);
+const ProfileDetail = ({ userData }) => {
+  console.log(userData);
+
   return (
-    <>
-      <h1>
-        This page is <b>User Page</b>
-      </h1>
-      <p>
-        This page is for the user <code>hello</code> on the DRF db.
-      </p>
-    </>
+    <TwoSection
+      title="Your Profile"
+      userData={userData}
+      componentLeft={PersonalDetails}
+      componentRight={PublicDetails}
+    />
   );
 };
 
