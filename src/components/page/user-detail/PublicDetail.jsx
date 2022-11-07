@@ -1,7 +1,7 @@
 import React from 'react';
 import tw from 'tailwind-styled-components';
 
-export const PublicDetails = () => (
+export const PublicDetail = () => (
   <>
     <p>Hello from PublicDetails</p>
   </>
