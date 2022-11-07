@@ -1,9 +1,11 @@
 import { useContext } from 'react';
 import { toast } from 'react-toastify';
+import { navigate } from 'gatsby';
 
 import userLoginHandler from '../api/users/authenticate';
 import userRegisterHandler from '../api/users/userRegister';
-import { UserContext } from '../context/UserContext';
+import userRefreshHandler from '../api/users/userRefresh';
+import { isLoggedInContext } from '../context/IsLoggedInContext';
 
 /**
  *  Initial auth service from Gatsby's tutorial:
@@ -80,11 +82,26 @@ export const handleResetPassword = (account) => {
 };
 
 export const isLoggedIn = () => {
-  const GetIsLoggedIn = () => useContext(UserContext).isLoggedIn;
+  const GetIsLoggedIn = () => useContext(isLoggedInContext);
 
   return GetIsLoggedIn();
 };
 
+export const handleTokenRefresh = async () => {
+  const user = getUser();
+  const res = await userRefreshHandler(user.refresh);
+
+  if (res?.statusText === `OK`) {
+    setUser({
+      access: res.data.access,
+      refresh: user.refresh,
+    });
+  } else if (res === 401) {
+    return handleLogout();
+  }
+};
+
 export const handleLogout = () => {
-  return window.localStorage.removeItem('cotalUser');
+  window.localStorage.removeItem('cotalUser');
+  return navigate(`/`);
 };
