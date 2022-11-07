@@ -15,7 +15,7 @@ const Footer = ({ location }) =>
       </div>
     </footer>
   ) : (
-    <footer className="dark:text-slate-600 text-sm">
+    <footer className="mt-auto p-4 dark:text-slate-600 text-sm">
       © {new Date().getFullYear()} &middot; Developed by
       {` `}
       <a href="https://github.com/MTraveller" target="_blank" rel="noreferrer">
