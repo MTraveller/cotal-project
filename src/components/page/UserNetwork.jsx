@@ -1,20 +1,20 @@
-import * as React from 'react';
-// import { Link } from 'gatsby';
+import React from 'react';
 
+import { TwoSection } from '../layout/template/TwoSection';
+import { NetworkMenu } from './user-network/NetworkMenu';
+import { NetworkDetail } from './user-network/NetworkDetail';
 import Seo from '../Seo';
 
-const UserNetwork = (rest) => {
-  return (
-    <>
-      <h1>
-        This page is <b>Network Page</b>
-      </h1>
-      <p>
-        This Network page is for the user <code>hello</code> on the DRF db.
-      </p>
-    </>
-  );
-};
+const UserNetwork = ({ userData }) => (
+  <TwoSection
+    title="My Network"
+    userData={userData}
+    leftStyles="lg:basis-80"
+    rightStyles="lg:basis-auto"
+    componentLeft={NetworkMenu}
+    componentRight={NetworkDetail}
+  />
+);
 
 export const Head = () => <Seo title="My Network" />;
 
