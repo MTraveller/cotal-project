@@ -15,16 +15,11 @@ const PageWrapper = tw.div`
   gap-6
 `;
 
-const Feed = () => {
-  const { userData } = useUserDataContext();
-
-  console.log(userData);
-
+const Feed = ({ userData }) => {
   return (
     <PageWrapper>
       <SideBarLeft />
       <div className="flex-auto w-[500px] max-w-3xl bg-black/[.2] rounded-md">
-        <h1>Feed Page</h1>
         <p>
           This feed page is for the user <code>hello</code> on the DRF db.
         </p>
