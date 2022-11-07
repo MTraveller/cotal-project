@@ -1,10 +1,11 @@
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
+import { useUserDataContext } from '../../context/UserDataContext';
 import { handleLogout } from '../../services/authService';
 
 /**
@@ -14,8 +15,8 @@ import { handleLogout } from '../../services/authService';
 const privateRoutes = [`/feed/`, `/my-network/`, `/profile/`, `/settings/`];
 
 const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
+  name: '',
+  username: '',
   imageUrl:
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 };
@@ -38,8 +39,15 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-const Header = ({ siteTitle, location }) =>
-  privateRoutes.includes(location.pathname) ? (
+const Header = ({ siteTitle, location }) => {
+  const { userData } = useUserDataContext();
+
+  const handleClick = (e) => {
+    if (e.target.text === `Sign out`) return handleLogout();
+    return null;
+  };
+
+  return privateRoutes.includes(location.pathname) ? (
     <header>
       <Disclosure as="nav" className="bg-slate-900">
         {({ open }) => (
@@ -96,7 +104,7 @@ const Header = ({ siteTitle, location }) =>
                           <img
                             className="h-8 w-8 rounded-full"
                             src={user.imageUrl}
-                            alt=""
+                            alt={`${userData?.user?.first_name} ${userData?.user?.last_name}`}
                           />
                         </Menu.Button>
                       </div>
@@ -119,9 +127,7 @@ const Header = ({ siteTitle, location }) =>
                                     active ? 'bg-gray-100' : '',
                                     'block px-4 py-2 text-sm text-gray-700'
                                   )}
-                                  onClick={
-                                    item.name === `Sign out` ? handleLogout : ''
-                                  }
+                                  onClick={handleClick}
                                 >
                                   {item.name}
                                 </Link>
@@ -160,7 +166,7 @@ const Header = ({ siteTitle, location }) =>
                         : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                       'block px-3 py-2 rounded-md text-base font-medium'
                     )}
-                    aria-current={item.current ? 'page' : undefined}
+                    aria-current={item.current ? item.name : undefined}
                   >
                     {item.name}
                   </Link>
@@ -172,15 +178,15 @@ const Header = ({ siteTitle, location }) =>
                     <img
                       className="h-10 w-10 rounded-full"
                       src={user.imageUrl}
-                      alt={user.name}
+                      alt={`${userData?.user?.first_name} ${userData?.user?.last_name}`}
                     />
                   </div>
                   <div className="ml-3">
                     <div className="text-base font-medium leading-none text-white">
-                      {user.name}
+                      {userData?.user?.first_name} {userData?.user?.last_name}
                     </div>
                     <div className="text-sm font-medium leading-none text-gray-400">
-                      {user.email}
+                      {userData?.slug}
                     </div>
                   </div>
                   <button
@@ -198,7 +204,7 @@ const Header = ({ siteTitle, location }) =>
                       as="a"
                       to={item.href}
                       className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                      onClick={item.name === `Sign out` ? handleLogout : ''}
+                      onClick={handleClick}
                     >
                       {item.name}
                     </Link>
@@ -217,6 +223,7 @@ const Header = ({ siteTitle, location }) =>
       </div>
     </header>
   );
+};
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
