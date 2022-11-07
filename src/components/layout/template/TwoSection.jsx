@@ -20,31 +20,23 @@ const DivStyles = tw.div`
   mt-8
 `;
 
-const SectionLeftStyles = tw.div`
-  basis-full
-  lg:basis-60
-`;
-
-const SectionRightStyles = tw.div`
-  basis-full
-  lg:flex-auto
-`;
-
 export const TwoSection = ({
   userData,
   title,
+  leftStyles,
+  rightStyles,
   componentLeft: ComponentLeft,
   componentRight: ComponentRight,
 }) => (
   <Wrapper>
     <h1 className="text-3xl">{title}</h1>
     <DivStyles>
-      <SectionLeftStyles>
+      <div className={`basis-full ${leftStyles}`}>
         <ComponentLeft userData={userData} />
-      </SectionLeftStyles>
-      <SectionRightStyles>
+      </div>
+      <div className={`basis-full ${rightStyles}`}>
         <ComponentRight userData={userData} />
-      </SectionRightStyles>
+      </div>
     </DivStyles>
   </Wrapper>
 );
