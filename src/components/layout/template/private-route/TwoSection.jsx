@@ -15,7 +15,7 @@ const DivStyles = tw.div`
   flex-row
   flex-wrap
   gap-10
-  xl:gap-40
+  xl:gap-20
   mt-8
 `;
 
