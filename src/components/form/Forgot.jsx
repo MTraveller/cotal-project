@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import Joi from 'joi';
 
 import { handleResetPassword } from '../../services/authService';
-import { IndexFormInput } from './input/indexInput';
+import { Input } from './input/Input';
 import { SubmitButton } from './indexButton';
 
 const Forgot = ({ form }) => {
@@ -45,7 +45,7 @@ const Forgot = ({ form }) => {
           <label htmlFor="email-address" className="sr-only">
             Email address
           </label>
-          <IndexFormInput
+          <Input
             id="email-address"
             name="email"
             type="email"
