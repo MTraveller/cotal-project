@@ -3,8 +3,6 @@ import SelectInput from '../../form/input/profile/StatusInput';
 // import tw from 'tailwind-styled-components';
 
 import { handleEditSaveFlip } from '../../../utils/handleEditSaveFlip';
-import { ImageInput } from '../../form/input/ImageInput';
-import { handleKeypress } from '../../../utils/handleKeypress';
 import { ButtonImageInput } from '../../form/input/ButtonImageInput';
 import { ButtonLabelInput } from '../../form/input/ButtonLabelInput';
 
