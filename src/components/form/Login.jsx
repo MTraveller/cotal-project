@@ -4,7 +4,7 @@ import { navigate } from 'gatsby';
 import { globalHistory } from '@reach/router';
 
 import { handleLogin } from '../../services/authService';
-import { IndexFormInput } from './input/indexInput';
+import { Input } from './input/Input';
 import { SubmitButton } from './indexButton';
 
 const Login = ({ form }) => {
@@ -55,7 +55,7 @@ const Login = ({ form }) => {
           <label htmlFor="email-address" className="sr-only">
             Email address
           </label>
-          <IndexFormInput
+          <Input
             id="email-address"
             name="email"
             type="email"
@@ -70,7 +70,7 @@ const Login = ({ form }) => {
           <label htmlFor="password" className="sr-only">
             Password
           </label>
-          <IndexFormInput
+          <Input
             id="password"
             name="password"
             type="password"

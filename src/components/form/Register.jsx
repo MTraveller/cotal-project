@@ -4,7 +4,7 @@ import { navigate } from 'gatsby';
 import { globalHistory } from '@reach/router';
 
 import { handleRegister } from '../../services/authService';
-import { IndexFormInput } from './input/indexInput';
+import { Input } from './input/Input';
 import { SubmitButton } from './indexButton';
 
 const Register = ({ form }) => {
@@ -59,7 +59,7 @@ const Register = ({ form }) => {
             <label htmlFor="firstname" className="sr-only">
               Firstname
             </label>
-            <IndexFormInput
+            <Input
               id="firstname"
               name="firstname"
               type="text"
@@ -74,7 +74,7 @@ const Register = ({ form }) => {
             <label htmlFor="lastname" className="sr-only">
               Lastname
             </label>
-            <IndexFormInput
+            <Input
               id="lastname"
               name="lastname"
               type="text"
@@ -90,7 +90,7 @@ const Register = ({ form }) => {
           <label htmlFor="email-address" className="sr-only">
             Email address
           </label>
-          <IndexFormInput
+          <Input
             id="email-address"
             name="email"
             type="email"
@@ -105,7 +105,7 @@ const Register = ({ form }) => {
           <label htmlFor="username" className="sr-only">
             Username
           </label>
-          <IndexFormInput
+          <Input
             id="username"
             name="username"
             type="text"
@@ -120,7 +120,7 @@ const Register = ({ form }) => {
           <label htmlFor="password" className="sr-only">
             Password
           </label>
-          <IndexFormInput
+          <Input
             id="password"
             name="password"
             type="password"
