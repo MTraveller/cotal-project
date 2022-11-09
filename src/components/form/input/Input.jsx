@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const IndexFormInput = ({
+export const Input = ({
   id,
   name,
   type,
