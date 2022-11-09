@@ -1,28 +1,22 @@
 import React from 'react';
-import tw from 'tailwind-styled-components';
 
-import SideBarLeft from './sidebar/SideBarLeft';
-import SideBarRight from './sidebar/SideBarRight';
+import { ThreeSection } from '../layout/template/private-route/ThreeSection';
+import { SideBarLeft } from './user-feed/SideBarLeft';
+import { FeedDetail } from './user-feed/FeedDetail';
+import { SideBarRight } from './user-feed/SideBarRight';
 import Seo from '../Seo';
 
-const PageWrapper = tw.div`
-  flex
-  flex-row
-  flex-wrap
-  justify-center
-  gap-6
-`;
-
 const UserFeed = ({ userData }) => (
-  <PageWrapper>
-    <SideBarLeft />
-    <div className="flex-auto w-[500px] max-w-3xl bg-black/[.2] rounded-md">
-      <p>
-        This feed page is for the user <code>hello</code> on the DRF db.
-      </p>
-    </div>
-    <SideBarRight />
-  </PageWrapper>
+  <ThreeSection
+    title="Your Feed"
+    userData={userData}
+    leftStyles="hidden lg:block flex-1 max-w-60"
+    middleStyles="flex-auto w-[500px] max-w-[782px]"
+    rightStyles="hidden lg:block flex-1 max-w-60"
+    componentLeft={SideBarLeft}
+    componentMiddle={FeedDetail}
+    componentRight={SideBarRight}
+  />
 );
 
 export const Head = () => <Seo title="Feed" />;
