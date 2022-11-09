@@ -15,12 +15,18 @@ const Footer = ({ location }) =>
       </div>
     </footer>
   ) : (
-    <footer className="mt-auto p-4 dark:text-slate-600 text-sm">
-      © {new Date().getFullYear()} &middot; Developed by
-      {` `}
-      <a href="https://github.com/MTraveller" target="_blank" rel="noreferrer">
-        @MTraveller
-      </a>
+    <footer className="mt-auto py-4 dark:text-slate-600 text-sm">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        © {new Date().getFullYear()} &middot; Developed by
+        {` `}
+        <a
+          href="https://github.com/MTraveller"
+          target="_blank"
+          rel="noreferrer"
+        >
+          @MTraveller
+        </a>
+      </div>
     </footer>
   );
 
