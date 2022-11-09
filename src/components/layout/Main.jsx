@@ -8,11 +8,21 @@ const MainStyles = tw.main`
   pt-7
 `;
 
+const IndexMainStyles = tw.main`
+  w-full
+  h-full
+  inline-flex
+  flex-wrap
+  lg:content-center
+  justify-center
+  gap-y-0
+  lg:bg-stone-900
+  dark:lg:bg-neutral-900
+`;
+
 const Main = ({ children, location }) => {
   return location.pathname === `/` ? (
-    <main className="w-full h-full inline-flex flex-wrap lg:content-center justify-center gap-y-0 lg:bg-stone-900 dark:lg:bg-neutral-900">
-      {children}
-    </main>
+    <IndexMainStyles>{children}</IndexMainStyles>
   ) : (
     <MainStyles>{children}</MainStyles>
   );
