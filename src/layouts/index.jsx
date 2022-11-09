@@ -10,10 +10,8 @@ import { isLoggedInContext } from '../context/IsLoggedInContext';
 import Wrapper from '../components/layout/Wrapper';
 
 const Layout = ({ children, location }) => {
-  let user = useContext(isLoggedInContext);
-  Object.keys(getUser()).length
-    ? (user.isLoggedIn = true)
-    : (user.isLoggedIn = false);
+  let isLoggedIn = useContext(isLoggedInContext);
+  isLoggedIn = Object.keys(getUser()).length ? true : false;
 
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -28,7 +26,7 @@ const Layout = ({ children, location }) => {
   return (
     <ClientOnly>
       <ToastContainer />
-      <isLoggedInContext.Provider value={user}>
+      <isLoggedInContext.Provider value={isLoggedIn}>
         <Wrapper data={data} children={children} location={location} />
       </isLoggedInContext.Provider>
     </ClientOnly>
