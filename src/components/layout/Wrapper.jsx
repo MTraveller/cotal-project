@@ -8,12 +8,10 @@ import Footer from './Footer';
 import { UserDataProvider } from '../../context/UserDataContext';
 import { isLoggedInContext } from '../../context/IsLoggedInContext';
 
-let DivStyles = tw.div`
+const DivStyles = tw.div`
   flex
   flex-col
   h-full
-  bg-slate-200
-  dark:bg-slate-900
 `;
 
 const IndexDivStyles = styled.div`
@@ -43,29 +41,29 @@ const IndexDivStyles = styled.div`
   }
 `;
 
-const htmlTags = (data, children, location, user) => (
+const htmlTags = (data, children, location, isLoggedIn) => (
   <UserDataProvider>
     <Header
       location={location}
-      isLoggedIn={user?.isLoggedIn}
       siteTitle={data.site.siteMetadata?.title || `Title`}
+      isLoggedIn={isLoggedIn}
     />
-    <Main
-      location={location}
-      isLoggedIn={user?.isLoggedIn}
-      children={children}
-    />
+    <Main location={location} children={children} isLoggedIn={isLoggedIn} />
     <Footer location={location} />
   </UserDataProvider>
 );
 
 const Wrapper = ({ data, children, location }) => {
-  const user = useContext(isLoggedInContext);
+  const isLoggedIn = useContext(isLoggedInContext);
 
-  return location.pathname !== `/` ? (
-    <DivStyles>{htmlTags(data, children, location, user)}</DivStyles>
+  return isLoggedIn && location.pathname !== `/` ? (
+    <DivStyles>{htmlTags(data, children, location, isLoggedIn)}</DivStyles>
+  ) : location.pathname === `/` ? (
+    <IndexDivStyles>
+      {htmlTags(data, children, location, isLoggedIn)}
+    </IndexDivStyles>
   ) : (
-    <IndexDivStyles>{htmlTags(data, children, location)}</IndexDivStyles>
+    <DivStyles>{htmlTags(data, children, location, isLoggedIn)}</DivStyles>
   );
 };
 
