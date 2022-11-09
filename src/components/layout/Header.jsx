@@ -230,9 +230,15 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
         )}
       </Disclosure>
     </header>
-  ) : (
+  ) : location.pathname === `/` ? (
     <header className="lg:absolute lg:top-0 lg:left-5">
       <div className="flex items-center p-3 lg:bg-inherit text-white/[.2] dark:text-gray-600/[.5]">
+        <Link to="/">{siteTitle}</Link>
+      </div>
+    </header>
+  ) : (
+    <header className="py-4 dark:text-slate-600 text-sm">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Link to="/">{siteTitle}</Link>
       </div>
     </header>
