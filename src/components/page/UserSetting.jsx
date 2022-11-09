@@ -1,16 +1,15 @@
 import React from 'react';
 
+import { OneSection } from '../layout/template/private-route/OneSection';
+import { PersonalSetting } from './user-setting/PersonalSetting';
 import Seo from '../Seo';
 
 const UserSetting = ({ userData }) => (
-  <>
-    <h1>
-      This page is <b>User Settings Page</b>
-    </h1>
-    <p>
-      This page is for the user <code>hello</code> on the DRF db.
-    </p>
-  </>
+  <OneSection
+    title="Your Settings"
+    userData={userData}
+    component={PersonalSetting}
+  />
 );
 
 export const Head = () => <Seo title="User Settings" />;
