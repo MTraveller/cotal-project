@@ -10,6 +10,16 @@
 
 @layer base {
   html, body, #___gatsby, #gatsby-focus-wrapper {
+    @apply w-full;
     @apply h-full;
+    @apply left-0;
+    @apply top-0;
+    @apply right-0;
+    @apply bottom-0;
+  }
+
+  body {
+    @apply bg-slate-200;
+    @apply dark:bg-slate-900;
   }
 }
