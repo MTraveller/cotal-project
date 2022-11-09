@@ -12,10 +12,9 @@ const Wrapper = tw.div`
 const DivStyles = tw.div`
   w-full
   flex
-  flex-flow
+  flex-row
   flex-wrap
   gap-10
-  lg:gap-20
   xl:gap-40
   mt-8
 `;
@@ -31,10 +30,10 @@ export const TwoSection = ({
   <Wrapper>
     <h1 className="text-3xl">{title}</h1>
     <DivStyles>
-      <div className={`basis-full ${leftStyles}`}>
+      <div className={`${leftStyles}`}>
         <ComponentLeft userData={userData} />
       </div>
-      <div className={`basis-full ${rightStyles}`}>
+      <div className={`${rightStyles}`}>
         <ComponentRight userData={userData} />
       </div>
     </DivStyles>
