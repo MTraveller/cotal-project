@@ -15,14 +15,7 @@ const H1Styles = styled.h1`
 export default function IndexPage() {
   const [form, setForm] = useState(`login`);
 
-  const handleForm = (name) =>
-    name === `login`
-      ? setForm(`login`)
-      : name === `register`
-      ? setForm(`register`)
-      : name === `forgot`
-      ? setForm(`forgot`)
-      : '';
+  const handleForm = (name) => setForm(name);
 
   return isLoggedIn() ? (
     navigate(`/feed/`)
@@ -44,10 +37,8 @@ export default function IndexPage() {
             <Login form={handleForm} />
           ) : form === `register` ? (
             <Register form={handleForm} />
-          ) : form === `forgot` ? (
-            <Forgot form={handleForm} />
           ) : (
-            ''
+            <Forgot form={handleForm} />
           )}
         </div>
       </div>
