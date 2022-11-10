@@ -61,10 +61,13 @@ export const SocialInput = ({
       );
     })}
 
-    <button id="icon-save-button" type="button" className="hidden">
+    <button
+      id="icon-save-button"
+      type="button"
+      className="hidden"
+      onClick={handleIconSaveFlip}
+    >
       Save
     </button>
   </div>
 );
-
-// onClick={handleIconEditSaveFlip}
