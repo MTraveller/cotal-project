@@ -30,11 +30,11 @@ export default function SelectInput({ value, onChange }) {
     <Listbox value={selected} onChange={callOnChange}>
       {({ open }) => (
         <div className="w-full">
-          <Listbox.Label className="block text-sm font-medium text-gray-700">
+          <Listbox.Label className="hidden text-sm font-medium text-gray-700">
             Choose option
           </Listbox.Label>
-          <div className="relative mt-1 w-full">
-            <Listbox.Button className="relative w-full cursor-default rounded-md border border-slate-400 bg-slate-500 py-2 pl-3 pr-10 text-left shadow-sm text-white placeholder-white focus:z-10 focus:border-2 focus:border-yellow-300 focus:outline-none focus:ring-yellow-300 sm:text-sm">
+          <div className="relative w-full">
+            <Listbox.Button className="relative w-full cursor-default rounded-md border border-slate-400 bg-slate-500 py-2 pl-3 pr-10 text-left shadow-sm text-white placeholder-white focus:z-10 focus:border-yellow-300 focus:outline-none focus:ring-yellow-300 sm:text-sm">
               <span className="flex items-center">
                 <span className="ml-3 block">{selected}</span>
               </span>
