@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import SelectInput from '../../form/input/profile/StatusInput';
-// import tw from 'tailwind-styled-components';
 
 import { handleEditSaveFlip } from '../../../utils/handleEditSaveFlip';
 import { ButtonImageInput } from '../../form/input/ButtonImageInput';
 import { ButtonLabelInput } from '../../form/input/ButtonLabelInput';
+import { FlipTwo } from '../../layout/element/FlipTwo';
+import { SocialInput } from '../../form/input/profile/SocialInput';
 
 export const PersonalDetail = ({ userData }) => {
   const [personal, setPersonal] = useState({
-    image: '',
-    status: '',
-    location: '',
-    linktrees: '',
-    socials: '',
+    image: ``,
+    status: ``,
+    location: ``,
+    linktrees: ``,
+    socials: ``,
   });
 
   const [preview, setPreview] = useState();
@@ -20,12 +21,12 @@ export const PersonalDetail = ({ userData }) => {
   // Initial displaying selected image sourced from:
   // https://stackoverflow.com/a/57781164
   useEffect(() => {
-    if (!personal.image) {
+    if (userData && personal.status === ``) {
       setPersonal({
         image: userData?.image,
         status: userData?.status,
         location: userData?.location,
-        linktrees: userData?.linktrees,
+        linktrees: userData?.linktrees[0]?.username,
         socials: userData?.socials,
       });
     }
@@ -34,11 +35,13 @@ export const PersonalDetail = ({ userData }) => {
       return setPreview(undefined);
     }
 
-    const objectUrl = URL.createObjectURL(personal.image);
-    setPreview(objectUrl);
+    if (!userData?.image) {
+      const objectUrl = URL.createObjectURL(personal.image);
+      setPreview(objectUrl);
 
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [personal.image, userData]);
+      return () => URL.revokeObjectURL(objectUrl);
+    }
+  }, [userData, personal.image, personal.status]);
 
   const onSelectFile = (e) => {
     if (!e.target.files || e.target.files.length === 0) return;
@@ -54,12 +57,12 @@ export const PersonalDetail = ({ userData }) => {
 
   return (
     <div className="bg-black/[.2] rounded-lg p-6">
-      <form className="flex flex-col">
+      <form className="flex flex-col gap-y-3">
         <div className="flex flex-row justify-between items-center">
           <div className="w-32">
             <ButtonImageInput
               id="label-profile-image"
-              preview={preview}
+              preview={preview ? preview : personal?.image}
               alt={`${personal?.user?.first_name} ${personal?.user?.last_name}`}
               svg={
                 <svg
@@ -104,7 +107,7 @@ export const PersonalDetail = ({ userData }) => {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <p className="flex h-[74px] sm:h-[69.5px] items-center gap-3">
+          <p className="flex h-[47px] sm:h-[42.5px] items-center gap-3">
             Status:{` `}
             <span id="status">{personal.status}</span>
           </p>
@@ -118,6 +121,56 @@ export const PersonalDetail = ({ userData }) => {
             Edit
           </button>
         </div>
+        <FlipTwo
+          paragraphHight="h-[47px] sm:h-[42.5px]"
+          text="Location"
+          spanId="status"
+          variable={personal.location ? personal.location : ``}
+          inputId="location"
+          inputName="location"
+          inputType="text"
+          inputValue={personal.location ? personal.location : ``}
+          inputAutocomplete="country-name"
+          inputDisplay="block"
+          inputBorderRadius="rounded-md"
+          inputPadding="py-2 pl-6 pr-10"
+          inputPlaceholder="Location"
+          onChange={handleChange}
+        />
+        <FlipTwo
+          paragraphHight="h-[47px] sm:h-[42.5px]"
+          text="LinkTree"
+          link={`https://linktr.ee/${personal.linktrees}`}
+          spanId="linktrees"
+          variable={personal.linktrees ? personal.linktrees : ``}
+          inputId="linktrees"
+          inputName="linktrees"
+          inputType="text"
+          inputValue={personal.linktrees ? personal.linktrees : ``}
+          inputAutocomplete="off"
+          inputDisplay="block"
+          inputBorderRadius="rounded-md"
+          inputPadding="py-2 pl-6 pr-10"
+          inputPlaceholder="Username"
+          onChange={handleChange}
+        />
+        <SocialInput
+          buttonsHight="h-[47px] sm:h-[42.5px]"
+          socials={personal.socials ? personal.socials : ``}
+          spanId="socials"
+          inputId="socials"
+          inputName="socials"
+          inputType="text"
+          inputValue={
+            personal.socials.username ? personal.socials.username : ``
+          }
+          inputAutocomplete="off"
+          inputDisplay="hidden"
+          inputBorderRadius="rounded-md"
+          inputPadding="py-2 pl-6 pr-10"
+          inputPlaceholder="Username"
+          onChange={handleChange}
+        />
       </form>
     </div>
   );
