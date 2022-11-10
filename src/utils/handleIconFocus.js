@@ -6,6 +6,10 @@ export const handleIconFocus = (e) => {
       ? e.target.parentNode
       : e.target.parentNode.parentNode;
 
+  const isActive = clickedButton.parentNode.classList.contains('active');
+
+  if (isActive) return;
+
   const parentDivChildren = clickedButton.parentNode.parentNode.childNodes;
 
   Array.from(parentDivChildren).forEach((item) => {
@@ -15,7 +19,7 @@ export const handleIconFocus = (e) => {
         item.classList.replace(`hidden`, `flex`);
       }
     } else {
-      item.classList.add(`w-3/4`, `gap-3`);
+      item.classList.add(`active`, `w-3/4`, `gap-3`);
       item.lastChild.classList.replace(`hidden`, `flex`);
     }
   });
