@@ -51,7 +51,9 @@ const Forgot = ({ form }) => {
             type="email"
             value={account.email}
             autoComplete="email"
+            inputDisplay="block"
             borderRadius="rounded-md"
+            padding="px-3 py-3 md:py-4"
             placeholder="Email address"
             onChange={handleChange}
           />
