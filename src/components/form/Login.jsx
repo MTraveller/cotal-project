@@ -61,7 +61,9 @@ const Login = ({ form }) => {
             type="email"
             value={account.email}
             autoComplete="email"
+            inputDisplay="block"
             borderRadius="rounded-none rounded-t-md"
+            padding="px-3 py-3 md:py-4"
             placeholder="Email address"
             onChange={handleChange}
           />
@@ -76,7 +78,9 @@ const Login = ({ form }) => {
             type="password"
             value={account.password}
             autoComplete="current-password"
+            inputDisplay="block"
             borderRadius="rounded-none rounded-b-md"
+            padding="px-3 py-3 md:py-4"
             placeholder="Password"
             onChange={handleChange}
           />
