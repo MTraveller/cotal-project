@@ -8,7 +8,7 @@ const Footer = ({ location }) =>
         <a
           href="https://github.com/MTraveller"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
         >
           @MTraveller
         </a>
@@ -22,7 +22,7 @@ const Footer = ({ location }) =>
         <a
           href="https://github.com/MTraveller"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
         >
           @MTraveller
         </a>
