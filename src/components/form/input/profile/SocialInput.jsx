@@ -34,33 +34,30 @@ export const SocialInput = ({
   onChange,
 }) => (
   <div className="flex flex-wrap justify-between items-center">
-    {icons.map((item, idx) => {
-      return (
-        <div key={idx} id={idx} className="flex">
-          <button
-            type="button"
-            key={idx}
-            id={idx}
-            className={`flex basis-1/6 justify-center items-center ${buttonsHight}`}
-            onClick={handleIconFocus}
-          >
-            {item}
-          </button>
-          <Input
-            id={inputId}
-            name={inputName}
-            type={inputType}
-            value={inputValue}
-            autoComplete={inputAutocomplete}
-            display={inputDisplay}
-            borderRadius={inputBorderRadius}
-            padding={inputPadding}
-            placeholder={inputPlaceholder}
-            onChange={onChange}
-          />
-        </div>
-      );
-    })}
+    {icons.map((item, idx) => (
+      <div key={idx} id={idx} className="flex">
+        <button
+          type="button"
+          id={idx}
+          className={`flex basis-1/6 justify-center items-center ${buttonsHight}`}
+          onClick={handleIconFocus}
+        >
+          {item}
+        </button>
+        <Input
+          id={inputId}
+          name={inputName}
+          type={inputType}
+          value={inputValue}
+          autoComplete={inputAutocomplete}
+          display={inputDisplay}
+          borderRadius={inputBorderRadius}
+          padding={inputPadding}
+          placeholder={inputPlaceholder}
+          onChange={onChange}
+        />
+      </div>
+    ))}
 
     <button
       id="icon-save-button"
