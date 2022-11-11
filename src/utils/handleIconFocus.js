@@ -1,5 +1,3 @@
-import { animate } from './animate';
-
 export const handleIconFocus = (e) => {
   const clickedButton =
     e.target.type === `button`
@@ -14,15 +12,16 @@ export const handleIconFocus = (e) => {
 
   const parentDivChildren = clickedButton.parentNode.parentNode.childNodes;
 
-  Array.from(parentDivChildren).forEach((item) => {
-    if (item.id !== clickedButton.id) {
-      item.classList.replace(`flex`, `hidden`);
-      if (item.id === `icon-save-button`) {
-        item.classList.replace(`hidden`, `flex`);
+  Array.from(parentDivChildren).forEach((node) => {
+    if (node.id !== clickedButton.name) {
+      node.classList.replace(`flex`, `hidden`);
+      if (node.id === `icon-save-button`) {
+        node.classList.replace(`hidden`, `flex`);
       }
+      node.parentNode.lastChild.classList.replace(`block`, `hidden`);
     } else {
-      item.classList.add(`active`, `w-3/4`, `gap-3`);
-      animate(item.lastChild);
+      node.classList.add(`active`, `w-3/4`, `gap-3`);
+      node.lastChild.classList.replace(`hidden`, `flex`);
     }
   });
 };
