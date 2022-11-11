@@ -1,3 +1,5 @@
+import { animate } from './animate';
+
 export const handleIconFocus = (e) => {
   const clickedButton =
     e.target.type === `button`
@@ -20,7 +22,7 @@ export const handleIconFocus = (e) => {
       }
     } else {
       item.classList.add(`active`, `w-3/4`, `gap-3`);
-      item.lastChild.classList.replace(`hidden`, `flex`);
+      animate(item.lastChild);
     }
   });
 };
