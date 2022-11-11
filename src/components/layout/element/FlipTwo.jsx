@@ -8,7 +8,6 @@ export const FlipTwo = ({
   text,
   link,
   spanId,
-  variable,
   inputId,
   inputName,
   inputType,
@@ -24,10 +23,10 @@ export const FlipTwo = ({
       {text}:{` `}
       {link ? (
         <a id={spanId} href={link} target="_blank" rel="noopener noreferrer">
-          {variable}
+          {inputValue}
         </a>
       ) : (
-        <span id={spanId}>{variable}</span>
+        <span id={spanId}>{inputValue}</span>
       )}
     </p>
     <span id={inputId} name={inputName} className="hidden w-3/4">
