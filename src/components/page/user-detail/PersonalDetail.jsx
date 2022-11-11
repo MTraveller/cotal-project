@@ -161,9 +161,6 @@ export const PersonalDetail = ({ userData }) => {
           inputId="socials"
           inputName="socials"
           inputType="text"
-          inputValue={
-            personal.socials.username ? personal.socials.username : ``
-          }
           inputAutocomplete="off"
           inputDisplay="hidden"
           inputBorderRadius="rounded-md"
