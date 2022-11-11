@@ -18,8 +18,6 @@ export const PersonalDetail = ({ userData }) => {
 
   const [preview, setPreview] = useState();
 
-  // Initial displaying selected image sourced from:
-  // https://stackoverflow.com/a/57781164
   useEffect(() => {
     if (userData && personal.status === ``) {
       setPersonal({
@@ -31,6 +29,8 @@ export const PersonalDetail = ({ userData }) => {
       });
     }
 
+    // Initial displaying selected image sourced from:
+    // https://stackoverflow.com/a/57781164
     if (!personal.image) {
       return setPreview(undefined);
     }
@@ -50,10 +50,33 @@ export const PersonalDetail = ({ userData }) => {
   };
 
   const handleChange = ({ currentTarget: input }) => {
-    setPersonal({ ...personal, [input.name]: input.value });
+    if (input.dataset.name === `socials`) {
+      const oldSocials = [...personal.socials];
+
+      const socialObj = oldSocials.filter(
+        (social) => social.name === input.name
+      )[0];
+
+      const idx = oldSocials.indexOf(socialObj);
+      oldSocials[idx].username = input.value;
+
+      const newSocials = [...oldSocials];
+
+      setPersonal({
+        ...personal,
+        socials: newSocials,
+      });
+    } else {
+      setPersonal({ ...personal, [input.name]: input.value });
+    }
   };
 
   const handleStatusSelect = (e) => setPersonal({ ...personal, status: e });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e);
+  };
 
   return (
     <div className="bg-black/[.2] rounded-lg p-6">
@@ -125,7 +148,6 @@ export const PersonalDetail = ({ userData }) => {
           paragraphHight="h-[47px] sm:h-[42.5px]"
           text="Location"
           spanId="status"
-          variable={personal.location ? personal.location : ``}
           inputId="location"
           inputName="location"
           inputType="text"
@@ -142,7 +164,6 @@ export const PersonalDetail = ({ userData }) => {
           text="LinkTree"
           link={`https://linktr.ee/${personal.linktrees}`}
           spanId="linktrees"
-          variable={personal.linktrees ? personal.linktrees : ``}
           inputId="linktrees"
           inputName="linktrees"
           inputType="text"
@@ -155,12 +176,10 @@ export const PersonalDetail = ({ userData }) => {
           onChange={handleChange}
         />
         <SocialInput
-          buttonsHight="h-[47px] sm:h-[42.5px]"
-          socials={personal.socials ? personal.socials : ``}
-          spanId="socials"
+          buttonsHeight="h-[47px] sm:h-[42.5px]"
           inputId="socials"
-          inputName="socials"
           inputType="text"
+          inputValue={personal?.socials}
           inputAutocomplete="off"
           inputDisplay="hidden"
           inputBorderRadius="rounded-md"
@@ -168,6 +187,13 @@ export const PersonalDetail = ({ userData }) => {
           inputPlaceholder="Username"
           onChange={handleChange}
         />
+        <button
+          type="submit"
+          className="mt-3 py-2 dark:bg-slate-900 rounded-md ring-1 dark:ring-slate-400 transition ease-in-out delay-150 hover:ring-1 hover:dark:ring-yellow-400 hover:ring-offset-4 hover:ring-offset-gray-900"
+          onClick={handleSubmit}
+        >
+          Save Changes
+        </button>
       </form>
     </div>
   );
