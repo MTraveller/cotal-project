@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SiDeviantart,
   SiDribbble,
@@ -6,24 +6,22 @@ import {
   SiSoundcloud,
   SiPinterest,
 } from 'react-icons/si';
+
+import { Input } from '../Input';
 import { handleIconFocus } from '../../../../utils/handleIconFocus';
 import { handleIconSaveFlip } from '../../../../utils/handleIconSaveFlip';
-import { Input } from '../Input';
 
 const icons = [
-  <SiDeviantart size={`28px`} />,
-  <SiDribbble size={`28px`} />,
-  <SiGithub size={`28px`} />,
-  <SiSoundcloud size={`28px`} />,
-  <SiPinterest size={`28px`} />,
+  { name: `DeviantArt`, component: <SiDeviantart size={`28px`} /> },
+  { name: `Dribble`, component: <SiDribbble size={`28px`} /> },
+  { name: `GitHub`, component: <SiGithub size={`28px`} /> },
+  { name: `SoundCloud`, component: <SiSoundcloud size={`28px`} /> },
+  { name: `Pinterest`, component: <SiPinterest size={`28px`} /> },
 ];
 
 export const SocialInput = ({
-  buttonsHight,
-  socials,
-  spanId,
+  buttonsHeight,
   inputId,
-  inputName,
   inputType,
   inputValue,
   inputAutocomplete,
@@ -32,40 +30,63 @@ export const SocialInput = ({
   inputPadding,
   inputPlaceholder,
   onChange,
-}) => (
-  <div className="flex flex-wrap justify-between items-center">
-    {icons.map((item, idx) => (
-      <div key={idx} id={idx} className="flex">
-        <button
-          type="button"
-          id={idx}
-          className={`flex basis-1/6 justify-center items-center ${buttonsHight}`}
-          onClick={handleIconFocus}
-        >
-          {item}
-        </button>
-        <Input
-          id={inputId}
-          name={inputName}
-          type={inputType}
-          value={inputValue}
-          autoComplete={inputAutocomplete}
-          display={inputDisplay}
-          borderRadius={inputBorderRadius}
-          padding={inputPadding}
-          placeholder={inputPlaceholder}
-          onChange={onChange}
-        />
-      </div>
-    ))}
+}) => {
+  const [username, setUsername] = useState({
+    GitHub: ``,
+    DeviantArt: ``,
+    Dribble: ``,
+    SoundCloud: ``,
+    Pinterest: ``,
+  });
 
-    <button
-      id="icon-save-button"
-      type="button"
-      className="hidden"
-      onClick={handleIconSaveFlip}
-    >
-      Save
-    </button>
-  </div>
-);
+  useEffect(() => {
+    setUsername({
+      GitHub: inputValue[0]?.username,
+      DeviantArt: inputValue[1]?.username,
+      Dribble: inputValue[2]?.username,
+      SoundCloud: inputValue[3]?.username,
+      Pinterest: inputValue[4]?.username,
+    });
+  }, [inputValue]);
+
+  return (
+    <div className="flex flex-wrap justify-between items-center">
+      {icons.map((icon, idx) => (
+        <div key={icon.name} id={icon.name} className="flex">
+          <button
+            type="button"
+            id={idx}
+            name={icon.name}
+            className={`flex basis-1/6 justify-center items-center ${buttonsHeight}`}
+            onClick={handleIconFocus}
+          >
+            {icon.component}
+          </button>
+          <Input
+            key={icon.name}
+            id={idx}
+            name={icon.name}
+            type={inputType}
+            dataValue={inputId}
+            value={username[icon.name]}
+            autoComplete={inputAutocomplete}
+            display={inputDisplay}
+            borderRadius={inputBorderRadius}
+            padding={inputPadding}
+            placeholder={inputPlaceholder}
+            onChange={onChange}
+          />
+        </div>
+      ))}
+
+      <button
+        id="icon-save-button"
+        type="button"
+        className="hidden"
+        onClick={handleIconSaveFlip}
+      >
+        Save
+      </button>
+    </div>
+  );
+};
