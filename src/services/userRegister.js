@@ -1,4 +1,4 @@
-import http from '../../services/httpService';
+import http from './httpService';
 
 const apiLoginEndpoint = `${process.env.GATSBY_API_URL}/auth/users/`;
 

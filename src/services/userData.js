@@ -1,5 +1,5 @@
-import http from '../../services/httpService';
-import { handleTokenRefresh } from '../../services/authService';
+import http from './httpService';
+import { handleTokenRefresh } from './authService';
 
 const apiProfileMeEndpoint = `${process.env.GATSBY_API_URL}/profiles/me/`;
 
