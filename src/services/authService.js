@@ -81,7 +81,8 @@ export const handleResetPassword = (account) => {
 };
 
 export const isLoggedIn = () => {
-  return useLoggedInContext();
+  const DoCheckLogin = () => useLoggedInContext();
+  return DoCheckLogin();
 };
 
 export const handleTokenRefresh = async () => {
