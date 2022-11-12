@@ -1,16 +1,19 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useStaticQuery, graphql } from 'gatsby';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
+import {
+  useLoggedInContext,
+  LoggedInContext,
+} from '../context/LoggedInContext';
 import { getUser } from '../services/authService';
 import ClientOnly from '../hooks/ClientOnly';
-import { isLoggedInContext } from '../context/IsLoggedInContext';
 import Wrapper from '../components/layout/Wrapper';
 
 const Layout = ({ children, location }) => {
-  let isLoggedIn = useContext(isLoggedInContext);
+  let isLoggedIn = useLoggedInContext();
   isLoggedIn = Object.keys(getUser()).length ? true : false;
 
   const data = useStaticQuery(graphql`
@@ -26,9 +29,9 @@ const Layout = ({ children, location }) => {
   return (
     <ClientOnly>
       <ToastContainer />
-      <isLoggedInContext.Provider value={isLoggedIn}>
+      <LoggedInContext.Provider value={isLoggedIn}>
         <Wrapper data={data} children={children} location={location} />
-      </isLoggedInContext.Provider>
+      </LoggedInContext.Provider>
     </ClientOnly>
   );
 };

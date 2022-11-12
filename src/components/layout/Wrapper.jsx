@@ -6,7 +6,7 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import { UserDataProvider } from '../../context/UserDataContext';
-import { isLoggedInContext } from '../../context/IsLoggedInContext';
+import { useLoggedInContext } from '../../context/LoggedInContext';
 
 const DivStyles = tw.div`
   flex
@@ -54,7 +54,7 @@ const htmlTags = (data, children, location, isLoggedIn) => (
 );
 
 const Wrapper = ({ data, children, location }) => {
-  const isLoggedIn = useContext(isLoggedInContext);
+  const isLoggedIn = useLoggedInContext();
 
   return isLoggedIn && location.pathname !== `/` ? (
     <DivStyles>{htmlTags(data, children, location, isLoggedIn)}</DivStyles>
