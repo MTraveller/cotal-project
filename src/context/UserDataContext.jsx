@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 import { getUser } from '../services/authService';
-import getUserDatahandler from '../api/users/userData';
+import getUserDatahandler from '../services/userData';
 
 export const UserDataContext = createContext({
   userData: {},
