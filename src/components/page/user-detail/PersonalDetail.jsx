@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import SelectInput from '../../form/input/profile/StatusInput';
 
+import { checkEquality } from '../../../utils/checkEquality';
+import SelectInput from '../../form/input/profile/StatusInput';
+import { handleKeypress } from '../../../utils/handleKeypress';
 import { handleEditSaveFlip } from '../../../utils/handleEditSaveFlip';
 import { ButtonImageInput } from '../../form/input/ButtonImageInput';
 import { ButtonLabelInput } from '../../form/input/ButtonLabelInput';
@@ -51,16 +53,14 @@ export const PersonalDetail = ({ userData }) => {
 
   const handleChange = ({ currentTarget: input }) => {
     if (input.dataset.name === `socials`) {
-      const oldSocials = [...personal.socials];
+      const newSocials = [...personal.socials];
 
-      const socialObj = oldSocials.filter(
+      const socialObj = newSocials.filter(
         (social) => social.name === input.name
       )[0];
 
-      const idx = oldSocials.indexOf(socialObj);
-      oldSocials[idx].username = input.value;
-
-      const newSocials = [...oldSocials];
+      const idx = newSocials.indexOf(socialObj);
+      newSocials[idx].username = input.value;
 
       setPersonal({
         ...personal,
@@ -75,7 +75,20 @@ export const PersonalDetail = ({ userData }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
+
+    const userDataCopy = { ...userData };
+
+    const userId = userDataCopy.id;
+    delete userDataCopy.id;
+    delete userDataCopy.user;
+    delete userDataCopy.slug;
+
+    if (!userDataCopy.linktrees.length && !e.linktrees)
+      userDataCopy.linktrees = undefined;
+
+    const result = checkEquality(personal, userDataCopy);
+
+    console.log(result);
   };
 
   return (
@@ -106,7 +119,18 @@ export const PersonalDetail = ({ userData }) => {
               onChange={onSelectFile}
             />
           </div>
-          <div>
+          <div className="min-w-max flex flex-col gap-5">
+            <button type="button" onClick={handleKeypress}>
+              <a
+                id="open-profile"
+                title="Opens a new browser tab"
+                href={`/in/${userData?.slug}/`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View profile
+              </a>
+            </button>
             <ButtonLabelInput
               id="change-profile-image-button"
               svg={
@@ -140,7 +164,11 @@ export const PersonalDetail = ({ userData }) => {
               onChange={handleStatusSelect}
             />
           </span>
-          <button type="button" onClick={handleEditSaveFlip}>
+          <button
+            type="button"
+            data-message="Edit your status"
+            onClick={handleEditSaveFlip}
+          >
             Edit
           </button>
         </div>
@@ -189,6 +217,7 @@ export const PersonalDetail = ({ userData }) => {
         />
         <button
           type="submit"
+          data-message="Save changes made"
           className="mt-3 py-2 dark:bg-slate-900 rounded-md ring-1 dark:ring-slate-400 transition ease-in-out delay-150 hover:ring-1 hover:dark:ring-yellow-400 hover:ring-offset-4 hover:ring-offset-gray-900"
           onClick={handleSubmit}
         >
