@@ -1,4 +1,4 @@
-import http from '../../services/httpService';
+import http from './httpService';
 
 export default async function getUserHandler(req, res) {
   // GET user from api
@@ -7,8 +7,8 @@ export default async function getUserHandler(req, res) {
 
   try {
     const result = await http.get(url);
-    res.send(result.data);
-  } catch (error) {
-    res.status(500).send(error);
+    return result.data;
+  } catch (ex) {
+    return ex;
   }
 }
