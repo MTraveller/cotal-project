@@ -16,5 +16,7 @@ export default async function userLoginHandler(req) {
       return ex;
     });
 
+  console.log(result);
+
   return result;
 }
