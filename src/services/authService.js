@@ -10,21 +10,22 @@ import { useLoggedInContext } from '../context/LoggedInContext';
  *  Initial auth service from Gatsby's tutorial:
  *  https://www.gatsbyjs.com/tutorial/authentication-tutorial/
  */
-export const isBrowser = () => {
-  if (typeof window !== `undefined`) {
-    console.log(window);
-    return true;
-  }
-  return false;
-};
+export const isBrowser = () => typeof window !== `undefined`;
 
-export const getUser = () =>
-  isBrowser() && window.localStorage.getItem(`cotalUser`)
+export const getUser = () => {
+  if (typeof window !== `undefined`) {
+    console.log(JSON.parse(window.localStorage.getItem(`cotalUser`)));
+  }
+  return isBrowser() && window.localStorage.getItem(`cotalUser`)
     ? JSON.parse(window.localStorage.getItem(`cotalUser`))
     : {};
+};
 
-const setUser = (user) =>
-  window.localStorage.setItem(`cotalUser`, JSON.stringify(user));
+const setUser = (user) => {
+  console.log(`setting user`);
+  console.log(JSON.stringify(user));
+  return window.localStorage.setItem(`cotalUser`, JSON.stringify(user));
+};
 
 export const handleLogin = async (account) => {
   toast.dismiss();
