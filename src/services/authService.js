@@ -13,26 +13,18 @@ import { useLoggedInContext } from '../context/LoggedInContext';
 export const isBrowser = () => typeof window !== `undefined`;
 
 export const getUser = () => {
-  if (typeof window !== `undefined`) {
-    console.log(JSON.parse(window.localStorage.getItem(`cotalUser`)));
-  }
   return isBrowser() && window.localStorage.getItem(`cotalUser`)
     ? JSON.parse(window.localStorage.getItem(`cotalUser`))
     : {};
 };
 
 const setUser = ({ user }) => {
-  console.log(`setting user`);
-  console.log(JSON.stringify(user));
   return window.localStorage.setItem(`cotalUser`, JSON.stringify(user));
 };
 
 export const handleLogin = async (account) => {
   toast.dismiss();
-  console.log('handleLogin');
   const res = await userLoginHandler({ account });
-
-  console.log('Checking RES');
 
   if (res.code === `ERR_NETWORK`) {
     toast.error(
@@ -45,7 +37,6 @@ export const handleLogin = async (account) => {
       ${res.response.data.detail}!
     `);
   } else if (res.status === 200) {
-    console.log(res.status);
     const { access, refresh } = res.data;
     setUser({
       user: {
