@@ -21,7 +21,7 @@ export const getUser = () => {
     : {};
 };
 
-const setUser = (user) => {
+const setUser = ({ user }) => {
   console.log(`setting user`);
   console.log(JSON.stringify(user));
   return window.localStorage.setItem(`cotalUser`, JSON.stringify(user));
@@ -45,10 +45,13 @@ export const handleLogin = async (account) => {
   }
 
   if (res?.statusText === `OK`) {
+    console.log(res?.statusText);
     const { access, refresh } = res.data;
     setUser({
-      access,
-      refresh,
+      user: {
+        access,
+        refresh,
+      },
     });
 
     return true;
