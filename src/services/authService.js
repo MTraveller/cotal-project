@@ -29,6 +29,7 @@ const setUser = (user) => {
 
 export const handleLogin = async (account) => {
   toast.dismiss();
+  console.log('handleLogin');
   const res = await userLoginHandler({ account });
 
   if (res.code === `ERR_NETWORK`) {
