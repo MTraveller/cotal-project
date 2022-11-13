@@ -10,7 +10,10 @@ import { useLoggedInContext } from '../context/LoggedInContext';
  *  Initial auth service from Gatsby's tutorial:
  *  https://www.gatsbyjs.com/tutorial/authentication-tutorial/
  */
-export const isBrowser = () => typeof window !== `undefined`;
+export const isBrowser = () => {
+  console.log(window);
+  return typeof window !== `undefined`;
+};
 
 export const getUser = () =>
   isBrowser() && window.localStorage.getItem(`cotalUser`)
