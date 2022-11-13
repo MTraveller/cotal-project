@@ -2,7 +2,7 @@ import http from './httpService';
 
 const apiLoginEndpoint = `${process.env.GATSBY_API_URL}/auth/users/`;
 
-export default async function userRegisterHandler(req, res) {
+export default async function userRegisterHandler(req) {
   const accForAPI = { ...req.account };
 
   Object.keys(accForAPI).forEach((key) => {

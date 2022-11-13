@@ -1,6 +1,6 @@
 import http from './httpService';
 
-export default async function getUserHandler(req, res) {
+export default async function getUserHandler(req) {
   // GET user from api
   const slug = req.params['slug'];
   const url = `${process.env.GATSBY_API_URL}/profiles/${slug}/`;

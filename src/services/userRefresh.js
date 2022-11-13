@@ -2,7 +2,7 @@ import http from './httpService';
 
 const apiRefreshEndpoint = `${process.env.GATSBY_API_URL}/auth/jwt/refresh`;
 
-export default async function userLoginHandler(req, res) {
+export default async function userLoginHandler(req) {
   const result = await http
     .post(apiRefreshEndpoint, {
       refresh: req,
