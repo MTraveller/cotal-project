@@ -32,6 +32,8 @@ export const handleLogin = async (account) => {
   console.log('handleLogin');
   const res = await userLoginHandler({ account });
 
+  console.log('Checking RES');
+
   if (res.code === `ERR_NETWORK`) {
     toast.error(
       `${res.message}: 
@@ -42,10 +44,8 @@ export const handleLogin = async (account) => {
     toast.warn(`
       ${res.response.data.detail}!
     `);
-  }
-
-  if (res?.statusText === `OK`) {
-    console.log(res?.statusText);
+  } else if (res.status === 200) {
+    console.log(res.status);
     const { access, refresh } = res.data;
     setUser({
       user: {
