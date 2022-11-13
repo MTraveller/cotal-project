@@ -11,8 +11,11 @@ import { useLoggedInContext } from '../context/LoggedInContext';
  *  https://www.gatsbyjs.com/tutorial/authentication-tutorial/
  */
 export const isBrowser = () => {
-  console.log(window);
-  return typeof window !== `undefined`;
+  if (typeof window !== `undefined`) {
+    console.log(window);
+    return true;
+  }
+  return false;
 };
 
 export const getUser = () =>
