@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { checkEquality } from '../../../utils/checkEquality';
+import postDataHandler from '../../../services/postData';
 import SelectInput from '../../form/input/profile/StatusInput';
 import { handleKeypress } from '../../../utils/handleKeypress';
 import { handleEditSaveFlip } from '../../../utils/handleEditSaveFlip';
@@ -53,18 +54,21 @@ export const PersonalDetail = ({ userData }) => {
 
   const handleChange = ({ currentTarget: input }) => {
     if (input.dataset.name === `socials`) {
-      const newSocials = [...personal.socials];
+      const socialData = personal.socials;
 
-      const socialObj = newSocials.filter(
+      const socialObj = userData.socials.filter(
         (social) => social.name === input.name
       )[0];
 
-      const idx = newSocials.indexOf(socialObj);
-      newSocials[idx].username = input.value;
-
       setPersonal({
         ...personal,
-        socials: newSocials,
+        socials: {
+          ...socialData,
+          [userData.socials.indexOf(socialObj)]: {
+            ...socialObj,
+            username: input.value,
+          },
+        },
       });
     } else {
       setPersonal({ ...personal, [input.name]: input.value });
@@ -88,7 +92,7 @@ export const PersonalDetail = ({ userData }) => {
 
     const result = checkEquality(personal, userDataCopy);
 
-    console.log(result);
+    postDataHandler([`personal`, userId, result]);
   };
 
   return (
@@ -207,7 +211,7 @@ export const PersonalDetail = ({ userData }) => {
           divHeight="h-[47px]"
           inputId="socials"
           inputType="text"
-          inputValue={personal?.socials}
+          inputValue={personal.socials}
           inputAutocomplete="off"
           inputDisplay="hidden"
           inputBorderRadius="rounded-md"
