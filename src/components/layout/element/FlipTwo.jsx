@@ -4,6 +4,7 @@ import { Input } from '../../form/input/Input';
 import { handleEditSaveFlip } from '../../../utils/handleEditSaveFlip';
 
 export const FlipTwo = ({
+  divHeight,
   paragraphHight,
   text,
   link,
@@ -18,7 +19,7 @@ export const FlipTwo = ({
   inputPlaceholder,
   onChange,
 }) => (
-  <div className="flex justify-between items-center">
+  <div className={`flex justify-between items-center ${divHeight}`}>
     <p className={`flex ${paragraphHight} items-center gap-3`}>
       {text}:{` `}
       {link ? (

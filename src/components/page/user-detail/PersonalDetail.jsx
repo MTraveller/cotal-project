@@ -93,7 +93,7 @@ export const PersonalDetail = ({ userData }) => {
 
   return (
     <div className="bg-black/[.2] rounded-lg p-6">
-      <form className="flex flex-col gap-y-3">
+      <form className="flex flex-col gap-y-2">
         <div className="flex flex-row justify-between items-center">
           <div className="w-32">
             <ButtonImageInput
@@ -153,8 +153,8 @@ export const PersonalDetail = ({ userData }) => {
             />
           </div>
         </div>
-        <div className="flex justify-between items-center">
-          <p className="flex h-[47px] sm:h-[42.5px] items-center gap-3">
+        <div className="flex justify-between items-center h-[47px]">
+          <p className="flex items-center gap-3">
             Status:{` `}
             <span id="status">{personal.status}</span>
           </p>
@@ -173,7 +173,7 @@ export const PersonalDetail = ({ userData }) => {
           </button>
         </div>
         <FlipTwo
-          paragraphHight="h-[47px] sm:h-[42.5px]"
+          divHeight="h-[47px]"
           text="Location"
           spanId="status"
           inputId="location"
@@ -188,7 +188,7 @@ export const PersonalDetail = ({ userData }) => {
           onChange={handleChange}
         />
         <FlipTwo
-          paragraphHight="h-[47px] sm:h-[42.5px]"
+          divHeight="h-[47px]"
           text="LinkTree"
           link={`https://linktr.ee/${personal.linktrees}`}
           spanId="linktrees"
@@ -204,7 +204,7 @@ export const PersonalDetail = ({ userData }) => {
           onChange={handleChange}
         />
         <SocialInput
-          buttonsHeight="h-[47px] sm:h-[42.5px]"
+          divHeight="h-[47px]"
           inputId="socials"
           inputType="text"
           inputValue={personal?.socials}

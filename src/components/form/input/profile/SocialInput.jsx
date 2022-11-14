@@ -20,6 +20,7 @@ const icons = [
 ];
 
 export const SocialInput = ({
+  divHeight,
   buttonsHeight,
   inputId,
   inputType,
@@ -50,7 +51,7 @@ export const SocialInput = ({
   }, [inputValue]);
 
   return (
-    <div className="flex flex-wrap justify-between items-center">
+    <div className={`flex flex-wrap justify-between items-center ${divHeight}`}>
       {icons.map((icon, idx) => (
         <div key={icon.name} id={icon.name} className="flex">
           <button
