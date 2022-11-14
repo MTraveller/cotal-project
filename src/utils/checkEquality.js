@@ -15,8 +15,8 @@ export const checkEquality = (state, server) => {
           if (obj[0] === `socials`) {
             const socialServerChanges = [];
 
-            obj[1].forEach((o, i) => {
-              if (serverEntries[idx][i]?.username !== o.username) {
+            Object.entries(obj[1]).forEach((o, i) => {
+              if (serverEntries[idx][1][i].username !== o[1].username) {
                 socialServerChanges.push(stateEntries[idx][1][i]);
               }
             });
@@ -30,7 +30,11 @@ export const checkEquality = (state, server) => {
     } else {
       if (serverEntries[idx][1] !== obj[1]) {
         if (stateEntries[idx][1] !== undefined) {
-          serverChanges[obj[0]] = obj[1];
+          if (stateEntries[idx][0] === `linktrees`) {
+            serverChanges[obj[0]] = [{ username: obj[1] }];
+          } else {
+            serverChanges[obj[0]] = obj[1];
+          }
         }
       }
     }
