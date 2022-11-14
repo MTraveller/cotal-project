@@ -40,6 +40,14 @@ export const SocialInput = ({
     Pinterest: ``,
   });
 
+  const [inputVal, setInputVal] = useState({
+    GitHub: 0,
+    DeviantArt: 0,
+    Dribble: 0,
+    SoundCloud: 0,
+    Pinterest: 0,
+  });
+
   useEffect(() => {
     setUsername({
       GitHub: inputValue[0]?.username,
@@ -49,6 +57,12 @@ export const SocialInput = ({
       Pinterest: inputValue[4]?.username,
     });
   }, [inputValue]);
+
+  const handleChange = (e) => {
+    const input = e.currentTarget;
+    setInputVal({ ...inputVal, [input.name]: input.value });
+    onChange(e);
+  };
 
   return (
     <div className={`flex flex-wrap justify-between items-center ${divHeight}`}>
@@ -69,13 +83,15 @@ export const SocialInput = ({
             name={icon.name}
             type={inputType}
             dataValue={inputId}
-            value={username[icon.name]}
+            value={
+              inputVal[icon.name] ? inputVal[icon.name] : username[icon.name]
+            }
             autoComplete={inputAutocomplete}
             display={inputDisplay}
             borderRadius={inputBorderRadius}
             padding={inputPadding}
             placeholder={inputPlaceholder}
-            onChange={onChange}
+            onChange={handleChange}
           />
         </div>
       ))}
