@@ -13,11 +13,6 @@ import { handleLogout } from '../../services/authService';
  * https://tailwindui.com/components/application-ui/application-shells/stacked
  */
 
-const user = {
-  name: '',
-  username: '',
-};
-
 const navigation = [
   { name: 'Home', href: '/feed/', current: true },
   { name: 'My Network', href: '/my-network/', current: false },
@@ -41,11 +36,20 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
 
   const handleClick = (e) => {
     if (e.target.text === `Sign out`) return handleLogout();
-    return null;
+
+    const parentNode = e.target.parentNode.parentNode;
+
+    if (parentNode.id || parentNode.parentNode.id) {
+      const closeBtn = parentNode.id
+        ? parentNode.previousSibling.firstChild.lastChild.firstChild
+        : parentNode.parentNode.previousSibling.firstChild.lastChild.firstChild;
+
+      closeBtn.click();
+    }
   };
 
   return isLoggedIn && location.pathmame !== `/` ? (
-    <header>
+    <header className="dark:text-slate-400">
       <Disclosure as="nav">
         {({ open }) => (
           <>
@@ -181,6 +185,7 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
                       'block px-3 py-2 rounded-md text-base font-medium'
                     )}
                     aria-current={item.current ? item.name : undefined}
+                    onClick={handleClick}
                   >
                     {item.name}
                   </Link>
@@ -189,11 +194,28 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
               <div className="border-t border-gray-700 pt-4 pb-3">
                 <div className="flex items-center px-5">
                   <div className="flex-shrink-0">
-                    <img
-                      className="h-10 w-10 rounded-full"
-                      src={user.imageUrl}
-                      alt={`${userData?.user?.first_name} ${userData?.user?.last_name}`}
-                    />
+                    {userData?.image ? (
+                      <img
+                        className="h-10 w-10 rounded-full"
+                        src={userData?.image}
+                        alt={`${userData?.user?.first_name} ${userData?.user?.last_name}`}
+                      />
+                    ) : (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-8 h-8"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                      </svg>
+                    )}
                   </div>
                   <div className="ml-3">
                     <div className="text-base font-medium leading-none text-white">
@@ -211,7 +233,7 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                 </div>
-                <div className="mt-3 space-y-1 px-2">
+                <div id="user-navigation" className="mt-3 space-y-1 px-2">
                   {userNavigation.map((item) => (
                     <Link
                       key={item.name}
