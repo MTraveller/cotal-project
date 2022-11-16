@@ -2,7 +2,7 @@ import React from 'react';
 import tw from 'tailwind-styled-components';
 
 const Wrapper = tw.div`
-  max-w-7xl
+  max-w-5xl
   mx-auto
   px-4
   sm:px-6
@@ -22,7 +22,7 @@ const DivStyles = tw.div`
 
 export const OneSection = ({ userData, title, component: Component }) => (
   <Wrapper>
-    <h1 className="text-3xl">{title}</h1>
+    {title ? <h1 className="text-3xl">{title}</h1> : ``}
     <DivStyles>
       <Component userData={userData} />
     </DivStyles>
