@@ -101,7 +101,7 @@ export const PersonalDetail = () => {
   };
 
   return (
-    <div className="bg-black/[.2] rounded-lg p-6">
+    <div className="lg:sticky lg:top-[78px] bg-black/[.2] rounded-lg p-6">
       <form className="flex flex-col gap-y-2">
         <div className="flex flex-row justify-between items-center">
           <div className="w-32">
