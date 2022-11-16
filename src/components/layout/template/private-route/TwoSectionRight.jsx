@@ -20,12 +20,14 @@ const DivStyles = tw.div`
 `;
 
 export const TwoSectionRight = ({
+  title,
   leftStyles,
   rightStyles,
   componentLeft: ComponentLeft,
   componentRight: ComponentRight,
 }) => (
   <Wrapper>
+    {title ? <h1 className="text-3xl">{title}</h1> : ``}
     <DivStyles>
       <div className={`${leftStyles}`}>
         <ComponentLeft />
