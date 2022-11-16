@@ -21,7 +21,6 @@ const DivStyles = tw.div`
 `;
 
 export const ThreeSection = ({
-  userData,
   title,
   leftStyles,
   middleStyles,
@@ -34,13 +33,13 @@ export const ThreeSection = ({
     <h1 className="text-3xl">{title}</h1>
     <DivStyles>
       <div className={`${leftStyles}`}>
-        <ComponentLeft userData={userData} />
+        <ComponentLeft />
       </div>
       <div className={`${middleStyles}`}>
-        <ComponentMiddle userData={userData} />
+        <ComponentMiddle />
       </div>
       <div className={`${rightStyles}`}>
-        <ComponentRight userData={userData} />
+        <ComponentRight />
       </div>
     </DivStyles>
   </Wrapper>
