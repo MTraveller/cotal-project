@@ -6,11 +6,10 @@ import { format } from '@cloudinary/url-gen/actions/delivery';
 import { AdvancedImage } from '@cloudinary/react';
 import { lazyload } from '@cloudinary/react';
 
-export const Image = ({ image, modelName, userSlug }) => {
+export const Image = ({ image, modelName, userSlug, alt }) => {
   const idx = image.lastIndexOf(`/`);
-  const idxOfS = modelName.lastIndexOf(`s`);
 
-  const model = modelName.slice(0, idxOfS);
+  const model = modelName.slice(0, -1);
   const publicId = image.slice(idx);
 
   const imageUrl = 'cotal-api/' + userSlug + '/' + model + publicId;
@@ -22,5 +21,11 @@ export const Image = ({ image, modelName, userSlug }) => {
 
   img.delivery(format('auto'));
 
-  return <AdvancedImage cldImg={img} plugins={[lazyload()]}></AdvancedImage>;
+  return (
+    <AdvancedImage
+      cldImg={img}
+      alt={alt}
+      plugins={[lazyload()]}
+    ></AdvancedImage>
+  );
 };
