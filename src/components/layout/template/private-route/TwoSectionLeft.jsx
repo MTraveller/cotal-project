@@ -2,7 +2,7 @@ import React from 'react';
 import tw from 'tailwind-styled-components';
 
 const Wrapper = tw.div`
-  max-w-7xl
+  max-w-5xl
   mx-auto
   px-4
   sm:px-6
