@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { ThreeSection } from '../layout/template/private-route/ThreeSection';
-import { SideBarLeft } from './three-section/SideBarLeft';
+import { SideBarLeft } from './side-bar/three-section/SideBarLeft';
 import { FeedDetail } from './user-feed/FeedDetail';
-import { SideBarRight } from './three-section/SideBarRight';
+import { SideBarRight } from './side-bar/three-section/SideBarRight';
 import Seo from '../Seo';
 
 const UserFeed = ({ userData }) => (
