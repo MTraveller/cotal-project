@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import { useUserDataContext } from '../../context/UserDataContext';
 import { handleLogout } from '../../services/authService';
+import { ProfileImageSvg } from '../form/input/profile/ProfileImageSvg';
 
 /**
  * Initial header was sourced from:
@@ -89,14 +90,6 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
                 </div>
                 <div className="hidden md:block">
                   <div className="ml-4 flex items-center md:ml-6">
-                    <button
-                      type="button"
-                      className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    >
-                      <span className="sr-only">View notifications</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-
                     {/* Profile dropdown */}
                     <Menu as="div" className="relative ml-3">
                       <div>
@@ -109,20 +102,7 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
                               alt={`${userData?.user?.first_name} ${userData?.user?.last_name}`}
                             />
                           ) : (
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              strokeWidth={1.5}
-                              stroke="currentColor"
-                              className="w-8 h-8"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                              />
-                            </svg>
+                            <ProfileImageSvg widthHeight="w-8 h-8" />
                           )}
                         </Menu.Button>
                       </div>
@@ -201,20 +181,7 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
                         alt={`${userData?.user?.first_name} ${userData?.user?.last_name}`}
                       />
                     ) : (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-8 h-8"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                      </svg>
+                      <ProfileImageSvg widthHeight="w-8 h-8" />
                     )}
                   </div>
                   <div className="ml-3">
@@ -225,13 +192,6 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
                       {userData?.slug}
                     </div>
                   </div>
-                  <button
-                    type="button"
-                    className="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
                 </div>
                 <div id="user-navigation" className="mt-3 space-y-1 px-2">
                   {userNavigation.map((item) => (
