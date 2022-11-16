@@ -6,10 +6,8 @@ import { FeedDetail } from './user-feed/FeedDetail';
 import { SideBarRight } from './side-bar/three-section/SideBarRight';
 import Seo from '../Seo';
 
-const UserFeed = ({ userData }) => (
+const UserFeed = () => (
   <ThreeSection
-    title="Your Feed"
-    userData={userData}
     leftStyles="hidden lg:block flex-1 max-w-60"
     middleStyles="flex-auto w-[500px] max-w-[782px]"
     rightStyles="hidden lg:block flex-1 max-w-60"
