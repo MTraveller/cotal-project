@@ -7,9 +7,8 @@ import Seo from '../Seo';
 
 const UserNetwork = () => (
   <TwoSectionLeft
-    title="My Network"
-    leftStyles="flex-1 lg:flex-none lg:max-w-60"
-    rightStyles="flex-auto w-[451px] lg:max-w-[1200px]"
+    leftStyles="flex-initial w-full mx-auto sm:w-80"
+    rightStyles="flex-auto w-[460px] lg:max-w-[740px]"
     componentLeft={NetworkMenu}
     componentRight={NetworkDetail}
   />
