@@ -10,7 +10,7 @@ const UserDetail = ({ userData }) => (
     title="Your Profile"
     userData={userData}
     leftStyles="w-full sm:flex-initial sm:w-80 sm:max-w-80"
-    rightStyles="flex-auto w-[590px] lg:max-w-[1200px]"
+    rightStyles="w-full flex-auto sm:w-[590px] lg:max-w-[1200px]"
     componentLeft={PersonalDetail}
     componentRight={PublicDetail}
   />
