@@ -53,13 +53,15 @@ export const AddNew = ({ setActive, model }) => {
       </div>
       <div>
         <form className="flex flex-col">
-          <div className="flex flex-row justify-between items-center mb-4">
+          <div className="flex flex-row justify-around items-center mb-4">
             {preview ? (
-              <img src={preview} width="200px" height="auto" alt="preview" />
+              <img src={preview} width="50%" alt="preview" />
             ) : (
-              <p className="text-sm">Preview will be shown here.</p>
+              <p className="basis-1/2 text-sm sm:text-base">
+                Preview will be shown here.
+              </p>
             )}
-            <div className="flex flex-col place-items-center gap-y-3">
+            <div className="flex flex-col basis-1/2 place-items-end gap-y-2 text-sm sm:text-base">
               <ButtonLabelInput
                 id="add-image-button"
                 svg={<UploadSvg widthHeight="w-6 h-6" />}
@@ -70,7 +72,7 @@ export const AddNew = ({ setActive, model }) => {
                 type="button"
                 onClick={() => setForm({ ...form, image: undefined })}
               >
-                Remove image!
+                Remove
               </button>
             </div>
           </div>
