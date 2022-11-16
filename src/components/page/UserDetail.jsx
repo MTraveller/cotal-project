@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { TwoSection } from '../layout/template/private-route/TwoSection';
+import { TwoSectionLeft } from '../layout/template/private-route/TwoSectionLeft';
 import { PersonalDetail } from './user-detail/PersonalDetail';
 import { PublicDetail } from './user-detail/PublicDetail';
 import Seo from '../Seo';
 
 const UserDetail = ({ userData }) => (
-  <TwoSection
+  <TwoSectionLeft
     title="Your Profile"
     userData={userData}
     leftStyles="w-full sm:flex-initial sm:w-80 sm:max-w-80"
