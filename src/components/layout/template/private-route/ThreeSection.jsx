@@ -30,7 +30,7 @@ export const ThreeSection = ({
   componentRight: ComponentRight,
 }) => (
   <Wrapper>
-    <h1 className="text-3xl">{title}</h1>
+    {title ? <h1 className="text-3xl">{title}</h1> : ``}
     <DivStyles>
       <div className={`${leftStyles}`}>
         <ComponentLeft />
