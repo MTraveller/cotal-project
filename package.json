@@ -5,6 +5,8 @@
   "version": "0.1.0",
   "author": "Mahmoud Tantouri https://linkedin.com/in/mtantouri",
   "dependencies": {
+    "@cloudinary/react": "^1.5.0",
+    "@cloudinary/url-gen": "^1.8.6",
     "@headlessui/react": "^1.7.3",
     "@heroicons/react": "^2.0.12",
     "axios": "^1.1.3",
