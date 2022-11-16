@@ -1,0 +1,26 @@
+import React from 'react';
+import { URLConfig } from '@cloudinary/url-gen';
+import { CloudConfig } from '@cloudinary/url-gen';
+import { CloudinaryImage } from '@cloudinary/url-gen';
+import { format } from '@cloudinary/url-gen/actions/delivery';
+import { AdvancedImage } from '@cloudinary/react';
+import { lazyload } from '@cloudinary/react';
+
+export const Image = ({ image, modelName, userSlug }) => {
+  const idx = image.lastIndexOf(`/`);
+  const idxOfS = modelName.lastIndexOf(`s`);
+
+  const model = modelName.slice(0, idxOfS);
+  const publicId = image.slice(idx);
+
+  const imageUrl = 'cotal-api/' + userSlug + '/' + model + publicId;
+
+  // https://cloudinary.com/documentation/react_integration#asset_instance_configuration
+  let cloudConfig = new CloudConfig({ cloudName: 'matouri' });
+  let urlConfig = new URLConfig({ secure: true });
+  let img = new CloudinaryImage(imageUrl, cloudConfig, urlConfig);
+
+  img.delivery(format('auto'));
+
+  return <AdvancedImage cldImg={img} plugins={[lazyload()]}></AdvancedImage>;
+};
