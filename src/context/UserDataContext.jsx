@@ -11,7 +11,7 @@ export const UserDataProvider = ({ children }) => {
   const [userData, setUserData] = useState();
 
   useEffect(() => {
-    getUserDatahandler(getUser().access)
+    getUserDatahandler(`/profiles/me/`, getUser().access)
       .then((res) => {
         return setUserData(res.data);
       })
