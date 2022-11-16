@@ -50,7 +50,7 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
   };
 
   return isLoggedIn && location.pathmame !== `/` ? (
-    <header className="dark:text-slate-400">
+    <header className="sticky top-0 z-50 backdrop-blur border-b border-slate-900/10 dark:border-slate-50/10 bg-slate-300/75 dark:bg-slate-900/75 dark:text-slate-400">
       <Disclosure as="nav">
         {({ open }) => (
           <>
@@ -76,8 +76,8 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
                           to={item.href}
                           className={classNames(
                             item.href === location.pathname
-                              ? 'bg-gray-800 text-white'
-                              : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                              ? 'bg-gray-800 text-slate-300'
+                              : 'hover:bg-gray-700 hover:text-slate-300',
                             'px-3 py-2 rounded-md text-sm font-medium'
                           )}
                           aria-current={item.current ? 'page' : undefined}
