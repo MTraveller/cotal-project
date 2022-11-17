@@ -25,15 +25,16 @@ export const TwoSectionLeft = ({
   rightStyles,
   componentLeft: ComponentLeft,
   componentRight: ComponentRight,
+  ...rest
 }) => (
   <Wrapper>
     {title ? <h1 className="text-3xl">{title}</h1> : ``}
     <DivStyles>
       <div className={`${leftStyles}`}>
-        <ComponentLeft />
+        <ComponentLeft {...rest} />
       </div>
       <div className={`${rightStyles}`}>
-        <ComponentRight />
+        <ComponentRight {...rest} />
       </div>
     </DivStyles>
   </Wrapper>
