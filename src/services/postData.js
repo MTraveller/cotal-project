@@ -2,6 +2,7 @@ import {
   userProfileHandler,
   userSocialHandler,
   userLinktreesHandler,
+  userConnectHandler,
 } from './userPostHandler';
 
 export default async function postDataHandler(req) {
@@ -16,5 +17,5 @@ export default async function postDataHandler(req) {
     delete req[2].linktrees;
 
     if (profileLength > 0) await userProfileHandler({ data: req[2] });
-  }
+  } else if (req[0] === `connect`) await userConnectHandler({ data: req[1] });
 }
