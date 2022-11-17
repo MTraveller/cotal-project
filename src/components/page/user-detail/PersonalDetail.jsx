@@ -7,7 +7,7 @@ import postDataHandler from '../../../services/postData';
 import { ButtonImageInput } from '../../form/input/ButtonImageInput';
 import { ButtonLabelInput } from '../../form/input/ButtonLabelInput';
 import { SocialInput } from '../../form/input/profile/SocialInput';
-import { ProfileImageSvg } from '../../form/input/profile/ProfileImageSvg';
+import { ProfileImageSvg } from '../../layout/element/ProfileImageSvg';
 import { FormButton } from '../../form/FormButton';
 import { UploadSvg } from '../../form/input/UploadSvg';
 import { OpenLinkExternal } from '../../layout/element/OpenLinkExternal';
