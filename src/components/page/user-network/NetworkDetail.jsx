@@ -1,8 +1,19 @@
 import React from 'react';
-// import tw from 'tailwind-styled-components';
 
-export const NetworkDetail = () => (
-  <div className="bg-black/[.2] rounded-lg p-6">
-    <p>Hello from Network detail</p>
-  </div>
-);
+import { useUserDataContext } from '../../../context/UserDataContext';
+import { Network } from './network-detail/Network';
+import { Request } from './network-detail/Request';
+
+export const NetworkDetail = ({ menu }) => {
+  const { userData } = useUserDataContext();
+
+  return (
+    <div className="bg-black/[.2] rounded-lg p-6">
+      {menu === `request` ? (
+        <Request userData={userData} />
+      ) : (
+        <Network userData={userData} />
+      )}
+    </div>
+  );
+};
