@@ -17,3 +17,9 @@ export async function userLinktreesHandler({ data }) {
 
   // const res = await http.post()
 }
+
+export async function userConnectHandler({ data }) {
+  console.log(data);
+
+  // const res = await http.post()
+}
