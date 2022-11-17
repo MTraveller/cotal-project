@@ -3,12 +3,14 @@ import { handleTokenRefresh } from './authService';
 
 const apiProfileMeEndpoint = `${process.env.GATSBY_API_URL}`;
 
-export default async function getUserDataHandler(urlTrail, req) {
+export default async function getUserDataHandler(urlTrail, token) {
   // GET user data from api
+  if (!token) return null;
+
   const result = await http
     .get(apiProfileMeEndpoint + urlTrail, {
       headers: {
-        Authorization: `JWT ${req}`,
+        Authorization: `JWT ${token}`,
       },
     })
     .then((res) => res)
