@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import getUserDataHandler from '../../../../services/userData';
 import { getUser } from '../../../../services/authService';
-import { RequestCount } from '../../../../utils/getRequestCount';
+import { requestCount } from '../../../../utils/getRequestCount';
 import postDataHandler from '../../../../services/postData';
 import { Image } from '../../../layout/element/Image';
 import { OpenLinkExternal } from '../../../layout/element/OpenLinkExternal';
@@ -28,7 +28,7 @@ export const Request = ({ userData }) => {
     }
 
     if (data && !requestCount)
-      setRequestCount(RequestCount(data, requestCount));
+      setRequestCount(requestCount(data, requestCount));
   }, [data, userData?.slug, requestCount]);
 
   const handleClick = ({ target: button }) => {
