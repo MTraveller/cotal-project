@@ -7,7 +7,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import { useUserDataContext } from '../../context/UserDataContext';
 import { handleLogout } from '../../services/authService';
-import { ProfileImageSvg } from '../form/input/profile/ProfileImageSvg';
+import { ProfileImageSvg } from '../layout/element/ProfileImageSvg';
 
 /**
  * Initial header was sourced from:
