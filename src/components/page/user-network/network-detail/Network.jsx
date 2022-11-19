@@ -70,7 +70,7 @@ export const Network = ({ userData }) => {
               </div>
               <ButtonStyles
                 id="remove"
-                className="basis-1/3"
+                className="basis-1/3 py-2"
                 data-obj-id={connect.id}
                 data-idx={idx}
                 onClick={handleClick}
