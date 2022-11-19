@@ -30,9 +30,10 @@ export const Post = ({ form, handleChange }) => {
           type="title"
           value={form.title}
           autoComplete="off"
-          inputDisplay="block"
           borderRadius="rounded-none rounded-t-md"
           padding="px-3 py-3 md:py-4"
+          bgStyles="dark:bg-slate-400/40 dark:border-slate-300/70"
+          borderStyles="border-slate-400/40 dark:border-slate-400/70"
           placeholder="Title"
           onChange={handleChange}
         />
@@ -47,9 +48,9 @@ export const Post = ({ form, handleChange }) => {
           type="link"
           value={form.link}
           autoComplete="off"
-          inputDisplay="block"
           borderRadius="rounded-none rounded-b-md"
           padding="px-3 py-3 md:py-4"
+          bgStyles="dark:bg-slate-400/40 dark:border-slate-300/70"
           placeholder="Link?"
           onChange={handleChange}
         />
@@ -64,9 +65,9 @@ export const Post = ({ form, handleChange }) => {
           type="description"
           value={form.description}
           autoComplete="off"
-          inputDisplay="block"
           borderRadius="rounded-md"
           padding="px-3 py-3 md:py-4"
+          bgStyles="dark:bg-slate-400/40 dark:border-slate-300/70"
           placeholder="Description .."
           onChange={handleChange}
         />
