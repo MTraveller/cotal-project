@@ -16,12 +16,22 @@ export const PublicDetail = () => {
     setTargetName(model);
     setActive(true);
   };
+
   return (
     <div className="bg-black/[.2] rounded-lg p-6">
       {active ? (
         <AddNew setActive={setActive} model={targetName} />
       ) : (
         <div className="flex flex-col gap-y-10">
+          <div>
+            <div className="flex flex-row mb-3 justify-between items-center text-sm">
+              <h2>Your Posts</h2>
+              <button type="button" onClick={handleClick}>
+                Add new
+              </button>
+            </div>
+            <Model model="posts" />
+          </div>
           <div>
             <div className="flex flex-row mb-3 justify-between items-center text-sm">
               <h2>Your Portfolios</h2>
