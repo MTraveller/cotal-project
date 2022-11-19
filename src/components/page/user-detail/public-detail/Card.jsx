@@ -1,17 +1,9 @@
 import React from 'react';
 
+import { slugify } from '../../../../utils/slugify';
 import { Image } from '../../../layout/element/Image';
 
 export const Card = ({ model, modelName, userSlug }) => {
-  // https://github.com/30-seconds/30-seconds-of-code/blob/master/snippets/slugify.md
-  const slugify = (title) =>
-    title
-      .toLowerCase()
-      .trim()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/[\s_-]+/g, '-')
-      .replace(/^-+|-+$/g, '');
-
   const handleClick = ({ currentTarget }) => {
     const title = currentTarget.name;
     window.open(`/in/${userSlug}/${slugify(title)}/`, `_blank`);
@@ -24,19 +16,37 @@ export const Card = ({ model, modelName, userSlug }) => {
           key={item.id}
           type="button"
           name={item.title}
-          className="bg-slate-900 rounded-md mb-4"
+          className="bg-slate-900 rounded-md mb-5"
           onClick={handleClick}
         >
-          <span className="flex flex-col w-80 text-left">
-            <span className="py-2 px-4">{item.title}</span>
-            <Image
-              image={item.image}
-              modelName={modelName}
-              userSlug={userSlug}
-              alt={item.title}
-            />
-            <span className="relative flex items-center -mt-8 px-4 py-2 rounded-b-md bg-slate-900 text-sm">
-              {item.link}
+          <span className="w-80 h-72 flex flex-col text-left">
+            <span className="h-12 flex items-center px-4">
+              {item.title.length > 34
+                ? `${item.title.substring(0, 34)}...`
+                : item.title}
+            </span>
+            <span className="w-full h-56 overflow-y-hidden">
+              {item.image ? (
+                <Image
+                  image={item.image}
+                  modelName={modelName}
+                  userSlug={userSlug}
+                  alt={item.title}
+                />
+              ) : (
+                <span className="h-52 flex items-center px-4 bg-black/50">
+                  {item.post.length > 205
+                    ? `${item.post.substring(0, 205)}...`
+                    : item.post}
+                </span>
+              )}
+            </span>
+            <span className="h-8 flex items-center px-4 text-xs">
+              {item.link
+                ? item.link
+                : item.slug.length > 34
+                ? `/${item.slug.substring(0, 34)}...`
+                : `/${item.slug}/`}
             </span>
           </span>
         </button>
