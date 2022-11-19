@@ -10,10 +10,20 @@ export const NetworkMenu = ({ setMenu }) => {
   return (
     <div className="bg-black/[.2] rounded-lg p-6">
       <div className="flex flex-row lg:flex-col gap-5">
-        <ButtonStyles id="request" type="button" onClick={handleClick}>
+        <ButtonStyles
+          id="request"
+          type="button"
+          className="py-2"
+          onClick={handleClick}
+        >
           View Requests
         </ButtonStyles>
-        <ButtonStyles id="network" type="button" onClick={handleClick}>
+        <ButtonStyles
+          id="network"
+          type="button"
+          className="py-2"
+          onClick={handleClick}
+        >
           View Network
         </ButtonStyles>
       </div>
