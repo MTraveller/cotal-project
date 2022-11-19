@@ -4,6 +4,7 @@ import { MdMenuOpen } from 'react-icons/md';
 import { useUserDataContext } from '../../../context/UserDataContext';
 import { checkEquality } from '../../../utils/checkEquality';
 import postDataHandler from '../../../services/postData';
+import { ButtonStyles } from '../../layout/style/ButtonStyle';
 import { ButtonImageInput } from '../../form/input/ButtonImageInput';
 import { ButtonLabelInput } from '../../form/input/ButtonLabelInput';
 import { SocialInput } from '../../form/input/profile/SocialInput';
@@ -22,8 +23,9 @@ export const PersonalDetail = () => {
     status: ``,
     location: ``,
     linktrees: ``,
-    socials: ``,
   });
+
+  const [socials, setSocials] = useState({});
 
   const [preview, setPreview] = useState();
 
@@ -34,9 +36,10 @@ export const PersonalDetail = () => {
         status: userData?.status,
         location: userData?.location,
         linktrees: userData?.linktrees[0]?.username,
-        socials: userData?.socials,
       });
     }
+
+    if (userData && !socials) setSocials(userData?.socials);
 
     // Initial displaying selected image sourced from:
     // https://stackoverflow.com/a/57781164
@@ -50,7 +53,7 @@ export const PersonalDetail = () => {
 
       return () => URL.revokeObjectURL(objectUrl);
     }
-  }, [userData, personal.image, personal.status]);
+  }, [userData, socials, personal.image, personal.status]);
 
   const handleDivClick = ({ currentTarget: current }) => {
     current.parentNode.classList.toggle(`h-[90px]`);
@@ -70,26 +73,7 @@ export const PersonalDetail = () => {
   };
 
   const handleChange = ({ currentTarget: input }) => {
-    if (input.dataset.name === `socials`) {
-      const socialData = personal.socials;
-
-      const socialObj = userData.socials.filter(
-        (social) => social.name === input.name
-      )[0];
-
-      setPersonal({
-        ...personal,
-        socials: {
-          ...socialData,
-          [userData.socials.indexOf(socialObj)]: {
-            ...socialObj,
-            username: input.value,
-          },
-        },
-      });
-    } else {
-      setPersonal({ ...personal, [input.name]: input.value });
-    }
+    setPersonal({ ...personal, [input.name]: input.value });
   };
 
   const handleStatusSelect = (e) => setPersonal({ ...personal, status: e });
@@ -114,9 +98,9 @@ export const PersonalDetail = () => {
 
   return (
     <div className="h-[90px] lg:sticky lg:top-[78px] bg-black/[.2] rounded-lg p-6 overflow-y-hidden">
-      <button
+      <ButtonStyles
         type="button"
-        className="group w-full flex justify-center items-center gap-x-2 py-1 dark:bg-slate-900 rounded-md ring-1 dark:ring-slate-400 transition ease-in-out delay-150 hover:ring-1 hover:dark:ring-yellow-400 hover:ring-offset-4 hover:ring-offset-gray-900"
+        className="group flex justify-center items-center gap-x-2 py-1"
         data-open="false"
         onClick={handleDivClick}
       >
@@ -124,7 +108,7 @@ export const PersonalDetail = () => {
           <MdMenuOpen size={24} />
         </span>{' '}
         Profile Details
-      </button>
+      </ButtonStyles>
       <div className="group mt-5 invisible" data-hidden="true">
         <form className="flex flex-col gap-y-2 transform translate-y-20 opacity-0 group-data-[hidden=false]:translate-y-0 group-data-[hidden=false]:opacity-100 transition ease-in-out duration-700">
           <div className="flex flex-row justify-between items-center">
@@ -195,15 +179,19 @@ export const PersonalDetail = () => {
             divHeight="h-[47px]"
             inputId="socials"
             inputType="text"
-            inputValue={personal.socials}
             inputAutocomplete="off"
             inputDisplay="hidden"
             inputBorderRadius="rounded-md"
             inputPadding="py-2 pl-6 pr-10"
             inputPlaceholder="Username"
-            onChange={handleChange}
+            socials={socials}
+            setSocials={setSocials}
           />
-          <FormButton handleSubmit={handleSubmit} buttonText="Save Changes" />
+          <FormButton
+            extraStyles="py-2"
+            handleSubmit={handleSubmit}
+            buttonText="Save Changes"
+          />
         </form>
       </div>
     </div>
