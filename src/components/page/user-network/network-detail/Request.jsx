@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import getUserDataHandler from '../../../../services/userData';
 import { getUser } from '../../../../services/authService';
-import { requestCount } from '../../../../utils/getRequestCount';
+import { countRequest } from '../../../../utils/countRequest';
 import postDataHandler from '../../../../services/postData';
 import { Image } from '../../../layout/element/Image';
 import { OpenLinkExternal } from '../../../layout/element/OpenLinkExternal';
@@ -28,7 +28,7 @@ export const Request = ({ userData }) => {
     }
 
     if (data && !requestCount)
-      setRequestCount(requestCount(data, requestCount));
+      setRequestCount(countRequest(data, requestCount));
   }, [data, userData?.slug, requestCount]);
 
   const handleClick = ({ target: button }) => {
@@ -60,19 +60,19 @@ export const Request = ({ userData }) => {
               className="flex flex-row items-center gap-x-5"
             >
               <div className="flex flex-row basis-1/2 gap-x-3">
-                {userData.image ? (
+                {connect.connecter_image ? (
                   <Image
-                    image={userData.image}
+                    image={connect.connecter_image}
                     addedModelName="profile"
-                    userSlug={userData.slug}
-                    alt={`${userData.user.first_name} ${userData.user.last_name} profile image`}
+                    userSlug={connect.connecter_username}
+                    alt={`${connect.connecter_name.firstname} ${connect.connecter_name.lastname} profile image`}
                   />
                 ) : (
                   <ProfileImageSvg widthHeight="w-10 h-10" />
                 )}
                 <OpenLinkExternal
-                  url={`/in/${userData.slug}/`}
-                  buttonText={`${userData.user.first_name} ${userData.user.last_name}`}
+                  url={`/in/${connect.connecter_username}/`}
+                  buttonText={`${connect.connecter_name.firstname} ${connect.connecter_name.lastname}`}
                 />
               </div>
               <ButtonStyles
