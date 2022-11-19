@@ -7,6 +7,8 @@ import { AdvancedImage } from '@cloudinary/react';
 import { lazyload } from '@cloudinary/react';
 
 export const Image = ({ image, modelName, addedModelName, userSlug, alt }) => {
+  if (!image) return null;
+
   const idx = image.lastIndexOf(`/`);
 
   const model = addedModelName ? addedModelName : modelName.slice(0, -1);
