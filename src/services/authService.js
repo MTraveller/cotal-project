@@ -13,7 +13,8 @@ import { useLoggedInContext } from '../context/LoggedInContext';
 export const isBrowser = () => typeof window !== `undefined`;
 
 export const getUser = () => {
-  return isBrowser() && window.localStorage.getItem(`cotalUser`)
+  const cotalUser = window.localStorage.getItem(`cotalUser`);
+  return isBrowser() && cotalUser && cotalUser !== `undefined`
     ? JSON.parse(window.localStorage.getItem(`cotalUser`))
     : {};
 };
