@@ -22,10 +22,12 @@ export const TagInput = () => {
       type="tag"
       value={value}
       autoComplete="off"
-      inputDisplay="block"
       width="w-1/6"
-      borderRadius="rounded-md"
       padding="px-3 py-2 md:py-2"
+      borderRadius="rounded-md"
+      bgStyles="dark:bg-slate-800/40 dark:border-slate-800/70"
+      textColor="text-slate-500"
+      placeHolderColor="placeholder-slate-500"
       placeholder="Add tag.."
       onChange={handleChange}
     />
