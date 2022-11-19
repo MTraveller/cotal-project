@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 
 import { ButtonLabelInput } from '../../../form/input/ButtonLabelInput';
 import { UploadSvg } from '../../../form/input/UploadSvg';
-import { Input } from '../../../form/input/Input';
-
+import { ProfileModel } from './add-new/ProfileModel';
 import { FormButton } from '../../../form/FormButton';
-import { Textarea } from '../../../form/input/Textarea';
+import { Post } from './add-new/Post';
 
 export const AddNew = ({ setActive, model }) => {
   const [form, setForm] = useState({
@@ -33,6 +32,8 @@ export const AddNew = ({ setActive, model }) => {
 
     return setForm({ ...form, image: e.target.files[0] });
   };
+
+  // "add_tags": ["django"]
 
   const handleChange = ({ currentTarget: input }) => {
     setForm({ ...form, [input.name]: input.value });
@@ -76,58 +77,29 @@ export const AddNew = ({ setActive, model }) => {
               </button>
             </div>
           </div>
-          <div>
-            <label htmlFor="title" className="sr-only">
-              Title
-            </label>
-            <Input
-              id="title"
-              name="title"
-              type="title"
-              value={form.title}
-              autoComplete="off"
-              inputDisplay="block"
-              borderRadius="rounded-none rounded-t-md"
-              padding="px-3 py-3 md:py-4"
-              placeholder="Title"
-              onChange={handleChange}
+          {model === `Post` ? (
+            <Post
+              preview={preview}
+              onSelectFile={onSelectFile}
+              form={form}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
             />
-          </div>
-          <div className="mb-5">
-            <label htmlFor="link" className="sr-only">
-              Link
-            </label>
-            <Input
-              id="link"
-              name="link"
-              type="link"
-              value={form.link}
-              autoComplete="off"
-              inputDisplay="block"
-              borderRadius="rounded-none rounded-b-md"
-              padding="px-3 py-3 md:py-4"
-              placeholder="Link?"
-              onChange={handleChange}
+          ) : (
+            <ProfileModel
+              preview={preview}
+              onSelectFile={onSelectFile}
+              form={form}
+              setForm={setForm}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
             />
-          </div>
-          <div>
-            <label htmlFor="description" className="sr-only">
-              Description
-            </label>
-            <Textarea
-              id="description"
-              name="description"
-              type="description"
-              value={form.description}
-              autoComplete="off"
-              inputDisplay="block"
-              borderRadius="rounded-md"
-              padding="px-3 py-3 md:py-4"
-              placeholder="Description .."
-              onChange={handleChange}
-            />
-          </div>
-          <FormButton handleSubmit={handleSubmit} buttonText="Submit" />
+          )}
+          <FormButton
+            extraStyles="mt-5"
+            handleSubmit={handleSubmit}
+            buttonText="Submit"
+          />
         </form>
       </div>
     </div>
