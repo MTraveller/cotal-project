@@ -16,7 +16,15 @@ export const Model = ({ model }) => {
       setData(userData);
     }
     if (data) {
-      getUserDataHandler(`/profiles/${data.slug}/${model}/`, getUser().access)
+      let trail = ``;
+
+      if (model === `posts`) {
+        trail = `/posts/profiles/${data.slug}/${model}/`;
+      } else {
+        trail = `/profiles/${data.slug}/${model}/`;
+      }
+
+      getUserDataHandler(trail, getUser().access)
         .then((res) => {
           return setModelDB(res.data);
         })
