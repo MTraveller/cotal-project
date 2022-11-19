@@ -77,7 +77,7 @@ export const Request = ({ userData }) => {
               </div>
               <ButtonStyles
                 id="ignore"
-                className="basis-1/3"
+                className="basis-1/3 py-2"
                 data-obj-id={connect.id}
                 data-idx={idx}
                 onClick={handleClick}
@@ -86,7 +86,7 @@ export const Request = ({ userData }) => {
               </ButtonStyles>
               <ButtonStyles
                 id="connect"
-                className="basis-1/3"
+                className="basis-1/3 py-2"
                 data-obj-id={connect.id}
                 data-idx={idx}
                 onClick={handleClick}
