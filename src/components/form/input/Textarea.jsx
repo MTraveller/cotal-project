@@ -8,8 +8,13 @@ export const Textarea = ({
   value,
   autoComplete,
   display,
-  borderRadius,
+  width,
   padding,
+  bgStyles,
+  borderStyles,
+  textColor,
+  borderRadius,
+  placeHolderColor,
   placeholder,
   onChange,
 }) => {
@@ -23,7 +28,17 @@ export const Textarea = ({
       autoComplete={autoComplete}
       required
       rows="10"
-      className={`relative ${display} w-full appearance-none ${borderRadius} border border-slate-400 bg-slate-500 ${padding} text-white placeholder-white focus:z-10 focus:border-yellow-300 focus:outline-none focus:ring-yellow-300 sm:text-sm`}
+      className={`relative ${display ? display : `flex`} ${
+        width ? width : `w-full`
+      } appearance-none ${padding} ${
+        bgStyles ? bgStyles : `bg-slate-200 dark:bg-slate-500`
+      } ${borderStyles ? borderStyles : `border-slate-400`} ${
+        textColor ? textColor : `text-slate-900 dark:text-slate-300`
+      } ${borderRadius} border ${
+        placeHolderColor
+          ? placeHolderColor
+          : `placeholder-slate-900 dark:placeholder-slate-300`
+      } focus:z-10 focus:border-transparent focus:outline-none focus:ring-inset focus:ring-1 focus:ring-yellow-300 text-sm sm:text-base`}
       placeholder={placeholder}
       onChange={onChange}
     />
