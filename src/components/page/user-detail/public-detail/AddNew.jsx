@@ -96,7 +96,7 @@ export const AddNew = ({ setActive, model }) => {
             />
           )}
           <FormButton
-            extraStyles="mt-5"
+            extraStyles="mt-5 py-2"
             handleSubmit={handleSubmit}
             buttonText="Submit"
           />
