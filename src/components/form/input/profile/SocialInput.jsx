@@ -21,16 +21,15 @@ const icons = [
 
 export const SocialInput = ({
   divHeight,
-  buttonsHeight,
   inputId,
   inputType,
-  inputValue,
   inputAutocomplete,
   inputDisplay,
   inputBorderRadius,
   inputPadding,
   inputPlaceholder,
-  onChange,
+  socials,
+  setSocials,
 }) => {
   const [username, setUsername] = useState({
     GitHub: ``,
@@ -40,28 +39,34 @@ export const SocialInput = ({
     Pinterest: ``,
   });
 
-  const [inputVal, setInputVal] = useState({
-    GitHub: 0,
-    DeviantArt: 0,
-    Dribble: 0,
-    SoundCloud: 0,
-    Pinterest: 0,
-  });
-
   useEffect(() => {
-    setUsername({
-      GitHub: inputValue[0]?.username,
-      DeviantArt: inputValue[1]?.username,
-      Dribble: inputValue[2]?.username,
-      SoundCloud: inputValue[3]?.username,
-      Pinterest: inputValue[4]?.username,
-    });
-  }, [inputValue]);
+    if (!username) {
+      setUsername({
+        GitHub: socials[0]?.username,
+        DeviantArt: socials[1]?.username,
+        Dribble: socials[2]?.username,
+        SoundCloud: socials[3]?.username,
+        Pinterest: socials[4]?.username,
+      });
+    }
+  }, [username, socials]);
 
   const handleChange = (e) => {
     const input = e.currentTarget;
-    setInputVal({ ...inputVal, [input.name]: input.value });
-    onChange(e);
+    setUsername({ ...username, [input.name]: input.value });
+  };
+
+  const handleClick = (e) => {
+    const { currentTarget: button } = e;
+    const activeId = Array.from(button.parentNode.childNodes).filter((node) =>
+      node.classList.contains(`active`)
+    )[0].id;
+
+    const value = username[activeId];
+
+    setSocials({ ...socials, [activeId]: value });
+
+    handleIconSaveFlip(e);
   };
 
   return (
@@ -72,7 +77,7 @@ export const SocialInput = ({
             type="button"
             id={idx}
             name={icon.name}
-            className={`flex basis-1/6 justify-center items-center ${buttonsHeight}`}
+            className="flex basis-1/6 justify-center items-center"
             onClick={handleIconFocus}
           >
             {icon.component}
@@ -83,9 +88,7 @@ export const SocialInput = ({
             name={icon.name}
             type={inputType}
             dataValue={inputId}
-            value={
-              inputVal[icon.name] ? inputVal[icon.name] : username[icon.name]
-            }
+            value={username[icon.name] ? username[icon.name] : ``}
             autoComplete={inputAutocomplete}
             display={inputDisplay}
             borderRadius={inputBorderRadius}
@@ -100,7 +103,7 @@ export const SocialInput = ({
         id="icon-save-button"
         type="button"
         className="hidden"
-        onClick={handleIconSaveFlip}
+        onClick={handleClick}
       >
         Save
       </button>
