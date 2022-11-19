@@ -80,7 +80,7 @@ export const handleRegister = async (account) => {
 
 export const handleResetPassword = (account) => {
   console.log(account);
-  return `success`;
+  return null;
 };
 
 export const isLoggedIn = () => {
