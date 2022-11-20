@@ -82,8 +82,9 @@ export const handleRegister = async (account) => {
 };
 
 export const handleResetPassword = (account) => {
-  console.log(account);
-  return null;
+  // Function should be updated to make a
+  // server call to the JWT forgot endpoint!
+  return `success`;
 };
 
 export const isLoggedIn = () => {
