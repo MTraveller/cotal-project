@@ -4,6 +4,8 @@ import { navigate } from 'gatsby';
 import { globalHistory } from '@reach/router';
 
 import { handleLogin } from '../../services/authService';
+import { addLoader } from '../layout/element/button/addLoader';
+import { removeLoader } from '../layout/element/button/removeLoader';
 import { Input } from './input/Input';
 import { SubmitButton } from './indexButton';
 
@@ -37,9 +39,20 @@ const Login = ({ form }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const { currentTarget: form } = e;
+
+    const submitButton = form.lastChild.firstChild;
+    const buttonText = submitButton.firstChild.nextSibling;
+
+    addLoader(submitButton, buttonText);
+
     const loginRes = await handleLogin(account);
 
-    if (loginRes && previousPath === `/`) return navigate(`/feed/`);
+    if (loginRes && previousPath === `/`) {
+      return navigate(`/feed/`);
+    } else {
+      removeLoader(submitButton, buttonText);
+    }
 
     return null;
   };
