@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-// import Joi from 'joi';
 import { navigate } from 'gatsby';
 import { globalHistory } from '@reach/router';
 
-import { handleLogin } from '../../services/authService';
 import { addLoader } from '../layout/element/button/addLoader';
+import { handleLogin } from '../../services/authService';
 import { removeLoader } from '../layout/element/button/removeLoader';
 import { Input } from './input/Input';
 import { SubmitButton } from './indexButton';
@@ -16,19 +15,6 @@ const Login = ({ form }) => {
     email: '',
     password: '',
   });
-
-  // const schema = Joi.object({
-  //   email: Joi.string().email({
-  //     minDomainSegments: 2,
-  //     tlds: { allow: false },
-  //   }),
-  //   password: Joi.string()
-  //     .pattern(new RegExp('^[a-zA-Z0-9]{6,30}$'))
-  //     .required(),
-  // });
-
-  // //TODO: validate login form!
-  // const validate = () => {};
 
   const toggleForm = (e) => form(e.target.name);
 
@@ -105,7 +91,7 @@ const Login = ({ form }) => {
           <button
             type="button"
             name="register"
-            className="font-medium text-slate-100 hover:text-slate-300"
+            className="font-medium text-slate-400 hover:text-slate-300"
             onClick={toggleForm}
           >
             New to Cotal?
@@ -116,7 +102,7 @@ const Login = ({ form }) => {
           <button
             type="button"
             name="forgot"
-            className="font-medium text-slate-100 hover:text-slate-300"
+            className="font-medium text-slate-400 hover:text-slate-300"
             onClick={toggleForm}
           >
             Forgot your password?
