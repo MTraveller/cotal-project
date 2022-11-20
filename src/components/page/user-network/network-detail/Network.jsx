@@ -8,6 +8,7 @@ import { Image } from '../../../layout/element/Image';
 import { OpenLinkExternal } from '../../../layout/element/OpenLinkExternal';
 import { ButtonStyles } from '../../../layout/style/ButtonStyle';
 import { ProfileImageSvg } from '../../../layout/element/ProfileImageSvg';
+import Loader from '../../../layout/element/loader';
 
 export const Network = ({ userData }) => {
   const [data, setData] = useState();
@@ -42,7 +43,7 @@ export const Network = ({ userData }) => {
     postDataHandler(`connect`, obj);
   };
 
-  return (
+  return data ? (
     <div className="flex flex-col gap-y-8">
       {networkCount !== 0 ? (
         data?.map((connect, idx) =>
@@ -86,5 +87,7 @@ export const Network = ({ userData }) => {
         <p>You've got no connections</p>
       )}
     </div>
+  ) : (
+    <Loader styles="w-10 h-10 mx-auto" />
   );
 };

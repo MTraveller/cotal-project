@@ -8,6 +8,7 @@ import { Image } from '../../../layout/element/Image';
 import { OpenLinkExternal } from '../../../layout/element/OpenLinkExternal';
 import { ButtonStyles } from '../../../layout/style/ButtonStyle';
 import { ProfileImageSvg } from '../../../layout/element/ProfileImageSvg';
+import Loader from '../../../layout/element/loader';
 
 export const Request = ({ userData }) => {
   const [data, setData] = useState();
@@ -47,7 +48,7 @@ export const Request = ({ userData }) => {
     postDataHandler(`connect`, newObj);
   };
 
-  return (
+  return data ? (
     <div className="flex flex-col gap-y-8">
       {requestCount !== 0 ? (
         data?.map((connect, idx) =>
@@ -100,5 +101,7 @@ export const Request = ({ userData }) => {
         <p>You've got no requests</p>
       )}
     </div>
+  ) : (
+    <Loader styles="w-10 h-10 mx-auto" />
   );
 };

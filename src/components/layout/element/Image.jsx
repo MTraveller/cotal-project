@@ -5,6 +5,7 @@ import { CloudinaryImage } from '@cloudinary/url-gen';
 import { format } from '@cloudinary/url-gen/actions/delivery';
 import { AdvancedImage } from '@cloudinary/react';
 import { lazyload } from '@cloudinary/react';
+import Loader from './loader';
 
 export const Image = ({ image, modelName, addedModelName, userSlug, alt }) => {
   if (!image) return null;
@@ -23,5 +24,9 @@ export const Image = ({ image, modelName, addedModelName, userSlug, alt }) => {
 
   img.delivery(format('auto'));
 
-  return <AdvancedImage cldImg={img} alt={alt} plugins={[lazyload()]} />;
+  return img ? (
+    <AdvancedImage cldImg={img} alt={alt} plugins={[lazyload()]} />
+  ) : (
+    <Loader styles="w-8 h-8 mx-auto" />
+  );
 };

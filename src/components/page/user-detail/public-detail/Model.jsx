@@ -4,6 +4,7 @@ import { useUserDataContext } from '../../../../context/UserDataContext';
 import getUserDataHandler from '../../../../services/userData';
 import { getUser } from '../../../../services/authService';
 import { Card } from './Card';
+import Loader from '../../../layout/element/loader';
 
 export const Model = ({ model }) => {
   const { userData } = useUserDataContext();
@@ -34,5 +35,9 @@ export const Model = ({ model }) => {
     }
   }, [userData, data, model]);
 
-  return <Card model={modelDB} modelName={model} userSlug={data?.slug} />;
+  return data ? (
+    <Card model={modelDB} modelName={model} userSlug={data?.slug} />
+  ) : (
+    <Loader styles="w-10 h-10 mx-auto" />
+  );
 };
