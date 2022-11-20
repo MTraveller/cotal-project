@@ -1,26 +1,14 @@
 import React, { useState } from 'react';
-// import Joi from 'joi';
 
+import { addLoader } from '../layout/element/button/addLoader';
 import { handleResetPassword } from '../../services/authService';
+import { removeLoader } from '../layout/element/button/removeLoader';
 import { Input } from './input/Input';
 import { SubmitButton } from './indexButton';
 
 const Forgot = ({ form }) => {
   const [account, setAccount] = useState({ email: '' });
-  const [forgot, setForgot] = useState();
-
-  // const schema = Joi.object({
-  //   email: Joi.string().email({
-  //     minDomainSegments: 2,
-  //     tlds: { allow: false },
-  //   }),
-  //   password: Joi.string()
-  //     .pattern(new RegExp('^[a-zA-Z0-9]{6,30}$'))
-  //     .required(),
-  // });
-
-  // //TODO: validate Forgot form!
-  // const validate = () => {};
+  const [forgot, setForgot] = useState(null);
 
   const toggleForm = (e) => form(e.target.name);
 
@@ -31,16 +19,30 @@ const Forgot = ({ form }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const { currentTarget: form } = e;
+
+    const submitButton = form.lastChild.firstChild;
+    const buttonText = submitButton.firstChild.nextSibling;
+
+    addLoader(submitButton, buttonText);
+
     const forgotRes = await handleResetPassword(account);
 
-    if (forgotRes === `success`) return setForgot(`success`);
+    if (forgotRes === `success`) {
+      return setForgot(`success`);
+    } else {
+      removeLoader(submitButton, buttonText);
+    }
 
-    return null;
+    return setForgot(null);
   };
 
-  return !forgot === `success` ? (
+  return forgot !== `success` ? (
     <form className="space-y-6" onSubmit={handleSubmit}>
       <div className="-space-y-px rounded-md shadow-sm">
+        <p className="mb-3 text-slate-500 text-xs italic">
+          Email is not set up, this is for illustration purposes only!
+        </p>
         <div>
           <label htmlFor="email-address" className="sr-only">
             Email address
@@ -65,7 +67,7 @@ const Forgot = ({ form }) => {
           <button
             type="button"
             name="login"
-            className="font-medium text-slate-100 hover:text-slate-300"
+            className="font-medium text-slate-400 hover:text-slate-300"
             onClick={toggleForm}
           >
             Already have an account?
@@ -76,7 +78,7 @@ const Forgot = ({ form }) => {
           <button
             type="button"
             name="register"
-            className="font-medium text-slate-100 hover:text-slate-300"
+            className="font-medium text-slate-400 hover:text-slate-300"
             onClick={toggleForm}
           >
             New to Cotal?
