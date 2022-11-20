@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-// import Joi from 'joi';
 import { navigate } from 'gatsby';
 import { globalHistory } from '@reach/router';
 
+import { addLoader } from '../layout/element/button/addLoader';
 import { handleRegister } from '../../services/authService';
+import { removeLoader } from '../layout/element/button/removeLoader';
 import { Input } from './input/Input';
 import { SubmitButton } from './indexButton';
 
@@ -11,25 +12,12 @@ const Register = ({ form }) => {
   const previousPath = globalHistory.location.pathname;
 
   const [account, setAccount] = useState({
-    username: '',
-    password: '',
-    email: '',
     firstname: '',
     lastname: '',
+    email: '',
+    username: '',
+    password: '',
   });
-
-  // const schema = Joi.object({
-  //   email: Joi.string().email({
-  //     minDomainSegments: 2,
-  //     tlds: { allow: false },
-  //   }),
-  //   password: Joi.string()
-  //     .pattern(new RegExp('^[a-zA-Z0-9]{6,30}$'))
-  //     .required(),
-  // });
-
-  // //TODO: validate login form!
-  // const validate = () => {};
 
   const toggleForm = (e) => form(e.target.name);
 
@@ -40,9 +28,20 @@ const Register = ({ form }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const { currentTarget: form } = e;
+
+    const submitButton = form.lastChild.firstChild;
+    const buttonText = submitButton.firstChild.nextSibling;
+
+    addLoader(submitButton, buttonText);
+
     const registerRes = await handleRegister({ account });
 
-    if (registerRes && previousPath === `/`) return navigate(`/feed/`);
+    if (registerRes && previousPath === `/`) {
+      return navigate(`/feed/`);
+    } else {
+      removeLoader(submitButton, buttonText);
+    }
 
     return null;
   };
@@ -147,7 +146,7 @@ const Register = ({ form }) => {
         <button
           type="button"
           name="login"
-          className="font-medium text-slate-100 hover:text-slate-300"
+          className="font-medium text-slate-400 hover:text-slate-300"
           onClick={toggleForm}
         >
           Already Have an Account?
