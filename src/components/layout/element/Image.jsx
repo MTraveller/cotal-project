@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { URLConfig } from '@cloudinary/url-gen';
 import { CloudConfig } from '@cloudinary/url-gen';
 import { CloudinaryImage } from '@cloudinary/url-gen';
 import { format } from '@cloudinary/url-gen/actions/delivery';
-import { AdvancedImage } from '@cloudinary/react';
-import { lazyload } from '@cloudinary/react';
-import Loader from './loader';
+import { AdvancedImage, lazyload, responsive } from '@cloudinary/react';
 
-export const Image = ({ image, modelName, addedModelName, userSlug, alt }) => {
+export const Image = ({ image, modelName, addedModelName, slug, alt }) => {
   if (!image) return null;
 
   const idx = image.lastIndexOf(`/`);
@@ -15,7 +13,7 @@ export const Image = ({ image, modelName, addedModelName, userSlug, alt }) => {
   const model = addedModelName ? addedModelName : modelName.slice(0, -1);
   const publicId = image.slice(idx);
 
-  const imageUrl = 'cotal-api/' + userSlug + '/' + model + publicId;
+  const imageUrl = 'cotal-api/' + slug + '/' + model + publicId;
 
   // https://cloudinary.com/documentation/react_integration#asset_instance_configuration
   let cloudConfig = new CloudConfig({ cloudName: 'matouri' });
@@ -24,9 +22,12 @@ export const Image = ({ image, modelName, addedModelName, userSlug, alt }) => {
 
   img.delivery(format('auto'));
 
-  return img ? (
-    <AdvancedImage cldImg={img} alt={alt} plugins={[lazyload()]} />
-  ) : (
-    <Loader styles="w-8 h-8 mx-auto" />
+  return (
+    <AdvancedImage
+      id={publicId.slice(1)}
+      cldImg={img}
+      alt={alt}
+      plugins={[lazyload(), responsive()]}
+    />
   );
 };
