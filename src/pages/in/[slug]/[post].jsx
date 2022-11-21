@@ -8,7 +8,6 @@ import { SideBarRight } from '../../../components/page/side-bar/three-section/Si
 export default function Post({ params }) {
   return (
     <ThreeSection
-      title="Your Post"
       leftStyles="hidden lg:block flex-1 max-w-60"
       middleStyles="flex-auto w-[500px] max-w-[782px]"
       rightStyles="hidden lg:block flex-1 max-w-60"
