@@ -106,7 +106,7 @@ export const Request = ({ userData }) => {
                   <Image
                     image={connect.opposite_user.image}
                     addedModelName="profile"
-                    userSlug={connect.opposite_user.slug}
+                    slug={connect.opposite_user.slug}
                     alt={`${connect.opposite_user.firstname} ${connect.opposite_user.lastname} profile image`}
                   />
                 ) : (
