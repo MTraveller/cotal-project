@@ -8,11 +8,16 @@ export default async function getUserDataHandler(urlTrail, token) {
   if (!token) return null;
 
   const result = await http
-    .get(apiProfileMeEndpoint + urlTrail, {
-      headers: {
-        Authorization: `JWT ${token}`,
-      },
-    })
+    .get(
+      apiProfileMeEndpoint + urlTrail,
+      token !== `pass`
+        ? {
+            headers: {
+              Authorization: `JWT ${token}`,
+            },
+          }
+        : ``
+    )
     .then((res) => res)
     .catch((ex) => ex);
 
