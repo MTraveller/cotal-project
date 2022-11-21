@@ -28,18 +28,19 @@ export const ThreeSection = ({
   componentLeft: ComponentLeft,
   componentMiddle: ComponentMiddle,
   componentRight: ComponentRight,
+  params,
 }) => (
   <Wrapper>
     {title ? <h1 className="text-3xl">{title}</h1> : ``}
     <DivStyles>
       <div className={`${leftStyles}`}>
-        <ComponentLeft />
+        <ComponentLeft {...params} />
       </div>
       <div className={`${middleStyles}`}>
-        <ComponentMiddle />
+        <ComponentMiddle {...params} />
       </div>
       <div className={`${rightStyles}`}>
-        <ComponentRight />
+        <ComponentRight {...params} />
       </div>
     </DivStyles>
   </Wrapper>
