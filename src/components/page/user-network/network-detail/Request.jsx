@@ -55,25 +55,25 @@ export const Request = ({ userData }) => {
           connect.connecting_choice === `0` ||
           connect.connecting_choice === `1` ? (
             ``
-          ) : (
+          ) : connect.connecter_username !== userData.slug ? (
             <div
               key={connect.id}
-              className="flex flex-row items-center gap-x-5"
+              className="flex flex-row items-center gap-x-2 sm:gap-x-5"
             >
-              <div className="flex flex-row basis-1/2 gap-x-3">
-                {connect.connecter_image ? (
+              <div className="flex flex-row basis-1/2 items-center gap-x-1">
+                {connect.opposite_user?.image ? (
                   <Image
-                    image={connect.connecter_image}
+                    image={connect.opposite_user.image}
                     addedModelName="profile"
-                    userSlug={connect.connecter_username}
-                    alt={`${connect.connecter_name.firstname} ${connect.connecter_name.lastname} profile image`}
+                    userSlug={connect.opposite_user.slug}
+                    alt={`${connect.opposite_user.firstname} ${connect.opposite_user.lastname} profile image`}
                   />
                 ) : (
                   <ProfileImageSvg widthHeight="w-10 h-10" />
                 )}
                 <OpenLinkExternal
-                  url={`/in/${connect.connecter_username}/`}
-                  buttonText={`${connect.connecter_name.firstname} ${connect.connecter_name.lastname}`}
+                  url={`/in/${connect.opposite_user.slug}/`}
+                  buttonText={`${connect.opposite_user.firstname} ${connect.opposite_user.lastname}`}
                 />
               </div>
               <ButtonStyles
@@ -93,6 +93,39 @@ export const Request = ({ userData }) => {
                 onClick={handleClick}
               >
                 Connect
+              </ButtonStyles>
+            </div>
+          ) : (
+            <div
+              key={connect.id}
+              className="flex flex-row items-center gap-x-5"
+            >
+              {console.log(connect)}
+              <div className="flex flex-row basis-1/2 items-center gap-x-1">
+                {connect.opposite_user?.image ? (
+                  <Image
+                    image={connect.opposite_user.image}
+                    addedModelName="profile"
+                    userSlug={connect.opposite_user.slug}
+                    alt={`${connect.opposite_user.firstname} ${connect.opposite_user.lastname} profile image`}
+                  />
+                ) : (
+                  <ProfileImageSvg widthHeight="w-10 h-10" />
+                )}
+                <OpenLinkExternal
+                  url={`/in/${connect.opposite_user.slug}/`}
+                  buttonText={`${connect.opposite_user.firstname} ${connect.opposite_user.lastname}`}
+                />
+              </div>
+              <span className="hidden sm:block basis-1/3" />
+              <ButtonStyles
+                id="delete"
+                className="basis-1/2 sm:basis-1/3  py-2"
+                data-obj-id={connect.id}
+                data-idx={idx}
+                onClick={handleClick}
+              >
+                Delete request
               </ButtonStyles>
             </div>
           )

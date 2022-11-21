@@ -54,19 +54,19 @@ export const Network = ({ userData }) => {
               className="flex flex-row items-center gap-x-5"
             >
               <div className="flex flex-row basis-2/3 gap-x-3">
-                {connect.connecter_image ? (
+                {connect.opposite_user?.image ? (
                   <Image
-                    image={connect.connecter_image}
+                    image={connect.opposite_user.image}
                     addedModelName="profile"
-                    userSlug={connect.connecter_username}
-                    alt={`${connect.connecter_name.firstname} ${connect.connecter_name.lastname} profile image`}
+                    userSlug={connect.opposite_user.slug}
+                    alt={`${connect.opposite_user.firstname} ${connect.opposite_user.lastname} profile image`}
                   />
                 ) : (
                   <ProfileImageSvg widthHeight="w-10 h-10" />
                 )}
                 <OpenLinkExternal
-                  url={`/in/${connect.connecter_username}/`}
-                  buttonText={`${connect.connecter_name.firstname} ${connect.connecter_name.lastname}`}
+                  url={`/in/${connect.opposite_user.slug}/`}
+                  buttonText={`${connect.opposite_user.firstname} ${connect.opposite_user.lastname}`}
                 />
               </div>
               <ButtonStyles
