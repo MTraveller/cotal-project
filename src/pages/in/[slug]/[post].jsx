@@ -6,7 +6,6 @@ import { UserPost } from '../../../components/page/UserPost';
 import { SideBarRight } from '../../../components/page/side-bar/three-section/SideBarRight';
 
 export default function Post({ params }) {
-  console.log(params);
   return (
     <ThreeSection
       title="Your Post"
@@ -16,6 +15,7 @@ export default function Post({ params }) {
       componentLeft={SideBarLeft}
       componentMiddle={UserPost}
       componentRight={SideBarRight}
+      params={params}
     />
   );
 }
