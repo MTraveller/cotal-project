@@ -30,7 +30,7 @@ export const Card = ({ model, modelName, userSlug }) => {
                 <Image
                   image={item.image}
                   modelName={modelName}
-                  userSlug={userSlug}
+                  slug={userSlug}
                   alt={item.title}
                 />
               ) : (
