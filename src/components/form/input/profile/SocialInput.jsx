@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   SiDeviantart,
   SiDribbble,
@@ -31,42 +31,11 @@ export const SocialInput = ({
   socials,
   setSocials,
 }) => {
-  const [username, setUsername] = useState({
-    GitHub: ``,
-    DeviantArt: ``,
-    Dribble: ``,
-    SoundCloud: ``,
-    Pinterest: ``,
-  });
-
-  useEffect(() => {
-    if (!username) {
-      setUsername({
-        GitHub: socials[0]?.username,
-        DeviantArt: socials[1]?.username,
-        Dribble: socials[2]?.username,
-        SoundCloud: socials[3]?.username,
-        Pinterest: socials[4]?.username,
-      });
-    }
-  }, [username, socials]);
-
-  const handleChange = (e) => {
-    const input = e.currentTarget;
-    setUsername({ ...username, [input.name]: input.value });
-  };
-
-  const handleClick = (e) => {
-    const { currentTarget: button } = e;
-    const activeId = Array.from(button.parentNode.childNodes).filter((node) =>
-      node.classList.contains(`active`)
-    )[0].id;
-
-    const value = username[activeId];
-
-    setSocials({ ...socials, [activeId]: value });
-
-    handleIconSaveFlip(e);
+  const handleChange = ({ currentTarget: input }) => {
+    setSocials({
+      ...socials,
+      [input.name]: { username: input.value },
+    });
   };
 
   return (
@@ -88,7 +57,9 @@ export const SocialInput = ({
             name={icon.name}
             type={inputType}
             dataValue={inputId}
-            value={username[icon.name] ? username[icon.name] : ``}
+            value={
+              socials[icon.name]?.username ? socials[icon.name].username : ``
+            }
             autoComplete={inputAutocomplete}
             display={inputDisplay}
             borderRadius={inputBorderRadius}
@@ -103,7 +74,7 @@ export const SocialInput = ({
         id="icon-save-button"
         type="button"
         className="hidden"
-        onClick={handleClick}
+        onClick={handleIconSaveFlip}
       >
         Save
       </button>
