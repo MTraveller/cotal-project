@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { URLConfig } from '@cloudinary/url-gen';
 import { CloudConfig } from '@cloudinary/url-gen';
 import { CloudinaryImage } from '@cloudinary/url-gen';
