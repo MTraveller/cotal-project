@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { MdMenuOpen } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
-import { useUserDataContext } from '../../../context/UserDataContext';
-import { checkEquality } from '../../../utils/checkEquality';
+import {
+  useUserDataContext,
+  displayLoader,
+  checkEquality,
+  ButtonStyles,
+  ButtonImageInput,
+  ButtonLabelInput,
+  SocialInput,
+  ProfileImageSvg,
+  FormButton,
+  UploadSvg,
+  OpenLinkExternal,
+  FlipSelectTwo,
+  FlipTwo,
+  getUser,
+} from '../../export/personalDetail';
 import postDataHandler from '../../../services/postData';
-import { ButtonStyles } from '../../layout/style/ButtonStyle';
-import { ButtonImageInput } from '../../form/input/ButtonImageInput';
-import { ButtonLabelInput } from '../../form/input/ButtonLabelInput';
-import { SocialInput } from '../../form/input/profile/SocialInput';
-import { ProfileImageSvg } from '../../layout/element/ProfileImageSvg';
-import { FormButton } from '../../form/FormButton';
-import { UploadSvg } from '../../form/input/UploadSvg';
-import { OpenLinkExternal } from '../../layout/element/OpenLinkExternal';
-import { FlipSelectTwo } from '../../form/input/FlipSelectTwo';
-import { FlipTwo } from '../../form/input/FlipTwo';
 import Loader from '../../layout/element/loader';
 
 export const PersonalDetail = () => {
-  const { userData } = useUserDataContext();
+  const { userData, setUserData } = useUserDataContext();
 
   const [personal, setPersonal] = useState({
     image: ``,
@@ -38,31 +43,38 @@ export const PersonalDetail = () => {
         location: userData?.location,
         linktrees: userData?.linktrees[0]?.username,
       });
+
+      if (Object.keys(socials).length === 0) {
+        let socialsObj = {};
+
+        Object.entries(userData.socials).forEach((obj) => {
+          socialsObj = {
+            ...socialsObj,
+            [obj[1].name]: {
+              id: obj[1].id,
+              username: obj[1].username,
+            },
+          };
+        });
+
+        setSocials(socialsObj);
+      }
+    }
+  }, [userData, socials, personal.status]);
+
+  const handleDivClick = (e) => {
+    let current = ``;
+
+    if (e) {
+      current = e.currentTarget;
+    } else {
+      current = document.querySelector(`#profile-details-btn`);
     }
 
-    if (userData && !socials) setSocials(userData?.socials);
-
-    // Initial displaying selected image sourced from:
-    // https://stackoverflow.com/a/57781164
-    if (!personal.image) {
-      return setPreview(undefined);
-    }
-
-    if (!userData?.image) {
-      const objectUrl = URL.createObjectURL(personal.image);
-      setPreview(objectUrl);
-
-      return () => URL.revokeObjectURL(objectUrl);
-    }
-  }, [userData, socials, personal.image, personal.status]);
-
-  const handleDivClick = ({ currentTarget: current }) => {
     current.parentNode.classList.toggle(`h-[90px]`);
-
     current.nextSibling.classList.toggle(`invisible`);
 
     current.dataset.open = current.dataset.open === `false` ? `true` : `false`;
-
     current.nextSibling.dataset.hidden =
       current.nextSibling.dataset.hidden === `true` ? `false` : `true`;
   };
@@ -70,7 +82,15 @@ export const PersonalDetail = () => {
   const onSelectFile = (e) => {
     if (!e.target.files || e.target.files.length === 0) return;
 
-    return setPersonal({ ...personal, image: e.target.files[0] });
+    const objectUrl = URL.createObjectURL(e.target.files[0]);
+    setPreview(objectUrl);
+
+    setPersonal({
+      ...personal,
+      image: e.target.files[0],
+    });
+
+    return () => URL.revokeObjectURL(objectUrl);
   };
 
   const handleChange = ({ currentTarget: input }) => {
@@ -79,12 +99,12 @@ export const PersonalDetail = () => {
 
   const handleStatusSelect = (e) => setPersonal({ ...personal, status: e });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const userDataCopy = { ...userData };
 
-    const userId = userDataCopy.id;
+    const userId = userDataCopy.slug;
     delete userDataCopy.id;
     delete userDataCopy.user;
     delete userDataCopy.slug;
@@ -92,16 +112,32 @@ export const PersonalDetail = () => {
     if (!userDataCopy.linktrees.length && !e.linktrees)
       userDataCopy.linktrees = undefined;
 
-    const result = checkEquality(personal, userDataCopy);
+    const result = checkEquality(personal, socials, userDataCopy);
 
-    postDataHandler([`personal`, userId, result]);
+    if (result !== null) {
+      displayLoader(e);
+      const response = await postDataHandler([
+        `personal`,
+        userId,
+        result,
+        getUser().access,
+      ]);
+
+      if (response === true) {
+        handleDivClick();
+        setUserData();
+      } else {
+        toast.warn(`${response[0]}: ${response[1]}`);
+      }
+    }
   };
 
   return (
-    <div className="h-[90px] lg:sticky lg:top-[78px] bg-black/[.2] rounded-lg p-6 overflow-y-hidden">
+    <div className="h-[90px] lg:sticky lg:top-[80px] bg-black/[.2] rounded-lg p-6 overflow-y-hidden">
       {userData ? (
         <>
           <ButtonStyles
+            id="profile-details-btn"
             type="button"
             className="group flex justify-center items-center gap-x-2 py-1"
             data-open="false"
@@ -119,7 +155,7 @@ export const PersonalDetail = () => {
                   <ButtonImageInput
                     id="label-profile-image"
                     preview={preview ? preview : personal?.image}
-                    alt={`${personal?.user?.first_name} ${personal?.user?.last_name}`}
+                    alt={`${userData?.user?.first_name} ${userData?.user?.last_name} profile image`}
                     svg={<ProfileImageSvg widthHeight="w-32 h-32" />}
                     onChange={onSelectFile}
                   />
