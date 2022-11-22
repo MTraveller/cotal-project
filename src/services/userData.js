@@ -13,7 +13,7 @@ export default async function getUserDataHandler(urlTrail, token) {
       token !== `pass`
         ? {
             headers: {
-              Authorization: `JWT ${token}`,
+              Authorization: `Cotal ${token}`,
             },
           }
         : ``
