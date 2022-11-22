@@ -2,6 +2,7 @@ import tw from 'tailwind-styled-components';
 
 export const ButtonStyles = tw.button`
   w-full
+  mt-0.5
   dark:bg-slate-900
   rounded-md
   ring-1
