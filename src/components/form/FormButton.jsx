@@ -11,12 +11,12 @@ export const FormButton = ({ id, extraStyles, handleSubmit, buttonText }) => (
     data-message="Save changes made"
     onClick={handleSubmit}
   >
-    <span id="button-loading" className="hidden">
+    <span className="hidden">
       <span className="flex flex-row justify-center items-center italic">
         <Loader styles="w-4 h-4 mr-3" />
         Processing...
       </span>
     </span>
-    <span id="form-btn">{buttonText}</span>
+    <span>{buttonText}</span>
   </ButtonStyles>
 );
