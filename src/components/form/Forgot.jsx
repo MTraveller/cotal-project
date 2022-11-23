@@ -44,11 +44,11 @@ const Forgot = ({ form }) => {
           Email is not set up, this is for illustration purposes only!
         </p>
         <div>
-          <label htmlFor="email-address" className="sr-only">
+          <label htmlFor="forgot-email-address" className="sr-only">
             Email address
           </label>
           <Input
-            id="email-address"
+            id="forgot-email-address"
             name="email"
             type="email"
             value={account.email}
