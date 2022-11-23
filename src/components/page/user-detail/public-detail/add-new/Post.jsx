@@ -27,7 +27,7 @@ export const Post = ({ form, handleChange, tagArray, setTag }) => {
         <Input
           id="title"
           name="title"
-          type="title"
+          type="text"
           value={form.title}
           autoComplete="off"
           borderRadius="rounded-md"
@@ -39,19 +39,19 @@ export const Post = ({ form, handleChange, tagArray, setTag }) => {
         />
       </div>
       <div>
-        <label htmlFor="description" className="sr-only">
-          Description
+        <label htmlFor="post-body" className="sr-only">
+          Post
         </label>
         <Textarea
-          id="description"
-          name="description"
-          type="description"
-          value={form.description}
+          id="post-body"
+          name="post"
+          type="text"
+          value={form.post}
           autoComplete="off"
           borderRadius="rounded-md"
           padding="px-3 py-3 md:py-4"
           bgStyles="dark:bg-slate-400/40 dark:border-slate-300/70"
-          placeholder="Description .."
+          placeholder="Post .."
           onChange={handleChange}
         />
         <div className="w-full flex flex-wrap items-center gap-2 sm:gap-y-4 sm:gap-x-3 my-5">
