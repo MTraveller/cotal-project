@@ -1,28 +1,25 @@
 import React, { useEffect, useState } from 'react';
 
-import { useUserDataContext } from '../../../../context/UserDataContext';
 import getUserDataHandler from '../../../../services/userData';
 import { getUser } from '../../../../services/authService';
 import { Card } from './Card';
 import Loader from '../../../layout/element/loader';
 
-export const Model = ({ model }) => {
-  const { userData } = useUserDataContext();
-
-  const [data, setData] = useState();
+export const Model = ({ userSlug, model }) => {
+  const [slug, setSlug] = useState();
   const [modelDB, setModelDB] = useState();
 
   useEffect(() => {
-    if (!data) {
-      setData(userData);
+    if (!slug) {
+      setSlug(userSlug);
     }
-    if (data) {
+    if (slug) {
       let trail = ``;
 
       if (model === `posts`) {
-        trail = `/posts/profiles/${data.slug}/${model}/`;
+        trail = `/posts/profiles/${slug}/${model}/`;
       } else {
-        trail = `/profiles/${data.slug}/${model}/`;
+        trail = `/profiles/${slug}/${model}/`;
       }
 
       getUserDataHandler(trail, getUser().access)
@@ -33,10 +30,10 @@ export const Model = ({ model }) => {
           return ex;
         });
     }
-  }, [userData, data, model]);
+  }, [slug, userSlug, model]);
 
-  return data ? (
-    <Card model={modelDB} modelName={model} userSlug={data?.slug} />
+  return slug ? (
+    <Card model={modelDB} modelName={model} userSlug={slug} />
   ) : (
     <Loader styles="w-10 h-10 mx-auto" />
   );
