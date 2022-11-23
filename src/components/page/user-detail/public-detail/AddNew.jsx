@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
+import postDataHandler from '../../../../services/postData';
+import { displayLoader, getUser } from '../../../export/personalDetail';
 import { ButtonLabelInput } from '../../../form/input/ButtonLabelInput';
 import { UploadSvg } from '../../../form/input/UploadSvg';
+import { Post } from './add-new/Post';
 import { ProfileModel } from './add-new/ProfileModel';
 import { FormButton } from '../../../form/FormButton';
-import { Post } from './add-new/Post';
 
-export const AddNew = ({ setActive, model }) => {
+export const AddNew = ({ userSlug, setActive, model }) => {
   const [form, setForm] = useState({
     image: undefined,
     title: ``,
@@ -14,34 +16,49 @@ export const AddNew = ({ setActive, model }) => {
     link: ``,
   });
 
+  const [tag, setTag] = useState([]);
+
   const [preview, setPreview] = useState();
-
-  useEffect(() => {
-    if (!form.image) {
-      return setPreview(undefined);
-    }
-
-    const objectUrl = URL.createObjectURL(form.image);
-    setPreview(objectUrl);
-
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [form?.image]);
 
   const onSelectFile = (e) => {
     if (!e.target.files || e.target.files.length === 0) return;
 
-    return setForm({ ...form, image: e.target.files[0] });
+    const objectUrl = URL.createObjectURL(e.target.files[0]);
+    setPreview(objectUrl);
+
+    setForm({ ...form, image: e.target.files[0] });
+
+    return () => URL.revokeObjectURL(objectUrl);
   };
 
   // "add_tags": ["django"]
 
   const handleChange = ({ currentTarget: input }) => {
+    console.log(input.id);
     setForm({ ...form, [input.name]: input.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
+    const button = e.currentTarget;
+
+    const formCopy = { ...form };
+
+    if (formCopy.image === undefined) delete formCopy.image;
+    if (button.id === `Post`) delete formCopy.link;
+
+    displayLoader(e);
+    const response = await postDataHandler([
+      model,
+      userSlug,
+      formCopy,
+      getUser().access,
+    ]);
+
+    console.log(response);
+    if (response) {
+      displayLoader(e);
+    }
   };
 
   return (
@@ -82,6 +99,8 @@ export const AddNew = ({ setActive, model }) => {
               preview={preview}
               onSelectFile={onSelectFile}
               form={form}
+              tagArray={tag}
+              setTag={setTag}
               handleChange={handleChange}
               handleSubmit={handleSubmit}
             />
@@ -96,6 +115,7 @@ export const AddNew = ({ setActive, model }) => {
             />
           )}
           <FormButton
+            id={model}
             extraStyles="mt-5 py-2"
             handleSubmit={handleSubmit}
             buttonText="Submit"
