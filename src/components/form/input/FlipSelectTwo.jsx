@@ -15,9 +15,9 @@ export const FlipSelectTwo = ({
   <div className={`flex justify-between items-center ${divHeight}`}>
     <p className="flex items-center gap-3">
       {inputText}:{` `}
-      <span id={spanId}>{inputValue}</span>
+      <span>{inputValue}</span>
     </p>
-    <span id={spanId} name={spanId} className="hidden w-3/4">
+    <span name={spanId} className="hidden w-3/4">
       <SelectInput value={inputValue} onChange={onChange} />
     </span>
     <InputEditButton
