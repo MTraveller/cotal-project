@@ -23,13 +23,13 @@ export const SubmitButton = ({ buttonText }) => (
       </svg>
     </span>
     <span>
-      <span id="button-loading" className="hidden">
+      <span className="hidden">
         <span className="flex flex-row italic">
           <Loader styles="h-5 w-5 mr-3" />
           Processing...
         </span>
       </span>
-      <span id="button-text">{buttonText}</span>
+      <span>{buttonText}</span>
     </span>
   </button>
 );
