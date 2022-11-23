@@ -3,6 +3,7 @@ import {
   userSocialHandler,
   userLinktreesHandler,
   userConnectHandler,
+  userPostContentHander,
 } from './userPostHandler';
 
 export default async function postDataHandler(req) {
@@ -43,11 +44,28 @@ export default async function postDataHandler(req) {
       }
     }
   } else if (req[0] === `connect`) {
-    const response = await userConnectHandler({ data: req[1], token: req[3] });
+    const response = await userConnectHandler({
+      user: req[1],
+      data: req[2],
+      token: req[3],
+    });
+
+    if (response !== true) error = [...response];
+  } else if (
+    [`Post`, `Portfolio`, `Award`, `Certificate`, `Creative`].includes(req[0])
+  ) {
+    const response = await userPostContentHander({
+      model: req[0],
+      user: req[1],
+      data: req[2],
+      token: req[3],
+      isPost: req[4],
+      type: req[5],
+    });
 
     if (response !== true) error = [...response];
   }
 
-  if (error.length !== 0) return error;
+  if (error.length) return error;
   return true;
 }
