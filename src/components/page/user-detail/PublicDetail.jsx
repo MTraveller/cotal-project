@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 
 import { useUserDataContext } from '../../../context/UserDataContext';
-import { AddNew } from './public-detail/AddNew';
+import { AddNewEdit } from './public-detail/AddNewEdit';
 import { Model } from './public-detail/Model';
 
 export const PublicDetail = () => {
   const { userData } = useUserDataContext();
 
   const [active, setActive] = useState(false);
-  const [targetName, setTargetName] = useState();
+  const [targetName, setTargetName] = useState(null);
+  const [object, setObject] = useState(null);
 
   const handleClick = ({ target }) => {
     const parentDiv = target.parentNode.parentNode.parentNode;
@@ -24,57 +25,85 @@ export const PublicDetail = () => {
   return (
     <div className="bg-black/[.2] rounded-lg p-6">
       {active ? (
-        <AddNew
+        <AddNewEdit
           userSlug={userData?.slug}
           setActive={setActive}
           model={targetName}
+          object={object}
+          setObject={setObject}
+          setTargetName={setTargetName}
         />
       ) : (
         <div className="flex flex-col gap-y-10">
-          <div>
+          <div id="post">
             <div className="flex flex-row mb-3 justify-between items-center text-sm">
               <h2>Your Posts</h2>
               <button type="button" onClick={handleClick}>
                 Add new
               </button>
             </div>
-            <Model userSlug={userData?.slug} model="posts" />
+            <Model
+              userSlug={userData?.slug}
+              model="posts"
+              setObject={setObject}
+              handleObjectEdit={handleClick}
+            />
           </div>
-          <div>
+          <div id="postfofio">
             <div className="flex flex-row mb-3 justify-between items-center text-sm">
               <h2>Your Portfolios</h2>
               <button type="button" onClick={handleClick}>
                 Add new
               </button>
             </div>
-            <Model userSlug={userData?.slug} model="portfolios" />
+            <Model
+              userSlug={userData?.slug}
+              model="portfolios"
+              setObject={setObject}
+              handleObjectEdit={handleClick}
+            />
           </div>
-          <div>
+          <div id="awards">
             <div className="flex flex-row mb-3 justify-between items-center text-sm">
               <h2>Your Awards</h2>
               <button type="button" onClick={handleClick}>
                 Add new
               </button>
             </div>
-            <Model userSlug={userData?.slug} model="awards" />
+            <Model
+              userSlug={userData?.slug}
+              model="awards"
+              setObject={setObject}
+              handleObjectEdit={handleClick}
+            />
           </div>
-          <div>
+          <div id="certificate">
             <div className="flex flex-row mb-3 justify-between items-center text-sm">
               <h2>Your Certificates</h2>
               <button type="button" onClick={handleClick}>
                 Add new
               </button>
             </div>
-            <Model userSlug={userData?.slug} model="certificates" />
+            <Model
+              userSlug={userData?.slug}
+              model="certificates"
+              setObject={setObject}
+              handleObjectEdit={handleClick}
+            />
           </div>
-          <div>
+          <div id="creative">
             <div className="flex flex-row mb-3 justify-between items-center text-sm">
               <h2>Your Creatives</h2>
               <button type="button" onClick={handleClick}>
                 Add new
               </button>
             </div>
-            <Model userSlug={userData?.slug} model="creatives" />
+            <Model
+              userSlug={userData?.slug}
+              model="creatives"
+              setObject={setObject}
+              handleObjectEdit={handleClick}
+            />
           </div>
         </div>
       )}
