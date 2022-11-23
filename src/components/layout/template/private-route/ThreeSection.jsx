@@ -29,6 +29,7 @@ export const ThreeSection = ({
   componentMiddle: ComponentMiddle,
   componentRight: ComponentRight,
   params,
+  model,
 }) => (
   <Wrapper>
     {title ? <h1 className="text-3xl">{title}</h1> : ``}
@@ -37,7 +38,7 @@ export const ThreeSection = ({
         <ComponentLeft {...params} />
       </div>
       <div className={`${middleStyles}`}>
-        <ComponentMiddle {...params} />
+        <ComponentMiddle model={model} {...params} />
       </div>
       <div className={`${rightStyles}`}>
         <ComponentRight {...params} />
