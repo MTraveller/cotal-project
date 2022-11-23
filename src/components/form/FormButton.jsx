@@ -3,8 +3,9 @@ import Loader from '../layout/element/loader';
 
 import { ButtonStyles } from '../layout/style/ButtonStyle';
 
-export const FormButton = ({ extraStyles, handleSubmit, buttonText }) => (
+export const FormButton = ({ id, extraStyles, handleSubmit, buttonText }) => (
   <ButtonStyles
+    id={id ? id : ``}
     type="submit"
     className={extraStyles}
     data-message="Save changes made"
