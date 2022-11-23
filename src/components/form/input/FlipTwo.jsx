@@ -9,7 +9,6 @@ export const FlipTwo = ({
   paragraphHight,
   text,
   link,
-  spanId,
   inputId,
   inputName,
   inputType,
@@ -25,14 +24,14 @@ export const FlipTwo = ({
     <p className={`flex ${paragraphHight} items-center gap-3`}>
       {text}:{` `}
       {link ? (
-        <a id={spanId} href={link} target="_blank" rel="noopener noreferrer">
+        <a href={link} target="_blank" rel="noopener noreferrer">
           {inputValue}
         </a>
       ) : (
-        <span id={spanId}>{inputValue}</span>
+        <span>{inputValue}</span>
       )}
     </p>
-    <span id={inputId} name={inputName} className="hidden w-3/4">
+    <span name={inputName} className="hidden w-3/4">
       <Input
         id={inputId}
         name={inputName}
