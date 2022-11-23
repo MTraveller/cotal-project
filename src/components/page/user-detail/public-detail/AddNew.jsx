@@ -44,6 +44,7 @@ export const AddNew = ({ userSlug, setActive, model }) => {
 
     const formCopy = { ...form };
 
+    if (tag.length) formCopy[`tag`] = tag;
     if (formCopy.image === undefined) delete formCopy.image;
     if (button.id === `Post`) delete formCopy.link;
 
