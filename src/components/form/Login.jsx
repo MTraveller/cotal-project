@@ -51,11 +51,11 @@ const Login = ({ form }) => {
       */}
       <div className="-space-y-px rounded-md shadow-sm">
         <div>
-          <label htmlFor="email-address" className="sr-only">
+          <label htmlFor="login-email-address" className="sr-only">
             Email address
           </label>
           <Input
-            id="email-address"
+            id="login-email-address"
             name="email"
             type="email"
             value={account.email}
@@ -68,11 +68,11 @@ const Login = ({ form }) => {
           />
         </div>
         <div>
-          <label htmlFor="password" className="sr-only">
+          <label htmlFor="login-password" className="sr-only">
             Password
           </label>
           <Input
-            id="password"
+            id="login-password"
             name="password"
             type="password"
             value={account.password}
