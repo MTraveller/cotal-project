@@ -5,9 +5,10 @@ import { getUser } from '../../../../services/authService';
 import { Card } from './Card';
 import Loader from '../../../layout/element/loader';
 
-export const Model = ({ userSlug, model }) => {
+export const Model = ({ userSlug, model, setObject, handleObjectEdit }) => {
   const [slug, setSlug] = useState();
-  const [modelDB, setModelDB] = useState();
+  const [modelDB, setModelDB] = useState(null);
+  const [contentType, setContentType] = useState();
 
   useEffect(() => {
     if (!slug) {
@@ -18,22 +19,34 @@ export const Model = ({ userSlug, model }) => {
 
       if (model === `posts`) {
         trail = `/posts/profiles/${slug}/${model}/`;
+        setContentType(`post`);
       } else {
         trail = `/profiles/${slug}/${model}/`;
+        setContentType(`description`);
       }
 
-      getUserDataHandler(trail, getUser().access)
-        .then((res) => {
-          return setModelDB(res.data);
-        })
-        .catch((ex) => {
-          return ex;
-        });
+      if (!modelDB) {
+        getUserDataHandler(trail, getUser().access)
+          .then((res) => {
+            return setModelDB(res.data);
+          })
+          .catch((ex) => {
+            return ex;
+          });
+      }
     }
-  }, [slug, userSlug, model]);
+  }, [slug, userSlug, model, modelDB]);
 
   return slug ? (
-    <Card model={modelDB} modelName={model} userSlug={slug} />
+    <Card
+      model={modelDB}
+      modelName={model}
+      userSlug={slug}
+      setModelDB={setModelDB}
+      setObject={setObject}
+      contentType={contentType}
+      handleObjectEdit={handleObjectEdit}
+    />
   ) : (
     <Loader styles="w-10 h-10 mx-auto" />
   );
