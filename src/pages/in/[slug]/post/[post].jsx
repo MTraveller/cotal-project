@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { ThreeSection } from '../../../components/layout/template/private-route/ThreeSection';
-import { SideBarLeft } from '../../../components/page/side-bar/three-section/SideBarLeft';
-import { UserPost } from '../../../components/page/UserPost';
-import { SideBarRight } from '../../../components/page/side-bar/three-section/SideBarRight';
+import { ThreeSection } from '../../../../components/layout/template/private-route/ThreeSection';
+import { SideBarLeft } from '../../../../components/page/side-bar/three-section/SideBarLeft';
+import { UserPost } from '../../../../components/page/UserPost';
+import { SideBarRight } from '../../../../components/page/side-bar/three-section/SideBarRight';
 
 export default function Post({ params }) {
   return (
@@ -15,6 +15,7 @@ export default function Post({ params }) {
       componentMiddle={UserPost}
       componentRight={SideBarRight}
       params={params}
+      model="post"
     />
   );
 }
