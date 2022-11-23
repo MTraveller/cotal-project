@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 
+import { useUserDataContext } from '../../../context/UserDataContext';
 import { AddNew } from './public-detail/AddNew';
 import { Model } from './public-detail/Model';
 
 export const PublicDetail = () => {
+  const { userData } = useUserDataContext();
+
   const [active, setActive] = useState(false);
   const [targetName, setTargetName] = useState();
 
@@ -21,7 +24,11 @@ export const PublicDetail = () => {
   return (
     <div className="bg-black/[.2] rounded-lg p-6">
       {active ? (
-        <AddNew setActive={setActive} model={targetName} />
+        <AddNew
+          userSlug={userData?.slug}
+          setActive={setActive}
+          model={targetName}
+        />
       ) : (
         <div className="flex flex-col gap-y-10">
           <div>
@@ -31,7 +38,7 @@ export const PublicDetail = () => {
                 Add new
               </button>
             </div>
-            <Model model="posts" />
+            <Model userSlug={userData?.slug} model="posts" />
           </div>
           <div>
             <div className="flex flex-row mb-3 justify-between items-center text-sm">
@@ -40,7 +47,7 @@ export const PublicDetail = () => {
                 Add new
               </button>
             </div>
-            <Model model="portfolios" />
+            <Model userSlug={userData?.slug} model="portfolios" />
           </div>
           <div>
             <div className="flex flex-row mb-3 justify-between items-center text-sm">
@@ -49,7 +56,7 @@ export const PublicDetail = () => {
                 Add new
               </button>
             </div>
-            <Model model="awards" />
+            <Model userSlug={userData?.slug} model="awards" />
           </div>
           <div>
             <div className="flex flex-row mb-3 justify-between items-center text-sm">
@@ -58,7 +65,7 @@ export const PublicDetail = () => {
                 Add new
               </button>
             </div>
-            <Model model="certificates" />
+            <Model userSlug={userData?.slug} model="certificates" />
           </div>
           <div>
             <div className="flex flex-row mb-3 justify-between items-center text-sm">
@@ -67,7 +74,7 @@ export const PublicDetail = () => {
                 Add new
               </button>
             </div>
-            <Model model="creatives" />
+            <Model userSlug={userData?.slug} model="creatives" />
           </div>
         </div>
       )}
