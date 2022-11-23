@@ -17,6 +17,7 @@ export const Input = ({
   placeHolderColor,
   placeholder,
   onChange,
+  onBlur,
 }) => {
   return (
     <input
@@ -40,6 +41,7 @@ export const Input = ({
       } focus:z-10 focus:border-transparent focus:outline-none focus:ring-inset focus:ring-1 focus:ring-yellow-300 text-sm sm:text-base`}
       placeholder={placeholder}
       onChange={onChange}
+      onBlur={onBlur}
     />
   );
 };
