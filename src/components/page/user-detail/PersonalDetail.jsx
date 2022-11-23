@@ -124,6 +124,7 @@ export const PersonalDetail = () => {
       ]);
 
       if (response === true) {
+        toast.success(`Saved successfully`);
         handleDivClick();
         setUserData();
       } else {
@@ -176,7 +177,6 @@ export const PersonalDetail = () => {
               <FlipSelectTwo
                 divHeight="h-[47px]"
                 inputText="Status"
-                spanId="status"
                 inputValue={personal.status}
                 onChange={handleStatusSelect}
                 dataMsg="Edit your status"
@@ -184,7 +184,6 @@ export const PersonalDetail = () => {
               <FlipTwo
                 divHeight="h-[47px]"
                 text="Location"
-                spanId="location"
                 inputId="location"
                 inputName="location"
                 inputType="text"
@@ -201,7 +200,6 @@ export const PersonalDetail = () => {
                 divHeight="h-[47px]"
                 text="LinkTree"
                 link={`https://linktr.ee/${personal.linktrees}`}
-                spanId="linktrees"
                 inputId="linktrees"
                 inputName="linktrees"
                 inputType="text"
