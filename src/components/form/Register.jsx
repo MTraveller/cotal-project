@@ -55,11 +55,11 @@ const Register = ({ form }) => {
       <div className="-space-y-px rounded-md shadow-sm">
         <div className="flex items-center">
           <div className="basis-1/2">
-            <label htmlFor="firstname" className="sr-only">
+            <label htmlFor="register-firstname" className="sr-only">
               Firstname
             </label>
             <Input
-              id="firstname"
+              id="register-firstname"
               name="firstname"
               type="text"
               value={account.firstname}
@@ -72,11 +72,11 @@ const Register = ({ form }) => {
             />
           </div>
           <div className="basis-1/2">
-            <label htmlFor="lastname" className="sr-only">
+            <label htmlFor="register-lastname" className="sr-only">
               Lastname
             </label>
             <Input
-              id="lastname"
+              id="register-lastname"
               name="lastname"
               type="text"
               value={account.lastname}
@@ -90,11 +90,11 @@ const Register = ({ form }) => {
           </div>
         </div>
         <div>
-          <label htmlFor="email-address" className="sr-only">
+          <label htmlFor="register-email-address" className="sr-only">
             Email address
           </label>
           <Input
-            id="email-address"
+            id="register-email-address"
             name="email"
             type="email"
             value={account.email}
@@ -107,11 +107,11 @@ const Register = ({ form }) => {
           />
         </div>
         <div>
-          <label htmlFor="username" className="sr-only">
+          <label htmlFor="register-username" className="sr-only">
             Username
           </label>
           <Input
-            id="username"
+            id="register-username"
             name="username"
             type="text"
             value={account.username}
@@ -124,11 +124,11 @@ const Register = ({ form }) => {
           />
         </div>
         <div>
-          <label htmlFor="password" className="sr-only">
+          <label htmlFor="register-password" className="sr-only">
             Password
           </label>
           <Input
-            id="password"
+            id="register-password"
             name="password"
             type="password"
             value={account.password}
