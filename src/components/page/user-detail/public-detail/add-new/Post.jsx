@@ -5,7 +5,7 @@ import { TagInput } from '../../../../form/input/TagInput';
 import { Textarea } from '../../../../form/input/Textarea';
 import { AddTag } from './post/AddTag';
 
-export const Post = ({ form, handleChange }) => {
+export const Post = ({ form, handleChange, tagArray, setTag }) => {
   const [tagCount, setTagCount] = useState([1]);
 
   const handleClick = ({ currentTarget: button }) => {
@@ -20,7 +20,7 @@ export const Post = ({ form, handleChange }) => {
 
   return (
     <>
-      <div>
+      <div className="mb-5">
         <label htmlFor="title" className="sr-only">
           Title
         </label>
@@ -30,28 +30,11 @@ export const Post = ({ form, handleChange }) => {
           type="title"
           value={form.title}
           autoComplete="off"
-          borderRadius="rounded-none rounded-t-md"
+          borderRadius="rounded-md"
           padding="px-3 py-3 md:py-4"
           bgStyles="dark:bg-slate-400/40 dark:border-slate-300/70"
           borderStyles="border-slate-400/40 dark:border-slate-400/70"
           placeholder="Title"
-          onChange={handleChange}
-        />
-      </div>
-      <div className="mb-5">
-        <label htmlFor="link" className="sr-only">
-          Link
-        </label>
-        <Input
-          id="link"
-          name="link"
-          type="link"
-          value={form.link}
-          autoComplete="off"
-          borderRadius="rounded-none rounded-b-md"
-          padding="px-3 py-3 md:py-4"
-          bgStyles="dark:bg-slate-400/40 dark:border-slate-300/70"
-          placeholder="Link?"
           onChange={handleChange}
         />
       </div>
@@ -71,9 +54,9 @@ export const Post = ({ form, handleChange }) => {
           placeholder="Description .."
           onChange={handleChange}
         />
-        <div className="w-full flex flex-wrap items-center gap-y-4 gap-x-3 my-5">
+        <div className="w-full flex flex-wrap items-center gap-2 sm:gap-y-4 sm:gap-x-3 my-5">
           {tagCount.map((idx) => (
-            <TagInput key={idx} onChange={handleChange} />
+            <TagInput key={idx} tagArray={tagArray} setTag={setTag} />
           ))}
           <AddTag handleClick={handleClick} />
         </div>
