@@ -2,7 +2,7 @@ import React from 'react';
 
 export const AddTag = ({ handleClick }) => {
   return (
-    <div className="w-1/6 flex flex-row justify-around">
+    <div className="w-[175px] sm:basis-2/6 flex sm:flex-auto flex-row justify-evenly sm:justify-start sm:gap-x-5 sm:pl-5">
       <button
         id="remove-tag"
         type="button"
