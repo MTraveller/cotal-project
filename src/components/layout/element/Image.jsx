@@ -5,7 +5,14 @@ import { CloudinaryImage } from '@cloudinary/url-gen';
 import { format } from '@cloudinary/url-gen/actions/delivery';
 import { AdvancedImage, lazyload } from '@cloudinary/react';
 
-export const Image = ({ image, modelName, addedModelName, slug, alt }) => {
+export const Image = ({
+  image,
+  modelName,
+  addedModelName,
+  slug,
+  className,
+  alt,
+}) => {
   if (!image) return null;
 
   const idx = image.lastIndexOf(`/`);
@@ -25,6 +32,7 @@ export const Image = ({ image, modelName, addedModelName, slug, alt }) => {
   return (
     <AdvancedImage
       id={publicId}
+      className={className}
       cldImg={img}
       plugins={[lazyload()]}
       alt={alt}
