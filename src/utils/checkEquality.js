@@ -19,10 +19,14 @@ export const checkEquality = (data, dataTwo, server) => {
         if (serverEntries[idx][1] !== obj[1]) {
           if (formEntries[idx][1] !== undefined) {
             if (formEntries[idx][0] === `linktrees`) {
-              if (serverEntries[idx][1][0].username !== obj[1]) {
-                serverChanges[obj[0]] = [
-                  { id: serverEntries[idx][1][0].id, username: obj[1] },
-                ];
+              if (serverEntries[idx][1] !== undefined) {
+                if (serverEntries[idx][1][0].username !== obj[1]) {
+                  serverChanges[obj[0]] = [
+                    { id: serverEntries[idx][1][0].id, username: obj[1] },
+                  ];
+                }
+              } else {
+                serverChanges[obj[0]] = [{ username: obj[1] }];
               }
             } else {
               serverChanges[obj[0]] = obj[1];
@@ -33,6 +37,7 @@ export const checkEquality = (data, dataTwo, server) => {
     });
 
     serverChanges.socials = {};
+
     socialsEntries.forEach((o, idx) => {
       if (serverEntries[4][1][idx]?.username !== o[1].username) {
         if (serverEntries[4][1][idx]?.id) {
