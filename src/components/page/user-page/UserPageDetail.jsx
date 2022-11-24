@@ -1,8 +1,228 @@
-import React from 'react';
-// import tw from 'tailwind-styled-components';
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
-export const UserPageDetail = () => (
-  <div className="bg-black/[.2] rounded-lg p-6">
-    <p>Hello from user page detail</p>
-  </div>
-);
+import { allUserDataHandler } from '../../../services/userData';
+import Seo from '../../Seo';
+import { Image } from '../../layout/element/Image';
+import { socialIcon } from '../../layout/element/socialIcons';
+import Loader from '../../layout/element/loader';
+import { LessThanTwo } from './grid/LessThanTwo';
+import { LessThanThree } from './grid/LessThanThree';
+import { MoreThanTwo } from './grid/MoreThanTwo';
+
+const IconDivStyles = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0 10%;
+  margin-top: 0.5rem;
+`;
+
+export const UserPageDetail = ({ user }) => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    if (!data) {
+      async function fetchData() {
+        return await allUserDataHandler(user).then((res) => setData(res));
+      }
+      fetchData();
+    }
+  }, [data, user]);
+
+  const handleName = (name) => {
+    const userName = data.profile.user[name];
+    const char = userName.slice(0, 1);
+    const isUpper = char === char.toUpperCase() && char.toUpperCase() !== char;
+
+    return isUpper
+      ? userName
+      : userName.slice(0, 1).toUpperCase() + userName.slice(1);
+  };
+
+  return data ? (
+    <>
+      <Seo title={`${handleName(`first_name`)} ${handleName(`last_name`)}`} />
+
+      <div className="bg-black/[.2] rounded-lg p-6">
+        <div className="flex flex-row flex-wrap justify-between items-center">
+          <figure className="absolute sm:relative top-[160px] sm:top-auto right-10 sm:w-1/2">
+            <Image
+              image={data.profile.image}
+              addedModelName="profile"
+              slug={data.profile.slug}
+              className="rounded-full w-32 h-32 mx-auto"
+              alt={`${data.profile.user.first_name} ${data.profile.user.last_name}`}
+            />
+          </figure>
+          <div className="w-full sm:w-1/2 flex flex-col gap-y-2">
+            <h1 className="text-3xl">
+              {handleName(`first_name`)}
+              {` `}
+              {handleName(`last_name`)}
+            </h1>
+            <span>Status: {data.profile.status}</span>
+            <span>
+              Location:{' '}
+              {data.profile.location ? data.profile.location : `Some where`}
+            </span>
+            {data.profile.linktrees[0].username ? (
+              <span>
+                Linktree:{' '}
+                <a
+                  href={`https://linktr.ee/${data.profile.linktrees[0].username}`}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >{`@${data.profile.linktrees[0].username}`}</a>
+              </span>
+            ) : (
+              ``
+            )}
+            <IconDivStyles>
+              {data.profile.socials.map((obj, idx) => {
+                return (
+                  <a
+                    key={obj.name}
+                    href={`${socialIcon[idx].url}/${obj.username}`}
+                    target="_target"
+                    rel="noreferrer noopener"
+                  >
+                    {socialIcon[idx].component}
+                  </a>
+                );
+              })}
+            </IconDivStyles>
+          </div>
+        </div>
+        <div className="grid mt-16 gap-y-14">
+          {data.post.length < 2 ? (
+            <LessThanTwo
+              data={data}
+              model="post"
+              user={user}
+              colorTop="dark:bg-lime-700/50"
+              colorBottom="dark:bg-blue-700/50"
+            />
+          ) : data.post.length === 2 ? (
+            <LessThanThree
+              data={data}
+              model="post"
+              user={user}
+              colorTop="dark:bg-lime-700/50"
+              colorBottom="dark:bg-blue-700/50"
+            />
+          ) : (
+            <MoreThanTwo
+              data={data}
+              model="post"
+              user={user}
+              colorTop="dark:bg-lime-700/50"
+              colorBottom="dark:bg-blue-700/50"
+            />
+          )}
+          {data.creative.length < 2 ? (
+            <LessThanTwo
+              data={data}
+              model="creative"
+              user={user}
+              colorTop="dark:bg-violet-700/50"
+              colorBottom="dark:bg-pink-700/50"
+            />
+          ) : data.creative.length === 2 ? (
+            <LessThanThree
+              data={data}
+              model="creative"
+              user={user}
+              colorTop="dark:bg-violet-700/50"
+              colorBottom="dark:bg-pink-700/50"
+            />
+          ) : (
+            <MoreThanTwo
+              data={data}
+              model="creative"
+              user={user}
+              colorTop="dark:bg-violet-700/50"
+              colorBottom="dark:bg-pink-700/50"
+            />
+          )}
+          {data.portfolio.length < 2 ? (
+            <LessThanTwo
+              data={data}
+              model="portfolio"
+              user={user}
+              colorTop="dark:bg-fuchsia-700/50"
+              colorBottom="dark:bg-sky-700/50"
+            />
+          ) : data.portfolio.length === 2 ? (
+            <LessThanThree
+              data={data}
+              model="portfolio"
+              user={user}
+              colorTop="dark:bg-fuchsia-700/50"
+              colorBottom="dark:bg-sky-700/50"
+            />
+          ) : (
+            <MoreThanTwo
+              data={data}
+              model="portfolio"
+              user={user}
+              colorTop="dark:bg-fuchsia-700/50"
+              colorBottom="dark:bg-sky-700/50"
+            />
+          )}
+          {data.award.length < 2 ? (
+            <LessThanTwo
+              data={data}
+              model="award"
+              user={user}
+              colorTop="bg-orange-700/50"
+              colorBottom="bg-emerald-700/50"
+            />
+          ) : data.award.length === 2 ? (
+            <LessThanThree
+              data={data}
+              model="award"
+              user={user}
+              colorTop="bg-orange-700/50"
+              colorBottom="bg-emerald-700/50"
+            />
+          ) : (
+            <MoreThanTwo
+              data={data}
+              model="award"
+              user={user}
+              colorTop="dark:bg-orange-700/50"
+              colorBottom="dark:bg-emerald-700/50"
+            />
+          )}
+          {data.certificate.length < 2 ? (
+            <LessThanTwo
+              data={data}
+              model="certificate"
+              user={user}
+              colorTop="dark:bg-cyan-700/50"
+              colorBottom="dark:bg-zinc-700/50"
+            />
+          ) : data.certificate.length === 2 ? (
+            <LessThanThree
+              data={data}
+              model="certificate"
+              user={user}
+              colorTop="dark:bg-cyan-700/50"
+              colorBottom="dark:bg-zinc-700/50"
+            />
+          ) : (
+            <MoreThanTwo
+              data={data}
+              model="certificate"
+              user={user}
+              colorTop="dark:bg-cyan-700/50"
+              colorBottom="dark:bg-zinc-700/50"
+            />
+          )}
+        </div>
+      </div>
+    </>
+  ) : (
+    <Loader styles="w-10 h-10 mx-auto" />
+  );
+};
