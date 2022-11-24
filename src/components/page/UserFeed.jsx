@@ -4,7 +4,6 @@ import { ThreeSection } from '../layout/template/private-route/ThreeSection';
 import { SideBarLeft } from './side-bar/three-section/SideBarLeft';
 import { FeedDetail } from './user-feed/FeedDetail';
 import { SideBarRight } from './side-bar/three-section/SideBarRight';
-import Seo from '../Seo';
 
 const UserFeed = () => (
   <ThreeSection
