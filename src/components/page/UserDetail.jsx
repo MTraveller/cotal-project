@@ -6,15 +6,17 @@ import { PublicDetail } from './user-detail/PublicDetail';
 import Seo from '../Seo';
 
 const UserDetail = () => (
-  <TwoSectionLeft
-    title="Your Profile"
-    leftStyles="w-full sm:flex-initial sm:w-80 sm:max-w-80"
-    rightStyles="w-full flex-auto sm:w-[590px] lg:max-w-[1200px]"
-    componentLeft={PersonalDetail}
-    componentRight={PublicDetail}
-  />
-);
+  <>
+    <Seo title="Profile" />
 
-export const Head = () => <Seo title="Profile" />;
+    <TwoSectionLeft
+      title="Your Profile"
+      leftStyles="w-full sm:flex-initial sm:w-80 sm:max-w-80"
+      rightStyles="w-full flex-auto sm:w-[590px] lg:max-w-[1200px]"
+      componentLeft={PersonalDetail}
+      componentRight={PublicDetail}
+    />
+  </>
+);
 
 export default UserDetail;
