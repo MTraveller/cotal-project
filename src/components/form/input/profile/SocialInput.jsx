@@ -1,23 +1,9 @@
 import React from 'react';
-import {
-  SiDeviantart,
-  SiDribbble,
-  SiGithub,
-  SiSoundcloud,
-  SiPinterest,
-} from 'react-icons/si';
 
+import { socialIcon } from '../../../layout/element/socialIcons';
 import { Input } from '../Input';
 import { handleIconFocus } from '../../../../utils/handleIconFocus';
 import { handleIconSaveFlip } from '../../../../utils/handleIconSaveFlip';
-
-const icons = [
-  { name: `DeviantArt`, component: <SiDeviantart size={`28px`} /> },
-  { name: `Dribble`, component: <SiDribbble size={`28px`} /> },
-  { name: `GitHub`, component: <SiGithub size={`28px`} /> },
-  { name: `SoundCloud`, component: <SiSoundcloud size={`28px`} /> },
-  { name: `Pinterest`, component: <SiPinterest size={`28px`} /> },
-];
 
 export const SocialInput = ({
   divHeight,
@@ -40,7 +26,7 @@ export const SocialInput = ({
 
   return (
     <div className={`flex flex-wrap justify-between items-center ${divHeight}`}>
-      {icons.map((icon, idx) => (
+      {socialIcon.map((icon, idx) => (
         <div key={icon.name} id={icon.name} className="flex">
           <button
             type="button"
