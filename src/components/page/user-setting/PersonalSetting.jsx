@@ -12,7 +12,6 @@ export const PersonalSetting = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log([check]);
   };
 
   return (
