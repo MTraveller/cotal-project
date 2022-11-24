@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GoCommentDiscussion } from 'react-icons/go';
 import { Link } from 'gatsby';
 
+import { isLoggedIn } from '../../services/authService';
 import getUserDataHandler from '../../services/userData';
 import { Image } from '../layout/element/Image';
 import { ProfileImageSvg } from '../layout/element/ProfileImageSvg';
@@ -9,6 +10,8 @@ import { Comment } from './user-post/Comment';
 import Loader from '../layout/element/loader';
 
 export const UserPost = (props) => {
+  const isAuthorized = isLoggedIn();
+
   const [pageProps, setPageProps] = useState();
   const [data, setData] = useState(null);
   const [dataPost, setDataPost] = useState();
@@ -56,6 +59,23 @@ export const UserPost = (props) => {
     }
   }, [props, pageProps, data]);
 
+  const handleComment = ({ currentTarget: button }) => {
+    const comment = button.parentNode.parentNode.nextSibling;
+    const isHeight = comment.classList.contains(`max-h-80`);
+
+    comment.classList.toggle(`pb-6`);
+
+    if (!isHeight) {
+      button.innerText = `Close`;
+      comment.classList.replace(`max-h-0`, `max-h-80`);
+      comment.classList.replace(`invisible`, `visible`);
+    } else {
+      button.innerText = `Comment`;
+      comment.classList.replace(`max-h-80`, `max-h-0`);
+      comment.classList.replace(`visible`, `invisible`);
+    }
+  };
+
   return (
     <div className="bg-black/[.2] rounded-lg">
       {data ? (
@@ -70,9 +90,9 @@ export const UserPost = (props) => {
                 {data?.profile.image ? (
                   <figure className="w-20 h-20 flex items-center">
                     <img
-                      className="rounded-full"
                       src={data?.profile.image}
-                      alt=""
+                      className="rounded-full"
+                      alt={`${data.profile.user.first_name} ${data.profile.user.last_name} profile avatar`}
                     />
                   </figure>
                 ) : (
@@ -110,8 +130,8 @@ export const UserPost = (props) => {
             alt={`${data.title}`}
           />
           <h1 className="p-6 text-2xl">{data.title}</h1>
-          <div className="px-6 italic">
-            {data.link ? (
+          {data.link ? (
+            <div className="px-6 italic">
               <a
                 href={data.link}
                 title={data.link}
@@ -120,10 +140,10 @@ export const UserPost = (props) => {
               >
                 {data.link}
               </a>
-            ) : (
-              ``
-            )}
-          </div>
+            </div>
+          ) : (
+            ``
+          )}
           <div className="px-6 pb-6">
             {dataPost.map((string, idx) =>
               string !== `` ? <p key={idx}>{string}</p> : <br key={idx} />
@@ -131,56 +151,62 @@ export const UserPost = (props) => {
           </div>
           {dataPostComments ? (
             <>
-              <div className="border-y border-slate-400/30 mb-6">
-                <div className="py-4 px-6">
-                  <div className="h-0 invisible flex flex-row justify-around">
-                    <button className="text-sm transition active:scale-75 active:text-lime-500 ease-in-out duration-75">
-                      Like
-                    </button>
-                    <button className="text-sm transition active:scale-75 active:text-lime-500 ease-in-out duration-75">
-                      Comment
-                    </button>
-                  </div>
-                  <div className="flex flex-row justify-end">
-                    <button className="text-sm transition active:scale-75 active:text-lime-500 ease-in-out duration-75">
-                      Back
-                    </button>
+              {isAuthorized ? (
+                <div className="h-auto border-y border-slate-400/30 mb-6">
+                  <div className="px-6">
+                    <div className="py-4">
+                      <div className="flex flex-row">
+                        <button className="w-1/2 text-sm transition active:scale-75 active:text-lime-500 ease-in-out duration-75">
+                          Like
+                        </button>
+                        <button
+                          className="w-1/2 text-sm transition active:scale-75 active:text-lime-500 ease-in-out duration-75"
+                          onClick={handleComment}
+                        >
+                          Comment
+                        </button>
+                      </div>
+                    </div>
+                    <div className="px-1 max-h-0 invisible transition-all duration-700 overflow-y-hidden">
+                      <Comment setData={setData} {...props} />
+                    </div>
                   </div>
                 </div>
-                <div className="group px-6 pb-6">
-                  <Comment />
-                </div>
-              </div>
+              ) : (
+                ``
+              )}
               <div className="flex flex-col px-6 pb-6 gap-y-8">
-                {dataPostComments.map((data) => (
-                  <div key={data?.id} className="flex flex-row gap-x-5">
-                    <div className="flex flex-row gap-x-3">
-                      {data.profile.image ? (
-                        <figure className="w-20 h-20 flex items-center">
-                          <img
+                {dataPostComments.map((item) => (
+                  <div key={item?.id} className="flex flex-row gap-x-5">
+                    <div className="sm:w-1/5 flex flex-row sm:justify-end gap-x-3">
+                      {item.profile.image ? (
+                        <figure className="w-12 h-12 flex items-center">
+                          <Image
+                            image={item.profile.image}
+                            addedModelName="profile"
+                            slug={item.profile.slug}
                             className="rounded-full"
-                            src={data.profile.image}
-                            alt=""
+                            alt={`${item.profile.user.first_name} ${item.profile.user.last_name} profile avatar`}
                           />
                         </figure>
                       ) : (
                         <ProfileImageSvg widthHeight="w-10 h-10" />
                       )}
                     </div>
-                    <div className="flex flex-col gap-y-3">
+                    <div className="sm:w-4/5 flex flex-col gap-y-3">
                       <div className="flex flex-col gap-0">
                         <Link
-                          to={`/in/${data.profile.slug}/`}
+                          to={`/in/${item.profile.slug}/`}
                           className="flex flex-row gap-x-1"
                         >
-                          <span>{data.profile.user.first_name}</span>
-                          <span>{data.profile.user.last_name}</span>
+                          <span>{item.profile.user.first_name}</span>
+                          <span>{item.profile.user.last_name}</span>
                         </Link>
                         <span className="text-slate-900/40 dark:text-slate-400/40 text-xs italic">
-                          Posted on: {new Date(data.created_on).toDateString()}
+                          Posted on: {new Date(item.created_on).toDateString()}
                         </span>
                       </div>
-                      <div>{data.comment}</div>
+                      <div>{item.comment}</div>
                     </div>
                   </div>
                 ))}
