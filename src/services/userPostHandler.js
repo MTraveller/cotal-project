@@ -175,7 +175,6 @@ export async function userPostContentHander({
   } else if (res.code === `ERR_NETWORK`) {
     error.push(`Cotal Backend`, res.code);
   } else if (res.response.status >= 400 && res.response.status < 500) {
-    console.log(res.response);
     Object.entries(res.response.data).forEach((arr) => {
       error.push(arr[1]);
     });
