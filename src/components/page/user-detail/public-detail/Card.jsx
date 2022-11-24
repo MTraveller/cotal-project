@@ -1,7 +1,9 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 
 import { slugify } from '../../../../utils/slugify';
-import { ButtonStyles } from '../../../export/personalDetail';
+import { deleteDataHandler } from '../../../../services/deleteData';
+import { ButtonStyles, getUser } from '../../../export/personalDetail';
 import { Image } from '../../../layout/element/Image';
 
 export const Card = ({
@@ -28,20 +30,35 @@ export const Card = ({
       const target = { target: editButton };
 
       setObject(button.dataset.post);
-
       handleObjectEdit(target);
     }
   };
 
-  const handleRemove = (e) => {
+  const handleRemove = async (e) => {
     const button = e.currentTarget;
+    const item = button.dataset.post;
+    const mod = button.dataset.model;
+    const isPost = mod === `posts` ? true : false;
+    const modCap = mod.slice(0, 1).toUpperCase() + mod.slice(1, -1);
 
     if (e.type === `click`) {
       if (button.innerText !== `Sure?`) {
         button.innerText = `Sure?`;
       } else {
-        console.log('Remove post');
-        setModelDB(null);
+        const response = await deleteDataHandler(
+          isPost ? `posts/profiles` : `profiles`,
+          userSlug,
+          modelName,
+          item,
+          getUser().access
+        );
+
+        if (response === true) {
+          setModelDB(null);
+          toast.success(`${modCap} Deleted`);
+        } else {
+          toast.error(`Reload the page and try again`);
+        }
       }
     } else if (e.type === `blur`) button.innerText = `Remove`;
   };
@@ -97,6 +114,7 @@ export const Card = ({
             <ButtonStyles
               className="w-2/6"
               data-post={item.slug}
+              data-model={modelName}
               onClick={handleRemove}
               onBlur={handleRemove}
             >
