@@ -25,12 +25,13 @@ export const TwoSectionRight = ({
   rightStyles,
   componentLeft: ComponentLeft,
   componentRight: ComponentRight,
+  slug,
 }) => (
   <Wrapper>
     {title ? <h1 className="text-3xl">{title}</h1> : ``}
     <DivStyles>
       <div className={`${leftStyles}`}>
-        <ComponentLeft />
+        <ComponentLeft user={slug} />
       </div>
       <div className={`${rightStyles}`}>
         <ComponentRight />
