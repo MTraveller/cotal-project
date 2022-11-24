@@ -156,7 +156,12 @@ export const UserPost = (props) => {
                   <div className="px-6">
                     <div className="py-4">
                       <div className="flex flex-row">
-                        <button className="w-1/2 text-sm transition active:scale-75 active:text-lime-500 ease-in-out duration-75">
+                        {/* Like button not set up */}
+                        <button
+                          title="Not set up!"
+                          className="w-1/2 text-sm transition active:scale-75 active:text-lime-500 ease-in-out duration-75"
+                          onClick={() => alert(`Like button not set up!`)}
+                        >
                           Like
                         </button>
                         <button
