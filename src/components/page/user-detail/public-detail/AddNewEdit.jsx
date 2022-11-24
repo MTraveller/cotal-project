@@ -133,7 +133,7 @@ export const AddNewEdit = ({
         setIsObject(null);
         setObjectDB(null);
       } else {
-        response.length !== 1
+        response[0].length > 1
           ? toast.warn(response[0])
           : toast.warn(response[0][0]);
       }
