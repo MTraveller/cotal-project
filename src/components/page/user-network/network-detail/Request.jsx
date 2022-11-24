@@ -100,7 +100,6 @@ export const Request = ({ userData }) => {
               key={connect.id}
               className="flex flex-row items-center gap-x-5"
             >
-              {console.log(connect)}
               <div className="flex flex-row basis-1/2 items-center gap-x-1">
                 {connect.opposite_user?.image ? (
                   <Image
