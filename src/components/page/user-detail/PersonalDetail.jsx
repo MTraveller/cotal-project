@@ -71,8 +71,15 @@ export const PersonalDetail = () => {
       current = document.querySelector(`#profile-details-btn`);
     }
 
-    current.parentNode.classList.toggle(`h-[90px]`);
-    current.nextSibling.classList.toggle(`invisible`);
+    const parent = current.parentNode;
+
+    const isHeight = parent.classList.contains(`max-h-[550px]`);
+
+    if (!isHeight) {
+      parent.classList.replace(`max-h-[90px]`, `max-h-[550px]`);
+    } else {
+      parent.classList.replace(`max-h-[550px]`, `max-h-[90px]`);
+    }
 
     current.dataset.open = current.dataset.open === `false` ? `true` : `false`;
     current.nextSibling.dataset.hidden =
@@ -134,7 +141,7 @@ export const PersonalDetail = () => {
   };
 
   return (
-    <div className="h-[90px] lg:sticky lg:top-[80px] bg-black/[.2] rounded-lg p-6 overflow-y-hidden">
+    <div className="max-h-[90px] lg:sticky lg:top-[80px] bg-black/[.2] rounded-lg p-6 transition-all duration-700 ease-in-out overflow-y-hidden">
       {userData ? (
         <>
           <ButtonStyles
@@ -144,7 +151,7 @@ export const PersonalDetail = () => {
             data-open="false"
             onClick={handleDivClick}
           >
-            <span className="group-data-[open=true]:-rotate-90 ease-in-out duration-500">
+            <span className="group-data-[open=true]:-rotate-90 ease-in-out duration-700">
               <MdMenuOpen size={24} />
             </span>{' '}
             Profile Details
