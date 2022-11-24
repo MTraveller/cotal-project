@@ -7,6 +7,7 @@ export const Textarea = ({
   dataValue,
   value,
   autoComplete,
+  rows,
   display,
   width,
   padding,
@@ -27,7 +28,7 @@ export const Textarea = ({
       value={value ? value : ``}
       autoComplete={autoComplete}
       required
-      rows="10"
+      rows={rows ? rows : `10`}
       className={`relative ${display ? display : `flex`} ${
         width ? width : `w-full`
       } appearance-none ${padding} ${
