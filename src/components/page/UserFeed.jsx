@@ -17,6 +17,4 @@ const UserFeed = () => (
   />
 );
 
-export const Head = () => <Seo title="Feed" />;
-
 export default UserFeed;
