@@ -22,7 +22,9 @@ export async function userProfileHandler({ data, token }) {
     .then((res) => res)
     .catch((ex) => ex);
 
-  if (res.code === `ERR_NETWORK`) {
+  if (res.status === 200 || res.status === 201) {
+    return true;
+  } else if (res.code === `ERR_NETWORK`) {
     error.push(`Cotal Backend`, res.code);
   } else if (res.code === `ERR_BAD_REQUEST`) {
     Object.entries(res.response.data).forEach((arr) => {
@@ -31,7 +33,6 @@ export async function userProfileHandler({ data, token }) {
   }
 
   if (error.length !== 0) return error;
-  return true;
 }
 
 export async function userSocialHandler({ user, data, token }) {
@@ -61,12 +62,14 @@ export async function userSocialHandler({ user, data, token }) {
           .then((res) => res)
           .catch((ex) => ex);
 
-    if (res.code === `ERR_NETWORK`) {
-      error.push(`Cotal Backend`, res.code);
-    } else if (res.code === `ERR_BAD_REQUEST`) {
-      Object.entries(res.response.data).forEach((arr) => {
-        error.push(obj[0], arr[1][0]);
-      });
+    if (res.status !== 200 || res.status !== 201) {
+      if (res.code === `ERR_NETWORK`) {
+        error.push(`Cotal Backend`, res.code);
+      } else if (res.code === `ERR_BAD_REQUEST`) {
+        Object.entries(res.response.data).forEach((arr) => {
+          error.push(obj[0], arr[1][0]);
+        });
+      }
     }
   }
 
@@ -100,16 +103,17 @@ export async function userLinktreesHandler({ user, data, token }) {
         .then((res) => res)
         .catch((ex) => ex);
 
-  if (res.code === `ERR_NETWORK`) {
+  if (res.status === 200 || res.status === 201) {
+    return true;
+  } else if (res.code === `ERR_NETWORK`) {
     error.push(`Cotal Backend`, res.code);
-  } else if (res.code === `ERR_BAD_REQUEST`) {
+  } else if (res.response.status >= 400 && res.response.status < 500) {
     Object.entries(res.response.data).forEach((arr) => {
       error.push(`Linktree`, arr[1][0]);
     });
   }
 
   if (error.length !== 0) return error;
-  return true;
 }
 
 export async function userConnectHandler({ user, data, token }) {
@@ -170,16 +174,55 @@ export async function userPostContentHander({
     return true;
   } else if (res.code === `ERR_NETWORK`) {
     error.push(`Cotal Backend`, res.code);
-  } else if (res.status >= 400 && res.status < 500) {
+  } else if (res.response.status >= 400 && res.response.status < 500) {
     console.log(res.response);
-    Object.entries(res.data).forEach((arr) => {
+    Object.entries(res.response.data).forEach((arr) => {
       error.push(arr[1]);
     });
   }
 
-  console.log(res.response.status >= 400 && res.response.status < 500);
-
-  console.log(error);
   if (error.length !== 0) return error;
-  return true;
+}
+
+export async function userCommentHandler({ user, slug, token, data }) {
+  const headers = {
+    Authorization: `Cotal ${token}`,
+  };
+
+  const error = [];
+
+  // Future feature to implement edit function to comments
+  const res = data.id
+    ? await http
+        .put(
+          `${apiEndpoint}/posts/profiles/${user}/posts/${slug}/comments/${data.id}/`,
+          data,
+          {
+            headers,
+          }
+        )
+        .then((res) => res)
+        .catch((ex) => ex)
+    : await http
+        .post(
+          `${apiEndpoint}/posts/profiles/${user}/posts/${slug}/comments/`,
+          data,
+          {
+            headers,
+          }
+        )
+        .then((res) => res)
+        .catch((ex) => ex);
+
+  if (res.status === 200 || res.status === 201) {
+    return true;
+  } else if (res.code === `ERR_NETWORK`) {
+    error.push(`Cotal Backend`, res.code);
+  } else if (res.response.status >= 400 && res.response.status < 500) {
+    Object.entries(res.response.data).forEach((arr) => {
+      error.push(`Comment`, arr[1][0]);
+    });
+  }
+
+  if (error.length !== 0) return error;
 }
