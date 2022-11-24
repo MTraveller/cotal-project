@@ -4,6 +4,7 @@ import {
   userLinktreesHandler,
   userConnectHandler,
   userPostContentHander,
+  userCommentHandler,
 } from './userPostHandler';
 
 export default async function postDataHandler(req) {
@@ -64,6 +65,15 @@ export default async function postDataHandler(req) {
     });
 
     if (response !== true) error = [...response];
+  } else if (req[0] === `comment`) {
+    const response = await userCommentHandler({
+      user: req[1],
+      slug: req[2],
+      token: req[3],
+      data: req[4],
+    });
+
+    if (response !== true) return response;
   }
 
   if (error.length) return error;
