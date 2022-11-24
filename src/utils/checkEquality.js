@@ -100,8 +100,9 @@ export const checkEquality = (data, dataTwo, server) => {
       });
     } else {
       Object.entries(data).forEach((item) => {
-        if (item[1].length || item[1].name.length)
+        if (item[0] === `image` && item[1].name.length) {
           serverChanges[item[0]] = item[1];
+        } else if (item[1].length) serverChanges[item[0]] = item[1];
       });
     }
 
