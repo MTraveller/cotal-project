@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GoCommentDiscussion } from 'react-icons/go';
 import { Link } from 'gatsby';
 
+import Seo from '../Seo';
 import { isLoggedIn } from '../../services/authService';
 import getUserDataHandler from '../../services/userData';
 import { Image } from '../layout/element/Image';
@@ -77,155 +78,160 @@ export const UserPost = (props) => {
   };
 
   return (
-    <div className="bg-black/[.2] rounded-lg">
-      {data ? (
-        <div className="flex flex-col gap-y-5">
-          <div
-            className={`flex flex-row pt-6 px-6 ${
-              dataPostComments ? `justify-between` : `justify-start`
-            } items-center`}
-          >
-            <div className="flex flex-col gap-y-2 items-center">
-              <div className="flex flex-row gap-x-3 items-center">
-                {data?.profile.image ? (
-                  <figure className="w-20 h-20 flex items-center">
-                    <img
-                      src={data?.profile.image}
-                      className="rounded-full"
-                      alt={`${data.profile.user.first_name} ${data.profile.user.last_name} profile avatar`}
-                    />
-                  </figure>
-                ) : (
-                  <ProfileImageSvg widthHeight="w-10 h-10" />
-                )}
-                <Link
-                  to={`/in/${pageProps?.slug}/`}
-                  className="flex flex-row gap-x-1"
-                >
-                  <span>{data?.profile.user.first_name}</span>
-                  <span>{data?.profile.user.last_name}</span>
-                </Link>
+    <>
+      <Seo title={data?.title} />
+
+      <div className="bg-black/[.2] rounded-lg">
+        {data ? (
+          <div className="flex flex-col gap-y-5">
+            <div
+              className={`flex flex-row pt-6 px-6 ${
+                dataPostComments ? `justify-between` : `justify-start`
+              } items-center`}
+            >
+              <div className="flex flex-col gap-y-2 items-center">
+                <div className="flex flex-row gap-x-3 items-center">
+                  {data?.profile.image ? (
+                    <figure className="w-20 h-20 flex items-center">
+                      <img
+                        src={data?.profile.image}
+                        className="rounded-full"
+                        alt={`${data.profile.user.first_name} ${data.profile.user.last_name} profile avatar`}
+                      />
+                    </figure>
+                  ) : (
+                    <ProfileImageSvg widthHeight="w-10 h-10" />
+                  )}
+                  <Link
+                    to={`/in/${pageProps?.slug}/`}
+                    className="flex flex-row gap-x-1"
+                  >
+                    <span>{data?.profile.user.first_name}</span>
+                    <span>{data?.profile.user.last_name}</span>
+                  </Link>
+                </div>
+                <div className="text-xs italic">
+                  <span>
+                    Posted on: {new Date(data?.createdOn).toDateString()}
+                  </span>
+                </div>
               </div>
-              <div className="text-xs italic">
-                <span>
-                  Posted on: {new Date(data?.createdOn).toDateString()}
-                </span>
-              </div>
-            </div>
-            {dataPostComments ? (
-              <div className="flex flex-row self-end items-center gap-x-3">
-                <GoCommentDiscussion />
-                <span className="text-xs">
-                  {count === 1 ? `${count} comments` : `${count} comments`}
-                </span>
-              </div>
-            ) : (
-              ``
-            )}
-          </div>
-          <Image
-            image={data.image}
-            addedModelName={pageProps.model}
-            slug={pageProps.slug}
-            alt={`${data.title}`}
-          />
-          <h1 className="p-6 text-2xl">{data.title}</h1>
-          {data.link ? (
-            <div className="px-6 italic">
-              <a
-                href={data.link}
-                title={data.link}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                {data.link}
-              </a>
-            </div>
-          ) : (
-            ``
-          )}
-          <div className="px-6 pb-6">
-            {dataPost.map((string, idx) =>
-              string !== `` ? <p key={idx}>{string}</p> : <br key={idx} />
-            )}
-          </div>
-          {dataPostComments ? (
-            <>
-              {isAuthorized ? (
-                <div className="h-auto border-y border-slate-400/30 mb-6">
-                  <div className="px-6">
-                    <div className="py-4">
-                      <div className="flex flex-row">
-                        {/* Like button not set up */}
-                        <button
-                          title="Not set up!"
-                          className="w-1/2 text-sm transition active:scale-75 active:text-lime-500 ease-in-out duration-75"
-                          onClick={() => alert(`Like button not set up!`)}
-                        >
-                          Like
-                        </button>
-                        <button
-                          className="w-1/2 text-sm transition active:scale-75 active:text-lime-500 ease-in-out duration-75"
-                          onClick={handleComment}
-                        >
-                          Comment
-                        </button>
-                      </div>
-                    </div>
-                    <div className="px-1 max-h-0 invisible transition-all duration-700 overflow-y-hidden">
-                      <Comment setData={setData} {...props} />
-                    </div>
-                  </div>
+              {dataPostComments ? (
+                <div className="flex flex-row self-end items-center gap-x-3">
+                  <GoCommentDiscussion />
+                  <span className="text-xs">
+                    {count === 1 ? `${count} comments` : `${count} comments`}
+                  </span>
                 </div>
               ) : (
                 ``
               )}
-              <div className="flex flex-col px-6 pb-6 gap-y-8">
-                {dataPostComments.map((item) => (
-                  <div key={item?.id} className="flex flex-row gap-x-5">
-                    <div className="sm:w-1/5 flex flex-row sm:justify-end gap-x-3">
-                      {item.profile.image ? (
-                        <figure className="w-12 h-12 flex items-center">
-                          <Image
-                            image={item.profile.image}
-                            addedModelName="profile"
-                            slug={item.profile.slug}
-                            className="rounded-full"
-                            alt={`${item.profile.user.first_name} ${item.profile.user.last_name} profile avatar`}
-                          />
-                        </figure>
-                      ) : (
-                        <ProfileImageSvg widthHeight="w-10 h-10" />
-                      )}
-                    </div>
-                    <div className="sm:w-4/5 flex flex-col gap-y-3">
-                      <div className="flex flex-col gap-0">
-                        <Link
-                          to={`/in/${item.profile.slug}/`}
-                          className="flex flex-row gap-x-1"
-                        >
-                          <span>{item.profile.user.first_name}</span>
-                          <span>{item.profile.user.last_name}</span>
-                        </Link>
-                        <span className="text-slate-900/40 dark:text-slate-400/40 text-xs italic">
-                          Posted on: {new Date(item.created_on).toDateString()}
-                        </span>
+            </div>
+            <Image
+              image={data.image}
+              addedModelName={pageProps.model}
+              slug={pageProps.slug}
+              alt={`${data.title}`}
+            />
+            <h1 className="p-6 text-2xl">{data.title}</h1>
+            {data.link ? (
+              <div className="px-6 italic">
+                <a
+                  href={data.link}
+                  title={data.link}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  {data.link}
+                </a>
+              </div>
+            ) : (
+              ``
+            )}
+            <div className="px-6 pb-6">
+              {dataPost.map((string, idx) =>
+                string !== `` ? <p key={idx}>{string}</p> : <br key={idx} />
+              )}
+            </div>
+            {dataPostComments ? (
+              <>
+                {isAuthorized ? (
+                  <div className="h-auto border-y border-slate-400/30 mb-6">
+                    <div className="px-6">
+                      <div className="py-4">
+                        <div className="flex flex-row">
+                          {/* Like button not set up */}
+                          <button
+                            title="Not set up!"
+                            className="w-1/2 text-sm transition active:scale-75 active:text-lime-500 ease-in-out duration-75"
+                            onClick={() => alert(`Like button not set up!`)}
+                          >
+                            Like
+                          </button>
+                          <button
+                            className="w-1/2 text-sm transition active:scale-75 active:text-lime-500 ease-in-out duration-75"
+                            onClick={handleComment}
+                          >
+                            Comment
+                          </button>
+                        </div>
                       </div>
-                      <div>{item.comment}</div>
+                      <div className="px-1 max-h-0 invisible transition-all duration-700 overflow-y-hidden">
+                        <Comment setData={setData} {...props} />
+                      </div>
                     </div>
                   </div>
-                ))}
-              </div>
-            </>
-          ) : (
-            ``
-          )}
-        </div>
-      ) : (
-        <div className="h-24 flex items-center">
-          <Loader styles="w-10 h-10 mx-auto" />
-        </div>
-      )}
-    </div>
+                ) : (
+                  ``
+                )}
+                <div className="flex flex-col px-6 pb-6 gap-y-8">
+                  {dataPostComments.map((item) => (
+                    <div key={item?.id} className="flex flex-row gap-x-5">
+                      <div className="sm:w-1/5 flex flex-row sm:justify-end gap-x-3">
+                        {item.profile.image ? (
+                          <figure className="w-12 h-12 flex items-center">
+                            <Image
+                              image={item.profile.image}
+                              addedModelName="profile"
+                              slug={item.profile.slug}
+                              className="rounded-full"
+                              alt={`${item.profile.user.first_name} ${item.profile.user.last_name} profile avatar`}
+                            />
+                          </figure>
+                        ) : (
+                          <ProfileImageSvg widthHeight="w-10 h-10" />
+                        )}
+                      </div>
+                      <div className="sm:w-4/5 flex flex-col gap-y-3">
+                        <div className="flex flex-col gap-0">
+                          <Link
+                            to={`/in/${item.profile.slug}/`}
+                            className="flex flex-row gap-x-1"
+                          >
+                            <span>{item.profile.user.first_name}</span>
+                            <span>{item.profile.user.last_name}</span>
+                          </Link>
+                          <span className="text-slate-900/40 dark:text-slate-400/40 text-xs italic">
+                            Posted on:{' '}
+                            {new Date(item.created_on).toDateString()}
+                          </span>
+                        </div>
+                        <div>{item.comment}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : (
+              ``
+            )}
+          </div>
+        ) : (
+          <div className="h-24 flex items-center">
+            <Loader styles="w-10 h-10 mx-auto" />
+          </div>
+        )}
+      </div>
+    </>
   );
 };
