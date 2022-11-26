@@ -101,7 +101,7 @@ export const handleTokenRefresh = async () => {
   const user = getUser();
   const res = await userRefreshHandler(user.refresh);
 
-  if (res?.statusText === `OK`) {
+  if (res?.status === 200) {
     setUser({
       access: res.data.access,
       refresh: user.refresh,
