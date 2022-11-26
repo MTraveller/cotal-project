@@ -9,6 +9,8 @@ export async function userProfileHandler({ data, token }) {
   if (data.status) formData.append(`status`, data.status);
   if (data.location) formData.append(`location`, data.location);
 
+  console.log(formData);
+
   const headers = {
     Authorization: `Cotal ${token}`,
   };
@@ -22,7 +24,7 @@ export async function userProfileHandler({ data, token }) {
     .then((res) => res)
     .catch((ex) => ex);
 
-  if (res.status === 200 || res.status === 201) {
+  if (res?.status === 200 || res?.status === 201) {
     return true;
   } else if (res.code === `ERR_NETWORK`) {
     error.push(`Cotal Backend`, res.code);
@@ -32,6 +34,7 @@ export async function userProfileHandler({ data, token }) {
     });
   }
 
+  console.log(res);
   if (error.length !== 0) return error;
 }
 
@@ -62,7 +65,7 @@ export async function userSocialHandler({ user, data, token }) {
           .then((res) => res)
           .catch((ex) => ex);
 
-    if (res.status !== 200 || res.status !== 201) {
+    if (res?.status !== 200 || res?.status !== 201) {
       if (res.code === `ERR_NETWORK`) {
         error.push(`Cotal Backend`, res.code);
       } else if (res.code === `ERR_BAD_REQUEST`) {
@@ -103,7 +106,7 @@ export async function userLinktreesHandler({ user, data, token }) {
         .then((res) => res)
         .catch((ex) => ex);
 
-  if (res.status === 200 || res.status === 201) {
+  if (res?.status === 200 || res?.status === 201) {
     return true;
   } else if (res.code === `ERR_NETWORK`) {
     error.push(`Cotal Backend`, res.code);
@@ -117,7 +120,7 @@ export async function userLinktreesHandler({ user, data, token }) {
 }
 
 export async function userConnectHandler({ user, data, token }) {
-  console.log(data);
+  // connect handler
 }
 
 export async function userPostContentHander({
@@ -170,7 +173,7 @@ export async function userPostContentHander({
         .then((res) => res)
         .catch((ex) => ex);
 
-  if (res.status === 200 || res.status === 201) {
+  if (res?.status === 200 || res?.status === 201) {
     return true;
   } else if (res.code === `ERR_NETWORK`) {
     error.push(`Cotal Backend`, res.code);
@@ -213,7 +216,7 @@ export async function userCommentHandler({ user, slug, token, data }) {
         .then((res) => res)
         .catch((ex) => ex);
 
-  if (res.status === 200 || res.status === 201) {
+  if (res?.status === 200 || res?.status === 201) {
     return true;
   } else if (res.code === `ERR_NETWORK`) {
     error.push(`Cotal Backend`, res.code);

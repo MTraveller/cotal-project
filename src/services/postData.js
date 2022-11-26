@@ -41,6 +41,7 @@ export default async function postDataHandler(req) {
           token: req[3],
         });
 
+        console.log(response);
         if (response !== true) error = [...response];
       }
     }
@@ -77,5 +78,6 @@ export default async function postDataHandler(req) {
   }
 
   if (error.length) return error;
+  console.log(error);
   return true;
 }
