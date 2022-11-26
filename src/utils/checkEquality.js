@@ -10,9 +10,7 @@ export const checkEquality = (data, dataTwo, server) => {
       if (typeof obj[1] === `object`) {
         if (obj[1] !== null) {
           if (obj[0] === `image`) {
-            if (serverEntries[idx][1]?.name !== obj[1].name) {
-              serverChanges[obj[0]] = obj[1];
-            }
+            serverChanges[obj[0]] = obj[1];
           }
         }
       } else {
@@ -74,28 +72,7 @@ export const checkEquality = (data, dataTwo, server) => {
 
       serverEntries.forEach((serverEntry, idx) => {
         if (serverEntry[0] === `image`) {
-          if (serverEntry[1] === null) {
-            serverChanges[formEntries[idx][0]] = formEntries[idx][1];
-          } else {
-            if (serverEntry[1] !== formEntries[idx][1]) {
-              const serverImage = serverEntry[1];
-              const lastSlash = serverImage.lastIndexOf(`/`);
-              const serverImageName = serverEntry[1].substring(
-                lastSlash,
-                serverImage.lastIndexOf(`_`) - 1
-              );
-
-              const formImage = formEntries[idx][1].name;
-              const formImageName = formImage.substring(
-                0,
-                formImage.lastIndexOf(`.`) - 1
-              );
-
-              if (serverImageName !== formImageName) {
-                serverChanges[formEntries[idx][0]] = formEntries[idx][1];
-              }
-            }
-          }
+          serverChanges[formEntries[idx][0]] = formEntries[idx][1];
         } else {
           if (serverEntry[1] && formEntries[idx]) {
             if (serverEntry[1] !== formEntries[idx][1])
@@ -107,7 +84,9 @@ export const checkEquality = (data, dataTwo, server) => {
       Object.entries(data).forEach((item) => {
         if (item[0] === `image` && item[1].name.length) {
           serverChanges[item[0]] = item[1];
-        } else if (item[1].length) serverChanges[item[0]] = item[1];
+        } else if (item[1].length) {
+          serverChanges[item[0]] = item[1];
+        }
       });
     }
 
