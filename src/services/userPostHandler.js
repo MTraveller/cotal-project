@@ -28,13 +28,16 @@ export async function userProfileHandler({ data, token }) {
     return true;
   } else if (res.code === `ERR_NETWORK`) {
     error.push(`Cotal Backend`, res.code);
+  } else if (res.response.status === 500) {
+    error.push(`Cotal Backend`, res.response.statusText);
   } else if (res.code === `ERR_BAD_REQUEST`) {
     Object.entries(res.response.data).forEach((arr) => {
       error.push(arr[0], arr[1][0]);
     });
+  } else {
+    return res.statusText;
   }
 
-  console.log(res);
   if (error.length !== 0) return error;
 }
 
