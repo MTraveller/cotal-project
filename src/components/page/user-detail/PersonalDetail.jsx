@@ -133,7 +133,6 @@ export const PersonalDetail = () => {
 
       if (response === true) {
         toast.success(`Saved successfully`);
-        removeLoader(e.target);
         handleDivClick();
 
         setTimeout(() => {
