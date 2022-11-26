@@ -65,6 +65,10 @@ export async function allUserDataHandler(user) {
         data[model] = res.data;
       } else if (res.response.status !== 200) data[model] = `error`;
     }
+  } else if (profile?.status === 401) {
+    const res = await handleTokenRefresh();
+
+    if (res === true) allUserDataHandler(user);
   } else if (profile.response.status === 404) {
     return profile;
   } else if (profile.response.status !== 200) {
