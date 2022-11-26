@@ -4,6 +4,7 @@ import Loader from '../layout/element/loader';
 
 export const SubmitButton = ({ buttonText }) => (
   <button
+    id="index-submit"
     type="submit"
     className="group relative flex w-full justify-center rounded-md border border-transparent bg-slate-300 py-3 px-4 text-sm font-medium text-slate-500 hover:text-white hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
   >

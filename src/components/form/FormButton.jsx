@@ -5,7 +5,7 @@ import { ButtonStyles } from '../layout/style/ButtonStyle';
 
 export const FormButton = ({ id, extraStyles, handleSubmit, buttonText }) => (
   <ButtonStyles
-    id={id ? id : ``}
+    id={id ? id : `form-submit`}
     type="submit"
     className={extraStyles}
     data-message="Save changes made"
