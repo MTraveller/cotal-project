@@ -59,7 +59,7 @@ export const UserPageDetail = ({ user }) => {
                 alt={`${data.profile.user.first_name} ${data.profile.user.last_name}`}
               />
             ) : (
-              <ProfileImageSvg widthHeight="w-full h-full" />
+              <ProfileImageSvg widthHeight="w- sm:w-full sm:h-full" />
             )}
           </figure>
           <div className="w-full sm:w-1/2 flex flex-col gap-y-2">
@@ -87,20 +87,20 @@ export const UserPageDetail = ({ user }) => {
               ``
             )}
             <IconDivStyles>
-              {data.profile.socials.map((obj, idx) => {
-                return obj.username ? (
+              {socialIcon.map((obj, idx) =>
+                obj.name === data.profile.socials[idx].name ? (
                   <a
                     key={obj.name}
-                    href={`${socialIcon[idx].url}/${obj.username}`}
+                    href={`${obj.url}/${data.profile.socials[idx].username}`}
                     target="_target"
                     rel="noreferrer noopener"
                   >
-                    {socialIcon[idx].component}
+                    {obj.component}
                   </a>
                 ) : (
                   ``
-                );
-              })}
+                )
+              )}
             </IconDivStyles>
           </div>
         </div>
