@@ -1,8 +1,12 @@
 export const removeLoader = (...button) => {
-  button[0].removeAttribute(`disabled`, ``);
-  button[0].firstChild.classList.toggle(`hidden`);
-  button[1].lastChild.classList.toggle(`hidden`);
-  button[1].firstChild.classList.toggle(`hidden`);
-
-  return;
+  if (button[0].id === `form-submit`) {
+    button[0].removeAttribute(`disabled`, ``);
+    button[0].firstChild.classList.toggle(`hidden`);
+    button[0].lastChild.classList.toggle(`hidden`);
+  } else {
+    button[0].removeAttribute(`disabled`, ``);
+    button[0].firstChild.classList.toggle(`hidden`);
+    button[1].lastChild.classList.toggle(`hidden`);
+    button[1].firstChild.classList.toggle(`hidden`);
+  }
 };
