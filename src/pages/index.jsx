@@ -46,4 +46,6 @@ export default function IndexPage() {
   );
 }
 
-export const Head = () => <Seo title="Home" />;
+export function Head() {
+  return <Seo title="Home" />;
+}
