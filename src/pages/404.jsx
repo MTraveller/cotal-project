@@ -3,12 +3,14 @@ import React from 'react';
 import Seo from '../components/Seo';
 
 const NotFoundPage = () => (
-  <>
-    <h1>404: Not Found</h1>
+  <div className="flex flex-col items-center">
+    <h1 className="text-3xl mb-5">404: Not Found</h1>
     <p>You just hit a route that doesn&#39;t exist...</p>
-  </>
+  </div>
 );
 
-export const Head = () => <Seo title="404: Not Found" />;
+export function Head() {
+  return <Seo title="404: Not Found" />;
+}
 
 export default NotFoundPage;
