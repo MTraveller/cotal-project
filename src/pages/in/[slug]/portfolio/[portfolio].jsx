@@ -22,7 +22,7 @@ export default function Post({ params }) {
 }
 
 export function Head({ params: { portfolio } }) {
-  const path = portfolio.split(`-`);
+  const path = portfolio?.split(`-`);
   path.forEach((word, idx) => {
     path.splice(idx, 1, [...word].shift().toUpperCase() + word.slice(1));
   });

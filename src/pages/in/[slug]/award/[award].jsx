@@ -21,7 +21,7 @@ export default function Post({ params }) {
 }
 
 export function Head({ params: { award } }) {
-  const path = award.split(`-`);
+  const path = award?.split(`-`);
   path.forEach((word, idx) => {
     path.splice(idx, 1, [...word].shift().toUpperCase() + word.slice(1));
   });
