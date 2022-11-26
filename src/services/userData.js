@@ -35,25 +35,40 @@ export async function allUserDataHandler(user) {
     .then((res) => res)
     .catch((ex) => ex);
 
-  if (profile.status !== 200) data[`profile`] = `error`;
-  data[`profile`] = profile.data;
+  if (profile?.status === 200) {
+    data[`profile`] = profile.data;
 
-  const post = await http
-    .get(apiProfileMeEndpoint + `/posts/profiles/` + user + `/posts/`, {})
-    .then((res) => res)
-    .catch((ex) => ex);
-
-  if (profile.status !== 200) data[`profile`] = `error`;
-  data[`post`] = post.data;
-
-  for await (const model of [`portfolio`, `award`, `certificate`, `creative`]) {
-    const res = await http
-      .get(apiProfileMeEndpoint + `/profiles/` + user + `/` + model + `s/`, {})
+    const post = await http
+      .get(apiProfileMeEndpoint + `/posts/profiles/` + user + `/posts/`, {})
       .then((res) => res)
       .catch((ex) => ex);
 
-    if (res.status !== 200) data[model] = `error`;
-    data[model] = res.data;
+    if (post?.status === 200) {
+      data[`post`] = post.data;
+    } else if (post.response.status !== 200) data[`post`] = `error`;
+
+    for await (const model of [
+      `portfolio`,
+      `award`,
+      `certificate`,
+      `creative`,
+    ]) {
+      const res = await http
+        .get(
+          apiProfileMeEndpoint + `/profiles/` + user + `/` + model + `s/`,
+          {}
+        )
+        .then((res) => res)
+        .catch((ex) => ex);
+
+      if (res?.status === 200) {
+        data[model] = res.data;
+      } else if (res.response.status !== 200) data[model] = `error`;
+    }
+  } else if (profile.response.status === 404) {
+    return profile;
+  } else if (profile.response.status !== 200) {
+    data[`profile`] = `error`;
   }
 
   return data;
