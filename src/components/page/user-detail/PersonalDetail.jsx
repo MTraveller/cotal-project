@@ -20,7 +20,6 @@ import {
 } from '../../export/personalDetail';
 import postDataHandler from '../../../services/postData';
 import Loader from '../../layout/element/loader';
-import { removeLoader } from '../../layout/element/button/removeLoader';
 
 export const PersonalDetail = () => {
   const { userData, setUserData } = useUserDataContext();
@@ -134,7 +133,7 @@ export const PersonalDetail = () => {
       if (response === true) {
         toast.success(`Saved successfully`);
       } else {
-        removeLoader(e.target);
+        displayLoader(e);
         toast.warn(`${response[0]}: ${response[1]}`);
       }
       handleDivClick();
