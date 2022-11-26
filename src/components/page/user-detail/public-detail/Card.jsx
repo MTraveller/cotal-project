@@ -70,7 +70,7 @@ export const Card = ({
           <button
             type="button"
             name={item.title}
-            className="bg-slate-900 rounded-md mb-3 z-0"
+            className="bg-gray-400/60 dark:bg-slate-900 rounded-md mb-3 z-0"
             onClick={handleClick}
             data-hover="false"
             data-model={modelName}
@@ -92,7 +92,7 @@ export const Card = ({
                     alt={item.title}
                   />
                 ) : (
-                  <span className="h-52 flex items-center px-4 bg-black/50">
+                  <span className="h-52 flex items-center px-4 bg-gray-200/80 dark:bg-black/50">
                     {item[contentType].length > 205
                       ? `${item[contentType].substring(0, 205)}...`
                       : item[contentType]}

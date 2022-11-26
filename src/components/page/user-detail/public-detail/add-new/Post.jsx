@@ -32,7 +32,7 @@ export const Post = ({ form, handleChange, tagArray, setTag }) => {
           autoComplete="off"
           borderRadius="rounded-md"
           padding="px-3 py-3 md:py-4"
-          bgStyles="dark:bg-slate-400/40 dark:border-slate-300/70"
+          bgStyles="bg-gray-200 border-gray-500 dark:bg-slate-400/40 dark:border-slate-300/70"
           borderStyles="border-slate-400/40 dark:border-slate-400/70"
           placeholder="Title"
           onChange={handleChange}
@@ -50,7 +50,7 @@ export const Post = ({ form, handleChange, tagArray, setTag }) => {
           autoComplete="off"
           borderRadius="rounded-md"
           padding="px-3 py-3 md:py-4"
-          bgStyles="dark:bg-slate-400/40 dark:border-slate-300/70"
+          bgStyles="bg-gray-200 border-gray-500 dark:bg-slate-400/40 dark:border-slate-300/70"
           placeholder="Post .."
           onChange={handleChange}
         />

@@ -141,7 +141,7 @@ export const PersonalDetail = () => {
   };
 
   return (
-    <div className="max-h-[90px] lg:sticky lg:top-[80px] bg-black/[.2] rounded-lg p-6 transition-all duration-700 ease-in-out overflow-y-hidden">
+    <div className="max-h-[90px] lg:sticky lg:top-[80px] bg-gray-400/10 dark:bg-black/[.2] rounded-lg p-6 transition-all duration-700 ease-in-out overflow-y-hidden">
       {userData ? (
         <>
           <ButtonStyles
@@ -156,7 +156,7 @@ export const PersonalDetail = () => {
             </span>{' '}
             Profile Details
           </ButtonStyles>
-          <div className="group mt-5 invisible" data-hidden="true">
+          <div className="group mt-5" data-hidden="true">
             <form className="flex flex-col gap-y-2 transform translate-y-20 opacity-0 group-data-[hidden=false]:translate-y-0 group-data-[hidden=false]:opacity-100 transition ease-in-out duration-700">
               <div className="flex flex-row justify-between items-center">
                 <div className="w-32">

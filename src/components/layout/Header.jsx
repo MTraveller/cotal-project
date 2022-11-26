@@ -50,7 +50,7 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
   };
 
   return isLoggedIn && location.pathmame !== `/` ? (
-    <header className="sticky top-0 z-50 backdrop-blur border-b border-slate-900/10 dark:border-slate-50/10 bg-slate-300/75 dark:bg-slate-900/75 dark:text-slate-400">
+    <header className="sticky top-0 z-50 backdrop-blur border-b border-gray-400/60 dark:border-gray-50/10 bg-gray-300/40 dark:bg-slate-900/75 text-gray-600 dark:text-slate-400">
       <Disclosure as="nav">
         {({ open }) => (
           <>
@@ -76,8 +76,8 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
                           to={item.href}
                           className={classNames(
                             item.href === location.pathname
-                              ? 'bg-gray-800 text-slate-300'
-                              : 'hover:bg-gray-700 hover:text-slate-300',
+                              ? 'bg-gray-400/50 dark:bg-gray-800 text-zinc-600 dark:text-slate-200'
+                              : 'hover:bg-gray-600 hover:text-zinc-300 dark:hover:bg-gray-700 dark:hover:text-slate-300',
                             'px-3 py-2 rounded-md text-sm font-medium'
                           )}
                           aria-current={item.current ? 'page' : undefined}
@@ -93,7 +93,7 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
                     {/* Profile dropdown */}
                     <Menu as="div" className="relative ml-3">
                       <div>
-                        <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-sky-600 dark:focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                           <span className="sr-only">Open user menu</span>
                           {userData?.image ? (
                             <img
@@ -139,7 +139,7 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
                 </div>
                 <div className="-mr-2 flex md:hidden">
                   {/* Mobile menu button */}
-                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-gray-400 dark:bg-gray-800 p-2 text-gray-50 dark:text-gray-400 hover:bg-sky-700 dark:hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -160,8 +160,8 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
                     to={item.href}
                     className={classNames(
                       item.href === location.pathname
-                        ? 'bg-gray-900 text-white'
-                        : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                        ? 'bg-gray-400/50 dark:bg-gray-800 text-zinc-600 dark:text-slate-200'
+                        : 'hover:bg-gray-600 hover:text-zinc-300 dark:hover:bg-gray-700 dark:hover:text-slate-300',
                       'block px-3 py-2 rounded-md text-base font-medium'
                     )}
                     aria-current={item.current ? item.name : undefined}
@@ -171,7 +171,7 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
                   </Link>
                 ))}
               </div>
-              <div className="border-t border-gray-700 pt-4 pb-3">
+              <div className="border-t border-gray-400/60 dark:border-gray-700 pt-4 pb-3">
                 <div className="flex items-center px-5">
                   <div className="flex-shrink-0">
                     {userData?.image ? (
@@ -185,10 +185,10 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
                     )}
                   </div>
                   <div className="ml-3">
-                    <div className="text-base font-medium leading-none text-white">
+                    <div className="text-base font-medium leading-none text-zinc-600   dark:text-white">
                       {userData?.user?.first_name} {userData?.user?.last_name}
                     </div>
-                    <div className="text-sm font-medium leading-none text-gray-400">
+                    <div className="text-sm font-medium leading-none text-zinc-600 dark:text-gray-400">
                       {userData?.slug}
                     </div>
                   </div>
@@ -199,7 +199,7 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
                       key={item.name}
                       as="a"
                       to={item.href}
-                      className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                      className="block rounded-md px-3 py-2 text-base font-medium text-zinc-600 dark:text-gray-400 hover:bg-gray-600 dark:hover:bg-gray-700 hover:text-zinc-300 dark:hover:text-white"
                       onClick={handleClick}
                     >
                       {item.name}
@@ -219,7 +219,7 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
       </div>
     </header>
   ) : (
-    <header className="py-4 dark:text-slate-600 text-sm">
+    <header className="py-4 text-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Link to="/">{siteTitle}</Link>
       </div>

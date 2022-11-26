@@ -50,7 +50,7 @@ export const Comment = ({ slug, post, setData }) => {
         rows="5"
         borderRadius="rounded-md"
         padding="px-3 py-3 md:py-4"
-        bgStyles="dark:bg-slate-400/40 dark:border-slate-300/70"
+        bgStyles="bg-gray-200/60 border-gray-400 dark:bg-slate-400/40 dark:border-slate-300/70"
         placeholder="Comment .."
         onChange={handleChange}
       />

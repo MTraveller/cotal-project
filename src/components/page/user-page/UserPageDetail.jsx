@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { allUserDataHandler } from '../../../services/userData';
-import Seo from '../../Seo';
+import { ServerError } from '../../ServerError';
 import { Image } from '../../layout/element/Image';
 import { socialIcon } from '../../layout/element/socialIcons';
 import Loader from '../../layout/element/loader';
 import { LessThanTwo } from './grid/LessThanTwo';
 import { LessThanThree } from './grid/LessThanThree';
 import { MoreThanTwo } from './grid/MoreThanTwo';
+import NotFoundPage from '../../../pages/404';
 
 const IconDivStyles = styled.div`
   display: flex;
@@ -18,32 +19,34 @@ const IconDivStyles = styled.div`
 `;
 
 export const UserPageDetail = ({ user }) => {
+  const [error, setError] = useState(false);
+  const [notFound, setNotFound] = useState(false);
   const [data, setData] = useState(null);
 
   useEffect(() => {
     if (!data) {
       async function fetchData() {
-        return await allUserDataHandler(user).then((res) => setData(res));
+        return await allUserDataHandler(user).then((res) => {
+          if (res?.profile?.id) {
+            setData(res);
+          } else if (res.profile === `error`) {
+            setError(true);
+          } else if (res.response.status === 404) {
+            setNotFound(true);
+          }
+        });
       }
       fetchData();
     }
   }, [data, user]);
 
-  const handleName = (name) => {
-    const userName = data.profile.user[name];
-    const char = userName.slice(0, 1);
-    const isUpper = char === char.toUpperCase() && char.toUpperCase() !== char;
-
-    return isUpper
-      ? userName
-      : userName.slice(0, 1).toUpperCase() + userName.slice(1);
-  };
-
-  return data ? (
+  return error ? (
+    <ServerError />
+  ) : notFound ? (
+    <NotFoundPage />
+  ) : data ? (
     <>
-      <Seo title={`${handleName(`first_name`)} ${handleName(`last_name`)}`} />
-
-      <div className="bg-black/[.2] rounded-lg p-6">
+      <div className="bg-gray-400/10 dark:bg-black/[.2] rounded-lg p-6">
         <div className="flex flex-row flex-wrap justify-between items-center">
           <figure className="absolute sm:relative top-[160px] sm:top-auto right-10 sm:w-1/2">
             <Image
@@ -55,10 +58,10 @@ export const UserPageDetail = ({ user }) => {
             />
           </figure>
           <div className="w-full sm:w-1/2 flex flex-col gap-y-2">
-            <h1 className="text-3xl">
-              {handleName(`first_name`)}
+            <h1 className="text-3xl capitalize">
+              {data.profile.user.first_name}
               {` `}
-              {handleName(`last_name`)}
+              {data.profile.user.last_name}
             </h1>
             <span>Status: {data.profile.status}</span>
             <span>
@@ -93,30 +96,30 @@ export const UserPageDetail = ({ user }) => {
             </IconDivStyles>
           </div>
         </div>
-        <div className="grid mt-16 gap-y-14">
+        <div className="grid mt-16 gap-y-14 text-white">
           {data.post.length < 2 ? (
             <LessThanTwo
               data={data}
               model="post"
               user={user}
-              colorTop="dark:bg-lime-700/50"
-              colorBottom="dark:bg-blue-700/50"
+              colorTop="bg-lime-500 dark:bg-lime-700/50"
+              colorBottom="bg-blue-500 dark:bg-blue-700/50"
             />
           ) : data.post.length === 2 ? (
             <LessThanThree
               data={data}
               model="post"
               user={user}
-              colorTop="dark:bg-lime-700/50"
-              colorBottom="dark:bg-blue-700/50"
+              colorTop="bg-lime-500 dark:bg-lime-700/50"
+              colorBottom="bg-blue-500 dark:bg-blue-700/50"
             />
           ) : (
             <MoreThanTwo
               data={data}
               model="post"
               user={user}
-              colorTop="dark:bg-lime-700/50"
-              colorBottom="dark:bg-blue-700/50"
+              colorTop="bg-lime-500 dark:bg-lime-700/50"
+              colorBottom="bg-blue-500 dark:bg-blue-700/50"
             />
           )}
           {data.creative.length < 2 ? (
@@ -124,24 +127,24 @@ export const UserPageDetail = ({ user }) => {
               data={data}
               model="creative"
               user={user}
-              colorTop="dark:bg-violet-700/50"
-              colorBottom="dark:bg-pink-700/50"
+              colorTop="bg-violet-500 dark:bg-violet-700/50"
+              colorBottom="bg-pink-500 dark:bg-pink-700/50"
             />
           ) : data.creative.length === 2 ? (
             <LessThanThree
               data={data}
               model="creative"
               user={user}
-              colorTop="dark:bg-violet-700/50"
-              colorBottom="dark:bg-pink-700/50"
+              colorTop="bg-violet-500 dark:bg-violet-700/50"
+              colorBottom="bg-pink-500 dark:bg-pink-700/50"
             />
           ) : (
             <MoreThanTwo
               data={data}
               model="creative"
               user={user}
-              colorTop="dark:bg-violet-700/50"
-              colorBottom="dark:bg-pink-700/50"
+              colorTop="bg-violet-700 dark:bg-violet-700/50"
+              colorBottom="bg-pink-700 dark:bg-pink-700/50"
             />
           )}
           {data.portfolio.length < 2 ? (
@@ -149,24 +152,24 @@ export const UserPageDetail = ({ user }) => {
               data={data}
               model="portfolio"
               user={user}
-              colorTop="dark:bg-fuchsia-700/50"
-              colorBottom="dark:bg-sky-700/50"
+              colorTop="bg-fuchsia-700 dark:bg-fuchsia-700/50"
+              colorBottom="bg-sky-700 dark:bg-sky-700/50"
             />
           ) : data.portfolio.length === 2 ? (
             <LessThanThree
               data={data}
               model="portfolio"
               user={user}
-              colorTop="dark:bg-fuchsia-700/50"
-              colorBottom="dark:bg-sky-700/50"
+              colorTop="bg-fuchsia-700 dark:bg-fuchsia-700/50"
+              colorBottom="bg-sky-700 dark:bg-sky-700/50"
             />
           ) : (
             <MoreThanTwo
               data={data}
               model="portfolio"
               user={user}
-              colorTop="dark:bg-fuchsia-700/50"
-              colorBottom="dark:bg-sky-700/50"
+              colorTop="bg-fuchsia-700 dark:bg-fuchsia-700/50"
+              colorBottom="bg-sky-700 dark:bg-sky-700/50"
             />
           )}
           {data.award.length < 2 ? (
@@ -174,24 +177,24 @@ export const UserPageDetail = ({ user }) => {
               data={data}
               model="award"
               user={user}
-              colorTop="bg-orange-700/50"
-              colorBottom="bg-emerald-700/50"
+              colorTop="bg-orange-700 dark:bg-orange-700/50"
+              colorBottom="bg-emerald-700 dark:bg-emerald-700/50"
             />
           ) : data.award.length === 2 ? (
             <LessThanThree
               data={data}
               model="award"
               user={user}
-              colorTop="bg-orange-700/50"
-              colorBottom="bg-emerald-700/50"
+              colorTop="bg-orange-700 dark:bg-orange-700/50"
+              colorBottom="bg-emerald-700 dark:bg-emerald-700/50"
             />
           ) : (
             <MoreThanTwo
               data={data}
               model="award"
               user={user}
-              colorTop="dark:bg-orange-700/50"
-              colorBottom="dark:bg-emerald-700/50"
+              colorTop="bg-orange-700 dark:bg-orange-700/50"
+              colorBottom="bg-emerald-700 dark:bg-emerald-700/50"
             />
           )}
           {data.certificate.length < 2 ? (
@@ -199,24 +202,24 @@ export const UserPageDetail = ({ user }) => {
               data={data}
               model="certificate"
               user={user}
-              colorTop="dark:bg-cyan-700/50"
-              colorBottom="dark:bg-zinc-700/50"
+              colorTop="bg-cyan-700 dark:bg-cyan-700/50"
+              colorBottom="bg-zinc-700 dark:bg-zinc-700/50"
             />
           ) : data.certificate.length === 2 ? (
             <LessThanThree
               data={data}
               model="certificate"
               user={user}
-              colorTop="dark:bg-cyan-700/50"
-              colorBottom="dark:bg-zinc-700/50"
+              colorTop="bg-cyan-700 dark:bg-cyan-700/50"
+              colorBottom="bg-zinc-700 dark:bg-zinc-700/50"
             />
           ) : (
             <MoreThanTwo
               data={data}
               model="certificate"
               user={user}
-              colorTop="dark:bg-cyan-700/50"
-              colorBottom="dark:bg-zinc-700/50"
+              colorTop="bg-cyan-700 dark:bg-cyan-700/50"
+              colorBottom="bg-zinc-700 dark:bg-zinc-700/50"
             />
           )}
         </div>

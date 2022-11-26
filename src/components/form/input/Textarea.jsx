@@ -32,14 +32,16 @@ export const Textarea = ({
       className={`relative ${display ? display : `flex`} ${
         width ? width : `w-full`
       } appearance-none ${padding} ${
-        bgStyles ? bgStyles : `bg-slate-200 dark:bg-slate-500`
-      } ${borderStyles ? borderStyles : `border-slate-400`} ${
-        textColor ? textColor : `text-slate-900 dark:text-slate-300`
+        bgStyles ? bgStyles : `bg-gray-200 dark:bg-slate-500`
+      } ${
+        borderStyles ? borderStyles : `border-gray-400 dark:border-slate-400`
+      } ${
+        textColor ? textColor : `text-zinc-600 dark:text-slate-300`
       } ${borderRadius} border ${
         placeHolderColor
           ? placeHolderColor
-          : `placeholder-slate-900 dark:placeholder-slate-300`
-      } focus:z-10 focus:border-transparent focus:outline-none focus:ring-inset focus:ring-1 focus:ring-yellow-300 text-sm sm:text-base`}
+          : `placeholder-zinc-600 dark:placeholder-slate-300`
+      } focus:z-10 focus:border-transparent focus:outline-none focus:ring-inset focus:ring-1 focus:ring-sky-500 dark:focus:ring-yellow-300 text-sm sm:text-base`}
       placeholder={placeholder}
       onChange={onChange}
     />

@@ -6,7 +6,7 @@ export const AddTag = ({ handleClick }) => {
       <button
         id="remove-tag"
         type="button"
-        className="w-8 h-8 rounded-full dark:bg-pink-900 hover:dark:bg-pink-800 dark:text-slate-400 text-center"
+        className="w-8 h-8 rounded-full bg-pink-600 hover:bg-pink-700 text-gray-200 dark:bg-pink-900 dark:hover:bg-pink-800 dark:text-slate-400 text-center"
         onClick={handleClick}
       >
         <span className="font-bold">-1</span>
@@ -14,7 +14,7 @@ export const AddTag = ({ handleClick }) => {
       <button
         id="add-tag"
         type="button"
-        className="w-8 h-8 rounded-full dark:bg-lime-900 hover:dark:bg-lime-800 dark:text-slate-400 text-center"
+        className="w-8 h-8 rounded-full bg-lime-600 hover:bg-lime-700 text-gray-200 dark:bg-lime-900 dark:hover:bg-lime-800 dark:text-slate-400 text-center"
         onClick={handleClick}
       >
         <span className="font-bold">+1</span>

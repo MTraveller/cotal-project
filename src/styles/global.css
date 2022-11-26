@@ -9,7 +9,7 @@
 }
 
 @layer base {
-  html, body, #___gatsby, #gatsby-focus-wrapper {
+  #___gatsby, #gatsby-focus-wrapper {
     @apply w-full;
     @apply h-full;
     @apply left-0;
@@ -17,9 +17,17 @@
     @apply right-0;
     @apply bottom-0;
   }
+}
 
-  body {
-    @apply bg-slate-200;
-    @apply dark:bg-slate-900;
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme */
+@media (prefers-color-scheme: light) { 
+  .spin-loader, .profile-avatar {
+    color: #3b82f6;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .spin-color, .profile-avatar {
+    color: currentColor;
   }
 }

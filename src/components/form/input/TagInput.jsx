@@ -51,7 +51,7 @@ export const TagInput = ({ tagArray, setTag }) => {
       width="flex-auto w-[175px] sm:basis-2/6"
       padding="px-3 py-2"
       borderRadius="rounded-md"
-      bgStyles="dark:bg-slate-800/40 dark:border-slate-800/70"
+      bgStyles="bg-gray-200/80 dark:bg-slate-800/40 dark:border-slate-800/70"
       textColor="text-slate-500"
       placeHolderColor="placeholder-slate-500"
       placeholder="Add tag.."
