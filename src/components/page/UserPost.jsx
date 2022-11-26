@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { GoCommentDiscussion } from 'react-icons/go';
 import { Link } from 'gatsby';
 
-import Seo from '../Seo';
 import { isLoggedIn } from '../../services/authService';
 import getUserDataHandler from '../../services/userData';
 import { Image } from '../layout/element/Image';
 import { ProfileImageSvg } from '../layout/element/ProfileImageSvg';
 import { Comment } from './user-post/Comment';
 import Loader from '../layout/element/loader';
+import NotFoundPage from '../../pages/404';
 
 export const UserPost = (props) => {
   const isAuthorized = isLoggedIn();
 
+  const [notFound, setNotFound] = useState(false);
   const [pageProps, setPageProps] = useState();
   const [data, setData] = useState(null);
   const [dataPost, setDataPost] = useState();
@@ -32,8 +33,8 @@ export const UserPost = (props) => {
           ? `/posts/profiles/${slug}/${model}s/${postSlug}/`
           : `/profiles/${slug}/${model}s/${postSlug}/`,
         `pass`
-      )
-        .then((res) => {
+      ).then((res) => {
+        if (res?.status) {
           setDataPost(
             res.data[model === `post` ? `post` : `description`].split(`\r\n`)
           );
@@ -53,10 +54,10 @@ export const UserPost = (props) => {
             link: res.data.link,
             createdOn: res.data.created_on,
           });
-        })
-        .catch((ex) => {
-          return ex;
-        });
+        } else {
+          setNotFound(true);
+        }
+      });
     }
   }, [props, pageProps, data]);
 
@@ -77,11 +78,11 @@ export const UserPost = (props) => {
     }
   };
 
-  return (
+  return notFound ? (
+    <NotFoundPage />
+  ) : (
     <>
-      <Seo title={data?.title} />
-
-      <div className="bg-black/[.2] rounded-lg">
+      <div className="bg-gray-400/10 dark:bg-black/[.2] rounded-lg">
         {data ? (
           <div className="flex flex-col gap-y-5">
             <div
@@ -104,7 +105,7 @@ export const UserPost = (props) => {
                   )}
                   <Link
                     to={`/in/${pageProps?.slug}/`}
-                    className="flex flex-row gap-x-1"
+                    className="flex flex-row gap-x-1 capitalize font-semibold"
                   >
                     <span>{data?.profile.user.first_name}</span>
                     <span>{data?.profile.user.last_name}</span>
@@ -211,7 +212,7 @@ export const UserPost = (props) => {
                             <span>{item.profile.user.first_name}</span>
                             <span>{item.profile.user.last_name}</span>
                           </Link>
-                          <span className="text-slate-900/40 dark:text-slate-400/40 text-xs italic">
+                          <span className="text-zinc-600/40 dark:text-slate-400/40 text-xs italic">
                             Posted on:{' '}
                             {new Date(item.created_on).toDateString()}
                           </span>
