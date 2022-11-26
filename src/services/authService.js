@@ -92,6 +92,11 @@ export const isLoggedIn = () => {
   return DoCheckLogin();
 };
 
+export const handleLogout = () => {
+  window.localStorage.removeItem('cotalUser');
+  return navigate(`/`);
+};
+
 export const handleTokenRefresh = async () => {
   const user = getUser();
   const res = await userRefreshHandler(user.refresh);
@@ -104,9 +109,6 @@ export const handleTokenRefresh = async () => {
   } else if (res === 401) {
     return handleLogout();
   }
-};
 
-export const handleLogout = () => {
-  window.localStorage.removeItem('cotalUser');
-  return navigate(`/`);
+  return true;
 };
