@@ -59,7 +59,7 @@ export const UserPageDetail = ({ user }) => {
                 alt={`${data.profile.user.first_name} ${data.profile.user.last_name}`}
               />
             ) : (
-              <ProfileImageSvg widthHeight="w-8 h-8" />
+              <ProfileImageSvg widthHeight="w-full h-full" />
             )}
           </figure>
           <div className="w-full sm:w-1/2 flex flex-col gap-y-2">
