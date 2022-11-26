@@ -2,7 +2,6 @@ import React from 'react';
 import tw from 'tailwind-styled-components';
 
 const MainStyles = tw.main`
-  dark:text-slate-400
   pt-7
 `;
 
