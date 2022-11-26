@@ -10,8 +10,6 @@ const UserNetwork = () => {
 
   return (
     <>
-      <Seo title={menu} />
-
       <p className="text-stone-600/70 text-xs text-center">
         Due to deadline approacking this feature is not handling http.post
         request to the backend, with more time, sure would be functional.
@@ -29,6 +27,8 @@ const UserNetwork = () => {
   );
 };
 
-export const Head = () => <Seo title="My Network" />;
+export function Head() {
+  return <Seo title="My Network" />;
+}
 
 export default UserNetwork;

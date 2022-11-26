@@ -7,8 +7,6 @@ import Seo from '../Seo';
 // Future feature due to deadline approaching
 const UserSetting = ({ userData }) => (
   <>
-    <Seo title="Settings" />
-
     <p className="mb-4 text-stone-600/70 text-xs text-center">
       Due to deadline approacking this feature is not set up, with more time,
       sure would be functional.
@@ -22,6 +20,8 @@ const UserSetting = ({ userData }) => (
   </>
 );
 
-export const Head = () => <Seo title="User Settings" />;
+export function Head() {
+  return <Seo title="Settings" />;
+}
 
 export default UserSetting;
