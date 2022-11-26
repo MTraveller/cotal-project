@@ -9,14 +9,11 @@ import { UserDataProvider } from '../../context/UserDataContext';
 import { useLoggedInContext } from '../../context/LoggedInContext';
 
 const DivStyles = tw.div`
-  absolute
-  left-0
-  top-0
+  w-full
+  h-max
+  min-h-full
   flex
   flex-col
-  w-screen
-  h-full
-  overflow-y-auto
 `;
 
 const IndexDivStyles = styled.div`
