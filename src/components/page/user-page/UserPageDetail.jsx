@@ -3,13 +3,14 @@ import styled from 'styled-components';
 
 import { allUserDataHandler } from '../../../services/userData';
 import { ServerError } from '../../ServerError';
+import NotFoundPage from '../../../pages/404';
 import { Image } from '../../layout/element/Image';
+import { ProfileImageSvg } from '../../export/personalDetail';
 import { socialIcon } from '../../layout/element/socialIcons';
-import Loader from '../../layout/element/loader';
 import { LessThanTwo } from './grid/LessThanTwo';
 import { LessThanThree } from './grid/LessThanThree';
 import { MoreThanTwo } from './grid/MoreThanTwo';
-import NotFoundPage from '../../../pages/404';
+import Loader from '../../layout/element/loader';
 
 const IconDivStyles = styled.div`
   display: flex;
@@ -49,13 +50,17 @@ export const UserPageDetail = ({ user }) => {
       <div className="bg-gray-400/10 dark:bg-black/[.2] rounded-lg p-6">
         <div className="flex flex-row flex-wrap justify-between items-center">
           <figure className="absolute sm:relative top-[160px] sm:top-auto right-10 sm:w-1/2">
-            <Image
-              image={data.profile.image}
-              addedModelName="profile"
-              slug={data.profile.slug}
-              className="rounded-full w-32 h-32 mx-auto"
-              alt={`${data.profile.user.first_name} ${data.profile.user.last_name}`}
-            />
+            {data.profile.image ? (
+              <Image
+                image={data.profile.image}
+                addedModelName="profile"
+                slug={data.profile.slug}
+                className="rounded-full w-32 h-32 mx-auto"
+                alt={`${data.profile.user.first_name} ${data.profile.user.last_name}`}
+              />
+            ) : (
+              <ProfileImageSvg widthHeight="w-8 h-8" />
+            )}
           </figure>
           <div className="w-full sm:w-1/2 flex flex-col gap-y-2">
             <h1 className="text-3xl capitalize">
@@ -64,11 +69,12 @@ export const UserPageDetail = ({ user }) => {
               {data.profile.user.last_name}
             </h1>
             <span>Status: {data.profile.status}</span>
-            <span>
-              Location:{' '}
-              {data.profile.location ? data.profile.location : `Some where`}
-            </span>
-            {data.profile.linktrees[0].username ? (
+            {data.profile.location ? (
+              <span>Location: {data.profile.location}</span>
+            ) : (
+              ``
+            )}
+            {data.profile.linktrees[0]?.username ? (
               <span>
                 Linktree:{' '}
                 <a
@@ -82,7 +88,7 @@ export const UserPageDetail = ({ user }) => {
             )}
             <IconDivStyles>
               {data.profile.socials.map((obj, idx) => {
-                return (
+                return obj.username ? (
                   <a
                     key={obj.name}
                     href={`${socialIcon[idx].url}/${obj.username}`}
@@ -91,6 +97,8 @@ export const UserPageDetail = ({ user }) => {
                   >
                     {socialIcon[idx].component}
                   </a>
+                ) : (
+                  ``
                 );
               })}
             </IconDivStyles>
