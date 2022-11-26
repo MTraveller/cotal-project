@@ -136,6 +136,7 @@ export const PersonalDetail = () => {
         setUserData();
       } else {
         toast.warn(`${response[0]}: ${response[1]}`);
+        handleDivClick();
       }
     }
   };
