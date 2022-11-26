@@ -10,6 +10,11 @@ export const displayLoader = (e) => {
     ? button.removeAttribute(`disabled`)
     : button.setAttribute(`disabled`, ``);
 
-  button.childNodes[0].classList.toggle(`hidden`);
-  button.childNodes[1].classList.toggle(`hidden`);
+  try {
+    button.childNodes[0].classList.toggle(`hidden`);
+    button.childNodes[1].classList.toggle(`hidden`);
+  } catch {
+    button.childNodes[1].classList.toggle(`hidden`);
+    button.childNodes[0].classList.toggle(`hidden`);
+  }
 };
