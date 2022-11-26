@@ -26,12 +26,12 @@ function App({ params }) {
 }
 
 export function Head({ params }) {
-  const path = params[`*`].split(/(?:-|\/)+/);
-  path.forEach((word, idx) => {
-    path.splice(idx, 1, [...word].shift().toUpperCase() + word.slice(1));
+  const path = params[`*`]?.split(/(?:-|\/)+/);
+  path?.forEach((word, idx) => {
+    path?.splice(idx, 1, [...word].shift().toUpperCase() + word.slice(1));
   });
 
-  return <Seo title={path.join(` `)} />;
+  return <Seo title={path?.join(` `)} />;
 }
 
 export default App;
