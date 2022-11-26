@@ -4,11 +4,13 @@ import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 
 const choices = [
-  `Not Specified`,
+  `Owner`,
   `Employee`,
   `Job Seeker`,
   `Open To Collaborate`,
-  `Owner`,
+  `Hands Full`,
+  `Traveling`,
+  `Not Specified`,
 ];
 
 function classNames(...classes) {
