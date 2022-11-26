@@ -134,14 +134,14 @@ export const PersonalDetail = () => {
       if (response === true) {
         toast.success(`Saved successfully`);
         handleDivClick();
-
-        setTimeout(() => {
-          setUserData();
-        }, 700);
       } else {
         removeLoader(e.target);
         toast.warn(`${response[0]}: ${response[1]}`);
       }
+
+      setTimeout(() => {
+        setUserData();
+      }, 700);
     }
   };
 
