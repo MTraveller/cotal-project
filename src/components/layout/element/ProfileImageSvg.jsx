@@ -7,7 +7,7 @@ export const ProfileImageSvg = ({ widthHeight }) => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={`${widthHeight}`}
+    className={`profile-avatar ${widthHeight}`}
   >
     <path
       strokeLinecap="round"

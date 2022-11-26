@@ -3,7 +3,7 @@ import React from 'react';
 export default function Loader({ styles }) {
   return (
     <svg
-      className={`animate-spin ${styles} `}
+      className={`spin-loader animate-spin ${styles} `}
       viewBox="0 0 24 24"
       fillRule="evenodd"
       fill="currentColor"
