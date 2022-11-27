@@ -20,6 +20,7 @@ import {
 } from '../../export/personalDetail';
 import postDataHandler from '../../../services/postData';
 import Loader from '../../layout/element/loader';
+import { removeLoader } from '../../layout/element/button/removeLoader';
 
 export const PersonalDetail = () => {
   const { userData, setUserData } = useUserDataContext();
@@ -132,15 +133,14 @@ export const PersonalDetail = () => {
 
       if (response === true) {
         toast.success(`Saved successfully`);
+        handleDivClick();
+        setTimeout(() => {
+          setUserData();
+        }, 700);
       } else {
-        displayLoader(e);
         toast.warn(`${response[0]}: ${response[1]}`);
+        removeLoader(`trigger`, document.querySelector(`#form-submit`));
       }
-      handleDivClick();
-
-      setTimeout(() => {
-        setUserData();
-      }, 700);
     }
   };
 
