@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+// import FormData from 'form-data';
 
 import getUserDataHandler from '../../../../services/userData';
 import postDataHandler from '../../../../services/postData';
@@ -13,6 +14,7 @@ import { Post } from './add-new/Post';
 import { ProfileModel } from './add-new/ProfileModel';
 import { FormButton } from '../../../form/FormButton';
 import { toast } from 'react-toastify';
+import http from '../../../../services/httpService';
 
 export const AddNewEdit = ({
   userSlug,
@@ -81,7 +83,10 @@ export const AddNewEdit = ({
     const objectUrl = URL.createObjectURL(e.target.files[0]);
     setPreview(objectUrl);
 
-    setForm({ ...form, image: e.target.files[0] });
+    setForm({
+      ...form,
+      image: e.target.files[0],
+    });
 
     return () => URL.revokeObjectURL(objectUrl);
   };
