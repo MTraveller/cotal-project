@@ -6,7 +6,6 @@ import { countNetwork } from '../../../../utils/countNetwork';
 import postDataHandler from '../../../../services/postData';
 import { Image } from '../../../layout/element/Image';
 import { OpenLinkExternal } from '../../../layout/element/OpenLinkExternal';
-import { ButtonStyles } from '../../../layout/style/ButtonStyle';
 import { ProfileImageSvg } from '../../../layout/element/ProfileImageSvg';
 import Loader from '../../../layout/element/loader';
 
@@ -69,15 +68,15 @@ export const Network = ({ userData }) => {
                   buttonText={`${connect.opposite_user.firstname} ${connect.opposite_user.lastname}`}
                 />
               </div>
-              <ButtonStyles
+              <button
                 id="remove"
-                className="basis-1/3 py-2"
+                className="basis-1/3 py-2 fancy-button"
                 data-obj-id={connect.id}
                 data-idx={idx}
                 onClick={handleClick}
               >
                 Remove
-              </ButtonStyles>
+              </button>
             </div>
           ) : (
             ``

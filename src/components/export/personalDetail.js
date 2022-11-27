@@ -1,7 +1,6 @@
 export { useUserDataContext } from '../../context/UserDataContext';
 export { displayLoader } from '../layout/element/displayLoader';
 export { checkEquality } from '../../utils/checkEquality';
-export { ButtonStyles } from '../layout/style/ButtonStyle';
 export { ButtonImageInput } from '../form/input/ButtonImageInput';
 export { ButtonLabelInput } from '../form/input/ButtonLabelInput';
 export { SocialInput } from '../form/input/profile/SocialInput';

@@ -6,7 +6,6 @@ import { countRequest } from '../../../../utils/countRequest';
 import postDataHandler from '../../../../services/postData';
 import { Image } from '../../../layout/element/Image';
 import { OpenLinkExternal } from '../../../layout/element/OpenLinkExternal';
-import { ButtonStyles } from '../../../layout/style/ButtonStyle';
 import { ProfileImageSvg } from '../../../layout/element/ProfileImageSvg';
 import Loader from '../../../layout/element/loader';
 
@@ -76,24 +75,24 @@ export const Request = ({ userData }) => {
                   buttonText={`${connect.opposite_user.firstname} ${connect.opposite_user.lastname}`}
                 />
               </div>
-              <ButtonStyles
+              <button
                 id="ignore"
-                className="basis-1/3 py-2"
+                className="basis-1/3 py-2 fancy-button"
                 data-obj-id={connect.id}
                 data-idx={idx}
                 onClick={handleClick}
               >
                 Ignore
-              </ButtonStyles>
-              <ButtonStyles
+              </button>
+              <button
                 id="connect"
-                className="basis-1/3 py-2"
+                className="basis-1/3 py-2 fancy-button"
                 data-obj-id={connect.id}
                 data-idx={idx}
                 onClick={handleClick}
               >
                 Connect
-              </ButtonStyles>
+              </button>
             </div>
           ) : (
             <div
@@ -117,15 +116,15 @@ export const Request = ({ userData }) => {
                 />
               </div>
               <span className="hidden sm:block basis-1/3" />
-              <ButtonStyles
+              <button
                 id="delete"
-                className="basis-1/2 sm:basis-1/3  py-2"
+                className="basis-1/2 sm:basis-1/3 py-2 fancy-button"
                 data-obj-id={connect.id}
                 data-idx={idx}
                 onClick={handleClick}
               >
                 Delete request
-              </ButtonStyles>
+              </button>
             </div>
           )
         )

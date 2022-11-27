@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 import { slugify } from '../../../../utils/slugify';
 import { deleteDataHandler } from '../../../../services/deleteData';
-import { ButtonStyles, getUser } from '../../../export/personalDetail';
+import { FormButton, getUser } from '../../../export/personalDetail';
 import { Image } from '../../../layout/element/Image';
 
 export const Card = ({
@@ -111,22 +111,22 @@ export const Card = ({
             </span>
           </button>
           <div className="flex flex-row justify-evenly mb-5 p-2">
-            <ButtonStyles
-              className="w-2/6"
+            <button
+              className="w-2/6 fancy-button"
               data-post={item.slug}
               data-model={modelName}
               onClick={handleRemove}
               onBlur={handleRemove}
             >
               Remove
-            </ButtonStyles>
-            <ButtonStyles
-              className="w-2/6"
+            </button>
+            <button
+              className="w-2/6 fancy-button"
               data-post={item.slug}
               onClick={handleEdit}
             >
               Edit
-            </ButtonStyles>
+            </button>
           </div>
         </div>
       ))}

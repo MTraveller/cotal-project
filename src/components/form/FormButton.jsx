@@ -1,13 +1,11 @@
 import React from 'react';
 import Loader from '../layout/element/loader';
 
-import { ButtonStyles } from '../layout/style/ButtonStyle';
-
 export const FormButton = ({ id, extraStyles, handleSubmit, buttonText }) => (
-  <ButtonStyles
+  <button
     id={id ? id : `form-submit`}
     type="submit"
-    className={extraStyles}
+    className={`fancy-button ${extraStyles}`}
     data-message="Save changes made"
     onClick={handleSubmit}
   >
@@ -18,5 +16,5 @@ export const FormButton = ({ id, extraStyles, handleSubmit, buttonText }) => (
       </span>
     </span>
     <span>{buttonText}</span>
-  </ButtonStyles>
+  </button>
 );
