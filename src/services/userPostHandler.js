@@ -1,4 +1,5 @@
 import http from './httpService';
+import FormData from 'form-data';
 
 const apiEndpoint = `${process.env.GATSBY_API_URL}`;
 
@@ -16,16 +17,13 @@ export async function userProfileHandler({ data, token }) {
 
   const headers = {
     Authorization: `Cotal ${token}`,
-    'Content-Type': 'application/x-www-form-urlencoded',
   };
 
   const error = [];
 
   const res = await http
-    .put({
-      url: `${apiEndpoint}/profiles/me/`,
+    .put(`${apiEndpoint}/profiles/me/`, formData, {
       headers,
-      body: { image: data.image, status: data.status, location: data.location },
     })
     .then((res) => res)
     .catch((ex) => ex);
