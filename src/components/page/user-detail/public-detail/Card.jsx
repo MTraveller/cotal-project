@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 import { slugify } from '../../../../utils/slugify';
 import { deleteDataHandler } from '../../../../services/deleteData';
-import { FormButton, getUser } from '../../../export/personalDetail';
+import { getUser } from '../../../export/personalDetail';
 import { Image } from '../../../layout/element/Image';
 
 export const Card = ({
