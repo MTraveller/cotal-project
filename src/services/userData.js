@@ -31,7 +31,7 @@ export async function allUserDataHandler(user) {
   const data = {};
 
   const profile = await http
-    .get(apiProfileMeEndpoint + `/profiles/me/`, {})
+    .get(apiProfileMeEndpoint + `/profiles/` + user + `/`, {})
     .then((res) => res)
     .catch((ex) => ex);
 
