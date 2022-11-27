@@ -1,10 +1,8 @@
 export const displayLoader = (e) => {
   let button = e.currentTarget;
-  if (button.type !== `button`) button = document.querySelector(`#${e}`);
+  if (!button) button = document.querySelector(`#${e}`);
 
-  const disabled = Array.from(button.attributes).filter(
-    (attr) => attr.name === `disabled`
-  );
+  const disabled = button.hasAttribute(`disabled`);
 
   disabled
     ? button.removeAttribute(`disabled`)
