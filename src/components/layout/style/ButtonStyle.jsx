@@ -1,6 +1,4 @@
-import tw from 'tailwind-styled-components';
-
-export const ButtonStyles = tw.button`
+export const ButtonStyles = `
   w-full
   mt-0.5
   bg-gray-300

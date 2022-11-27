@@ -1,20 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import tw from 'tailwind-styled-components';
 
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import { UserDataProvider } from '../../context/UserDataContext';
 import { useLoggedInContext } from '../../context/LoggedInContext';
-
-const DivStyles = tw.div`
-  w-full
-  h-max
-  min-h-full
-  flex
-  flex-col
-`;
 
 const IndexDivStyles = styled.div`
   min-height: 100%;
@@ -58,14 +49,14 @@ const htmlTags = (data, children, location, isLoggedIn) => (
 const Wrapper = ({ data, children, location }) => {
   const isLoggedIn = useLoggedInContext();
 
-  return isLoggedIn && location.pathname !== `/` ? (
-    <DivStyles>{htmlTags(data, children, location, isLoggedIn)}</DivStyles>
-  ) : location.pathname === `/` ? (
+  return !isLoggedIn && location.pathname === `/` ? (
     <IndexDivStyles>
       {htmlTags(data, children, location, isLoggedIn)}
     </IndexDivStyles>
   ) : (
-    <DivStyles>{htmlTags(data, children, location, isLoggedIn)}</DivStyles>
+    <div className="w-full h-max min-h-full flex flex-col">
+      {htmlTags(data, children, location, isLoggedIn)}
+    </div>
   );
 };
 
