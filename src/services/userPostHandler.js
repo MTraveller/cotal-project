@@ -6,7 +6,7 @@ export async function userProfileHandler({ data, token }) {
 
   console.log(data);
 
-  if (data.image) formData.append(`file`, data.image);
+  if (data.image) formData.append(`image`, data.image);
   if (data.status) formData.append(`status`, data.status);
   if (data.location) formData.append(`location`, data.location);
 
