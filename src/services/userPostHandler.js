@@ -3,11 +3,11 @@ import FormData from 'form-data';
 import http from './httpService';
 
 export async function userProfileHandler({ data, token }) {
-  const formData = new FormData();
+  // const formData = new FormData();
 
-  if (data.image) formData.append(`image`, data.image, data.image.name);
-  if (data.status) formData.append(`status`, data.status);
-  if (data.location) formData.append(`location`, data.location);
+  // if (data.image) formData.append(`image`, data.image, data.image.name);
+  // if (data.status) formData.append(`status`, data.status);
+  // if (data.location) formData.append(`location`, data.location);
 
   const error = [];
 
@@ -17,7 +17,7 @@ export async function userProfileHandler({ data, token }) {
   };
 
   const res = await http
-    .post(`/profiles/me/`, formData, { headers })
+    .post(`/profiles/me/`, data, { headers })
     .then((res) => res)
     .catch((ex) => ex);
 
@@ -130,16 +130,20 @@ export async function userPostContentHander({
     'Content-Type': `multipart/form-data`,
   };
 
-  const formData = new FormData();
+  // const formData = new FormData();
 
-  if (data.image) formData.append(`image`, data.image, data.image.name);
-  if (data.title) formData.append(`title`, data.title);
-  if (isPost ? data.post : data.description)
-    formData.append(type, isPost ? data.post : data.description);
-  if (data.link) formData.append(`link`, data.link);
+  // if (data.image) formData.append(`image`, data.image, data.image.name);
+  // if (data.title) formData.append(`title`, data.title);
+  // if (isPost ? data.post : data.description)
+  //   formData.append(type, isPost ? data.post : data.description);
+  // if (data.link) formData.append(`link`, data.link);
 
-  console.log(data);
-  console.log(formData);
+  const formData = {
+    image: data.image,
+    title: data.title,
+    [type]: isPost ? data.post : data.description,
+    slug: data.slug,
+  };
 
   const error = [];
 
