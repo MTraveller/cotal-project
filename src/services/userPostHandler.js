@@ -1,31 +1,25 @@
-import http from './httpService';
 import FormData from 'form-data';
+
+import http from './httpService';
 
 export async function userProfileHandler({ data, token }) {
   const formData = new FormData();
 
-  console.log(data);
-
-  if (data.image) formData.append(`image`, data.image);
+  if (data.image) formData.append(`image`, data.image, data.image.name);
   if (data.status) formData.append(`status`, data.status);
   if (data.location) formData.append(`location`, data.location);
-
-  console.log(formData);
 
   const error = [];
 
   const headers = {
     Authorization: `Cotal ${token}`,
     'Content-Type': `multipart/form-data`,
-    'X-Requested-With': `XMLHttpRequest`,
   };
 
   const res = await http
-    .put(`/profiles/me/`, data, { headers })
+    .put(`/profiles/me/`, formData, { headers })
     .then((res) => res)
     .catch((ex) => ex);
-
-  console.log(res);
 
   if (res?.status === 200 || res?.status === 201) {
     return true;
