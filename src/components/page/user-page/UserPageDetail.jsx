@@ -88,10 +88,10 @@ export const UserPageDetail = ({ user }) => {
             )}
             <IconDivStyles>
               {socialIcon.map((obj, idx) =>
-                obj.name === data.profile.socials[idx].name ? (
+                obj.name === data.profile.socials[idx]?.name ? (
                   <a
                     key={obj.name}
-                    href={`${obj.url}/${data.profile.socials[idx].username}`}
+                    href={`${obj.url}/${data.profile.socials[idx]?.username}`}
                     target="_target"
                     rel="noreferrer noopener"
                   >
