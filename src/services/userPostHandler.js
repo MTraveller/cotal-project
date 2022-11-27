@@ -155,7 +155,7 @@ export async function userPostContentHander({
         .post(
           isPost
             ? `/posts/profiles/${user}/posts/`
-            : `$/profiles/${user}/${model.toLowerCase()}s/`,
+            : `/profiles/${user}/${model.toLowerCase()}s/`,
           formData,
           { headers }
         )
