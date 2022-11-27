@@ -90,7 +90,7 @@ export const UserPost = (props) => {
                 dataPostComments ? `justify-between` : `justify-start`
               } items-center`}
             >
-              <div className="flex flex-col gap-y-2 items-center">
+              <div className="w-2/3 flex flex-col gap-y-2">
                 <div className="flex flex-row gap-x-3 items-center">
                   {data?.profile.image ? (
                     <figure className="w-20 h-20 flex items-center">
@@ -118,7 +118,7 @@ export const UserPost = (props) => {
                 </div>
               </div>
               {dataPostComments ? (
-                <div className="flex flex-row self-end items-center gap-x-3">
+                <div className="w-1/3 flex flex-row self-end justify-end items-center gap-x-3">
                   <GoCommentDiscussion />
                   <span className="text-xs">
                     {count === 1 ? `${count} comments` : `${count} comments`}
