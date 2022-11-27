@@ -3,11 +3,11 @@ import FormData from 'form-data';
 import http from './httpService';
 
 export async function userProfileHandler({ data, token }) {
-  // const formData = new FormData();
+  const formData = new FormData();
 
-  // if (data.image) formData.append(`image`, data.image, data.image.name);
-  // if (data.status) formData.append(`status`, data.status);
-  // if (data.location) formData.append(`location`, data.location);
+  if (data.image) formData.append(`image`, data.image, data.image.name);
+  if (data.status) formData.append(`status`, data.status);
+  if (data.location) formData.append(`location`, data.location);
 
   const error = [];
 
@@ -17,7 +17,7 @@ export async function userProfileHandler({ data, token }) {
   };
 
   const res = await http
-    .post(`/profiles/me/`, data, { headers })
+    .post(`/profiles/me/`, formData, { headers })
     .then((res) => res)
     .catch((ex) => ex);
 
@@ -130,20 +130,13 @@ export async function userPostContentHander({
     'Content-Type': `multipart/form-data`,
   };
 
-  // const formData = new FormData();
+  const formData = new FormData();
 
-  // if (data.image) formData.append(`image`, data.image, data.image.name);
-  // if (data.title) formData.append(`title`, data.title);
-  // if (isPost ? data.post : data.description)
-  //   formData.append(type, isPost ? data.post : data.description);
-  // if (data.link) formData.append(`link`, data.link);
-
-  const formData = {
-    image: data.image,
-    title: data.title,
-    [type]: isPost ? data.post : data.description,
-    slug: data.slug,
-  };
+  if (data.image) formData.append(`image`, data.image, data.image.name);
+  if (data.title) formData.append(`title`, data.title);
+  if (isPost ? data.post : data.description)
+    formData.append(type, isPost ? data.post : data.description);
+  if (data.link) formData.append(`link`, data.link);
 
   const error = [];
 
@@ -173,10 +166,14 @@ export async function userPostContentHander({
     return true;
   } else if (res.code === `ERR_NETWORK`) {
     error.push(`Cotal Backend`, res.code);
-  } else if (res.response.status >= 400 && res.response.status < 500) {
+  } else if (res.response.status === 500) {
+    error.push(`Cotal Backend`, res.response.statusText);
+  } else if (res.code === `ERR_BAD_REQUEST`) {
     Object.entries(res.response.data).forEach((arr) => {
-      error.push(arr[1]);
+      error.push(arr[0], arr[1][0]);
     });
+  } else {
+    return res.statusText;
   }
 
   if (error.length !== 0) return error;
@@ -211,10 +208,14 @@ export async function userCommentHandler({ user, slug, token, data }) {
     return true;
   } else if (res.code === `ERR_NETWORK`) {
     error.push(`Cotal Backend`, res.code);
-  } else if (res.response.status >= 400 && res.response.status < 500) {
+  } else if (res.response.status === 500) {
+    error.push(`Cotal Backend`, res.response.statusText);
+  } else if (res.code === `ERR_BAD_REQUEST`) {
     Object.entries(res.response.data).forEach((arr) => {
-      error.push(`Comment`, arr[1][0]);
+      error.push(arr[0], arr[1][0]);
     });
+  } else {
+    return res.statusText;
   }
 
   if (error.length !== 0) return error;
