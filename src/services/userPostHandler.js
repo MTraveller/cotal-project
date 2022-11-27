@@ -6,10 +6,7 @@ export async function userProfileHandler({ data, token }) {
 
   console.log(data);
 
-  const { image } = data.image;
-  console.log(image);
-
-  if (data.image) formData.append(`image`, image);
+  if (data.image) formData.append(`file`, data.image);
   if (data.status) formData.append(`status`, data.status);
   if (data.location) formData.append(`location`, data.location);
 
@@ -19,7 +16,7 @@ export async function userProfileHandler({ data, token }) {
 
   const headers = {
     Authorization: `Cotal ${token}`,
-    'content-type': `multipart/form-data`,
+    'Content-Type': `multipart/form-data`,
   };
 
   const res = await http
@@ -49,7 +46,7 @@ export async function userProfileHandler({ data, token }) {
 export async function userSocialHandler({ user, data, token }) {
   const headers = {
     Authorization: `Cotal ${token}`,
-    'content-type': `multipart/form-data`,
+    'Content-Type': `multipart/form-data`,
   };
 
   const error = [];
@@ -88,7 +85,7 @@ export async function userSocialHandler({ user, data, token }) {
 export async function userLinktreesHandler({ user, data, token }) {
   const headers = {
     Authorization: `Cotal ${token}`,
-    'content-type': `multipart/form-data`,
+    'Content-Type': `multipart/form-data`,
   };
 
   const error = [];
@@ -135,7 +132,7 @@ export async function userPostContentHander({
 }) {
   const headers = {
     Authorization: `Cotal ${token}`,
-    'content-type': `multipart/form-data`,
+    'Content-Type': `multipart/form-data`,
   };
 
   const formData = new FormData();
@@ -189,7 +186,7 @@ export async function userPostContentHander({
 export async function userCommentHandler({ user, slug, token, data }) {
   const headers = {
     Authorization: `Cotal ${token}`,
-    'content-type': `multipart/form-data`,
+    'Content-Type': `multipart/form-data`,
   };
 
   const error = [];
