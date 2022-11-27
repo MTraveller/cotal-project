@@ -5,6 +5,8 @@ const apiEndpoint = `${process.env.GATSBY_API_URL}`;
 export async function userProfileHandler({ data, token }) {
   const formData = new FormData();
 
+  console.log(data);
+
   if (data.image) formData.append(`image`, data.image);
   if (data.status) formData.append(`status`, data.status);
   if (data.location) formData.append(`location`, data.location);
@@ -14,7 +16,7 @@ export async function userProfileHandler({ data, token }) {
 
   const headers = {
     Authorization: `Cotal ${token}`,
-    'Content-Type': 'multipart/form-data',
+    'Content-Type': 'application/x-www-form-urlencoded',
   };
 
   const error = [];
@@ -27,6 +29,8 @@ export async function userProfileHandler({ data, token }) {
     })
     .then((res) => res)
     .catch((ex) => ex);
+
+  console.log(res);
 
   if (res?.status === 200 || res?.status === 201) {
     return true;
