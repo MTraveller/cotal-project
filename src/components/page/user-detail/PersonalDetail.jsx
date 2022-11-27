@@ -150,7 +150,7 @@ export const PersonalDetail = () => {
           <button
             id="profile-details-btn"
             type="button"
-            className="group flex justify-center items-center gap-x-2 py-1 fancy-button"
+            className="w-full group flex justify-center items-center gap-x-2 py-1 fancy-button"
             data-open="false"
             onClick={handleDivClick}
           >
