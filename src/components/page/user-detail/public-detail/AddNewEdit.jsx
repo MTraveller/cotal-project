@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import FormData from 'form-data';
+import { toast } from 'react-toastify';
 
 import getUserDataHandler from '../../../../services/userData';
 import postDataHandler from '../../../../services/postData';
@@ -13,8 +13,6 @@ import { UploadSvg } from '../../../form/input/UploadSvg';
 import { Post } from './add-new/Post';
 import { ProfileModel } from './add-new/ProfileModel';
 import { FormButton } from '../../../form/FormButton';
-import { toast } from 'react-toastify';
-import http from '../../../../services/httpService';
 
 export const AddNewEdit = ({
   userSlug,
