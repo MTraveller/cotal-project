@@ -17,7 +17,7 @@ export async function userProfileHandler({ data, token }) {
   };
 
   const res = await http
-    .put(`/profiles/me/`, formData, { headers })
+    .post(`/profiles/me/`, formData, { headers })
     .then((res) => res)
     .catch((ex) => ex);
 
@@ -132,7 +132,7 @@ export async function userPostContentHander({
 
   const formData = new FormData();
 
-  if (data.image) formData.append(`image`, data.image);
+  if (data.image) formData.append(`image`, data.image, data.image.name);
   if (data.title) formData.append(`title`, data.title);
   if (isPost ? data.post : data.description)
     formData.append(type, isPost ? data.post : data.description);
