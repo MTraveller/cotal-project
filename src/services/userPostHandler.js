@@ -10,16 +10,20 @@ export async function userProfileHandler({ data, token }) {
   if (data.location) formData.append(`location`, data.location);
 
   console.log(formData);
+  console.log(data);
 
   const headers = {
     Authorization: `Cotal ${token}`,
+    'Content-Type': 'multipart/form-data',
   };
 
   const error = [];
 
   const res = await http
-    .put(`${apiEndpoint}/profiles/me/`, formData, {
+    .put({
+      url: `${apiEndpoint}/profiles/me/`,
       headers,
+      body: { image: data.image, status: data.status, location: data.location },
     })
     .then((res) => res)
     .catch((ex) => ex);
@@ -146,6 +150,7 @@ export async function userPostContentHander({
 
   const headers = {
     Authorization: `Cotal ${token}`,
+    'Content-Type': 'multipart/form-data',
   };
 
   const error = [];
