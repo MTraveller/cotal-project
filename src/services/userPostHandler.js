@@ -6,22 +6,24 @@ export async function userProfileHandler({ data, token }) {
 
   console.log(data);
 
-  if (data.image) formData.append(`image`, data.image);
+  const { image } = data.image;
+  console.log(image);
+
+  if (data.image) formData.append(`image`, image);
   if (data.status) formData.append(`status`, data.status);
   if (data.location) formData.append(`location`, data.location);
 
   console.log(formData);
-  console.log(data.image[0]);
-
-  const { image } = data.image;
-  console.log(image);
 
   const error = [];
 
+  const headers = {
+    Authorization: `Cotal ${token}`,
+    'content-type': `multipart/form-data`,
+  };
+
   const res = await http
-    .put(`/profiles/me/`, formData, {
-      headers: { Authorization: `Cotal ${token}` },
-    })
+    .put(`/profiles/me/`, formData, { headers })
     .then((res) => res)
     .catch((ex) => ex);
 
@@ -45,6 +47,11 @@ export async function userProfileHandler({ data, token }) {
 }
 
 export async function userSocialHandler({ user, data, token }) {
+  const headers = {
+    Authorization: `Cotal ${token}`,
+    'content-type': `multipart/form-data`,
+  };
+
   const error = [];
   for (const obj of Object.entries(data)) {
     const object = { name: obj[0], username: obj[1].username };
@@ -52,13 +59,13 @@ export async function userSocialHandler({ user, data, token }) {
     const res = obj[1].id
       ? await http
           .put(`/profiles/${user}/socials/${obj[1].id}/`, object, {
-            Authorization: `Cotal ${token}`,
+            headers,
           })
           .then((res) => res)
           .catch((ex) => ex)
       : await http
           .post(`/profiles/${user}/socials/`, object, {
-            Authorization: `Cotal ${token}`,
+            headers,
           })
           .then((res) => res)
           .catch((ex) => ex);
@@ -79,19 +86,24 @@ export async function userSocialHandler({ user, data, token }) {
 }
 
 export async function userLinktreesHandler({ user, data, token }) {
+  const headers = {
+    Authorization: `Cotal ${token}`,
+    'content-type': `multipart/form-data`,
+  };
+
   const error = [];
   const object = { username: data[0].username };
 
   const res = data[0].id
     ? await http
         .put(`/profiles/${user}/linktree/${data[0].id}/`, object, {
-          Authorization: `Cotal ${token}`,
+          headers,
         })
         .then((res) => res)
         .catch((ex) => ex)
     : await http
         .post(`/profiles/${user}/linktree/`, object, {
-          Authorization: `Cotal ${token}`,
+          headers,
         })
         .then((res) => res)
         .catch((ex) => ex);
@@ -121,7 +133,10 @@ export async function userPostContentHander({
   data,
   token,
 }) {
-  const modelName = model.toLowerCase();
+  const headers = {
+    Authorization: `Cotal ${token}`,
+    'content-type': `multipart/form-data`,
+  };
 
   const formData = new FormData();
 
@@ -131,6 +146,9 @@ export async function userPostContentHander({
     formData.append(type, isPost ? data.post : data.description);
   if (data.link) formData.append(`link`, data.link);
 
+  console.log(data);
+  console.log(formData);
+
   const error = [];
 
   const res = data.slug
@@ -138,9 +156,9 @@ export async function userPostContentHander({
         .put(
           isPost
             ? `/posts/profiles/${user}/posts/${data.slug}/`
-            : `/profiles/${user}/${modelName}s/${data.slug}/`,
+            : `/profiles/${user}/${model.toLowerCase()}s/${data.slug}/`,
           formData,
-          { Authorization: `Cotal ${token}` }
+          { headers }
         )
         .then((res) => res)
         .catch((ex) => ex)
@@ -148,9 +166,9 @@ export async function userPostContentHander({
         .post(
           isPost
             ? `/posts/profiles/${user}/posts/`
-            : `$/profiles/${user}/${modelName}s/`,
+            : `$/profiles/${user}/${model.toLowerCase()}s/`,
           formData,
-          { Authorization: `Cotal ${token}` }
+          { headers }
         )
         .then((res) => res)
         .catch((ex) => ex);
@@ -169,6 +187,11 @@ export async function userPostContentHander({
 }
 
 export async function userCommentHandler({ user, slug, token, data }) {
+  const headers = {
+    Authorization: `Cotal ${token}`,
+    'content-type': `multipart/form-data`,
+  };
+
   const error = [];
 
   // Future feature to implement edit function to comments
@@ -177,13 +200,13 @@ export async function userCommentHandler({ user, slug, token, data }) {
         .put(
           `/posts/profiles/${user}/posts/${slug}/comments/${data.id}/`,
           data,
-          { Authorization: `Cotal ${token}` }
+          { headers }
         )
         .then((res) => res)
         .catch((ex) => ex)
     : await http
         .post(`/posts/profiles/${user}/posts/${slug}/comments/`, data, {
-          Authorization: `Cotal ${token}`,
+          headers,
         })
         .then((res) => res)
         .catch((ex) => ex);
