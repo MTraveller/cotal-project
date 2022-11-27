@@ -17,10 +17,11 @@ export async function userProfileHandler({ data, token }) {
   const headers = {
     Authorization: `Cotal ${token}`,
     'Content-Type': `multipart/form-data`,
+    'X-Requested-With': `XMLHttpRequest`,
   };
 
   const res = await http
-    .put(`/profiles/me/`, formData, { headers })
+    .put(`/profiles/me/`, data, { headers })
     .then((res) => res)
     .catch((ex) => ex);
 
