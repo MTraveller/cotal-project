@@ -32,7 +32,7 @@ export const UserPageDetail = ({ user }) => {
             setData(res);
           } else if (res.profile === `error`) {
             setError(true);
-          } else if (res.response.status === 404) {
+          } else if (res.response?.status === 404) {
             setNotFound(true);
           }
         });
