@@ -35,20 +35,12 @@ export default async function postDataHandler(req) {
       delete req[2].socials;
       delete req[2].linktrees;
 
-      if (Object.keys(req[2]).length >= 2) {
+      if (Object.keys(req[2]).length > 0) {
         const response = await userProfileHandler({
           data: req[2],
           token: req[3],
         });
 
-        if (response !== true) error = [...response];
-      } else {
-        const response = await userProfileHandler({
-          data: req[2],
-          token: req[3],
-        });
-
-        console.log(response);
         if (response !== true) error = [...response];
       }
     }
@@ -85,6 +77,5 @@ export default async function postDataHandler(req) {
   }
 
   if (error.length) return error;
-  console.log(error);
   return true;
 }
