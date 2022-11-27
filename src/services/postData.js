@@ -35,7 +35,14 @@ export default async function postDataHandler(req) {
       delete req[2].socials;
       delete req[2].linktrees;
 
-      if (Object.keys(req[2]).length > 0) {
+      if (Object.keys(req[2]).length >= 2) {
+        const response = await userProfileHandler({
+          data: req[2],
+          token: req[3],
+        });
+
+        if (response !== true) error = [...response];
+      } else {
         const response = await userProfileHandler({
           data: req[2],
           token: req[3],
