@@ -22,7 +22,6 @@ export const TagInput = ({ tagArray, setTag }) => {
         return tag[0] === input.id;
       });
 
-      console.log(isTag);
       if (!isTag || isTag.length === 0) {
         setTag([...tagArray, [input.id, input.value]]);
       } else {
