@@ -7,6 +7,7 @@ export async function userProfileHandler({ data, token }) {
 
   if (typeof data.image !== `object`) delete data.image;
   if (data.image) formData.append(`image`, data.image, data.image.name);
+  if (data.imageRemoved) formData.append(`remove_image`, data.imageRemoved);
   if (data.status) formData.append(`status`, data.status);
   if (data.location) formData.append(`location`, data.location);
 
@@ -18,7 +19,7 @@ export async function userProfileHandler({ data, token }) {
   };
 
   const res = await http
-    .post(`/profiles/me/`, formData, { headers })
+    .put(`/profiles/me/`, formData, { headers })
     .then((res) => res)
     .catch((ex) => ex);
 
@@ -135,6 +136,7 @@ export async function userPostContentHander({
 
   if (typeof data.image !== `object`) delete data.image;
   if (data.image) formData.append(`image`, data.image, data.image.name);
+  if (data.imageRemoved) formData.append(`remove_image`, data.imageRemoved);
   if (data.title) formData.append(`title`, data.title);
   if (isPost ? data.post : data.description)
     formData.append(type, isPost ? data.post : data.description);
