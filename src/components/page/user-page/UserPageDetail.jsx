@@ -49,7 +49,7 @@ export const UserPageDetail = ({ user }) => {
     <>
       <div className="bg-gray-400/10 dark:bg-black/[.2] rounded-lg p-6">
         <div className="flex flex-row flex-wrap justify-between items-center">
-          <figure className="absolute sm:relative top-[160px] sm:top-auto right-10 sm:w-1/2">
+          <figure className="absolute w-28 h-28 sm:relative top-[200px] sm:top-auto right-8 sm:right-auto sm:w-1/2 sm:h-auto">
             {data.profile.image ? (
               <Image
                 image={data.profile.image}
@@ -59,7 +59,7 @@ export const UserPageDetail = ({ user }) => {
                 alt={`${data.profile.user.first_name} ${data.profile.user.last_name}`}
               />
             ) : (
-              <ProfileImageSvg widthHeight="w- sm:w-full sm:h-full" />
+              <ProfileImageSvg widthHeight="max-w-32 max-h-32 mx-auto" />
             )}
           </figure>
           <div className="w-full sm:w-1/2 flex flex-col gap-y-2">
@@ -87,11 +87,15 @@ export const UserPageDetail = ({ user }) => {
               ``
             )}
             <IconDivStyles>
-              {socialIcon.map((obj, idx) =>
-                obj.name === data.profile.socials[idx]?.name ? (
+              {socialIcon.map((obj) => {
+                const o = data.profile.socials.filter((item) =>
+                  obj.name === item.name ? item.username : false
+                )[0];
+
+                return obj.name === o?.name ? (
                   <a
                     key={obj.name}
-                    href={`${obj.url}/${data.profile.socials[idx]?.username}`}
+                    href={`${obj.url}/${o?.username}`}
                     target="_target"
                     rel="noreferrer noopener"
                   >
@@ -99,8 +103,8 @@ export const UserPageDetail = ({ user }) => {
                   </a>
                 ) : (
                   ``
-                )
-              )}
+                );
+              })}
             </IconDivStyles>
           </div>
         </div>
