@@ -12,9 +12,14 @@ export const Post = ({ form, handleChange, tagArray, setTag }) => {
     if (button.id === `add-tag`) {
       setTagCount([...tagCount, tagCount.length + 1]);
     } else if (button.id === `remove-tag`) {
-      const newCount = [...tagCount];
-      newCount.pop();
-      setTagCount(newCount);
+      if (tagCount.length !== 1) {
+        const newCount = [...tagCount];
+        newCount.pop();
+        setTagCount(newCount);
+
+        const newTagArray = tagArray.slice(0, -1);
+        setTag(newTagArray);
+      }
     }
   };
 
