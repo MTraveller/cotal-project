@@ -32,8 +32,8 @@ export const PersonalDetail = () => {
   });
 
   const [socials, setSocials] = useState({});
-
   const [preview, setPreview] = useState();
+  const [imageRemoved, setImageRemoved] = useState(false);
 
   useEffect(() => {
     if (userData && personal.status === ``) {
@@ -100,6 +100,15 @@ export const PersonalDetail = () => {
     return () => URL.revokeObjectURL(objectUrl);
   };
 
+  const handleRemoveImage = () => {
+    setPreview(undefined);
+
+    if (personal.image) {
+      setImageRemoved(true);
+    }
+    setPersonal({ ...personal, image: undefined });
+  };
+
   const handleChange = ({ currentTarget: input }) => {
     setPersonal({ ...personal, [input.name]: input.value });
   };
@@ -119,7 +128,12 @@ export const PersonalDetail = () => {
     if (!userDataCopy.linktrees.length && !e.linktrees)
       userDataCopy.linktrees = undefined;
 
-    const result = checkEquality(personal, socials, userDataCopy);
+    let result = checkEquality(personal, socials, userDataCopy);
+
+    if (imageRemoved) {
+      if (!result) result = {};
+      result[`imageRemoved`] = imageRemoved;
+    }
 
     if (result !== null) {
       displayLoader(e);
@@ -141,6 +155,9 @@ export const PersonalDetail = () => {
         removeLoader(`trigger`, document.querySelector(`#form-submit`));
       }
     }
+
+    setImageRemoved(false);
+    return null;
   };
 
   return (
@@ -182,13 +199,7 @@ export const PersonalDetail = () => {
                     text="Add Image"
                     onChange={onSelectFile}
                   />
-                  <button
-                    type="button"
-                    onClick={() => (
-                      setPersonal({ ...personal, image: undefined }),
-                      setPreview(undefined)
-                    )}
-                  >
+                  <button type="button" onClick={handleRemoveImage}>
                     Remove
                   </button>
                 </div>
