@@ -48,7 +48,7 @@ export const AddNewEdit = ({
         }
         getUserDataHandler(trail, getUser().access)
           .then((res) => {
-            return setObjectDB(res.data);
+            return setObjectDB({ ...res.data, tags: res.data.tags[0] });
           })
           .catch((ex) => {
             return ex;
@@ -88,8 +88,6 @@ export const AddNewEdit = ({
 
     return () => URL.revokeObjectURL(objectUrl);
   };
-
-  // "add_tags": ["django"]
 
   const handleChange = ({ currentTarget: input }) => {
     setForm({ ...form, [input.name]: input.value });
