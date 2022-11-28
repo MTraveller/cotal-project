@@ -33,6 +33,7 @@ export const AddNewEdit = ({
   const [objectDB, setObjectDB] = useState(null);
   const [tag, setTag] = useState([]);
   const [preview, setPreview] = useState();
+  const [imageRemoved, setImageRemoved] = useState(false);
 
   useEffect(() => {
     if (object) setIsObject(true);
@@ -40,15 +41,18 @@ export const AddNewEdit = ({
     if (isObject && !objectDB) {
       if (userSlug) {
         const objectModel = model.toLowerCase();
+        const isPost = objectModel === `post` ? true : false;
         let trail = ``;
-        if (objectModel === `post`) {
+        if (isPost) {
           trail = `/posts/profiles/${userSlug}/${objectModel}s/${object}/`;
         } else {
           trail = `/profiles/${userSlug}/${objectModel}s/${object}/`;
         }
         getUserDataHandler(trail, getUser().access)
           .then((res) => {
-            return setObjectDB({ ...res.data, tags: res.data.tags[0] });
+            if (isPost)
+              return setObjectDB({ ...res.data, tags: res.data.tags[0] });
+            if (!isPost) return setObjectDB(res.data);
           })
           .catch((ex) => {
             return ex;
@@ -89,6 +93,16 @@ export const AddNewEdit = ({
     return () => URL.revokeObjectURL(objectUrl);
   };
 
+  const handleRemoveImage = () => {
+    setPreview(undefined);
+
+    if (form.image) {
+      setImageRemoved(true);
+    }
+
+    setForm({ ...form, image: undefined });
+  };
+
   const handleChange = ({ currentTarget: input }) => {
     setForm({ ...form, [input.name]: input.value });
   };
@@ -108,6 +122,11 @@ export const AddNewEdit = ({
     formCopy[`content`] = true;
 
     const result = checkEquality(formCopy, objectDB);
+
+    if (imageRemoved) {
+      if (!result) result = {};
+      result[`imageRemoved`] = imageRemoved;
+    }
 
     if (result) {
       displayLoader(e);
@@ -146,6 +165,7 @@ export const AddNewEdit = ({
       toast(`It works, but no input no output ;)`);
     }
 
+    setImageRemoved(false);
     return null;
   };
 
@@ -174,12 +194,7 @@ export const AddNewEdit = ({
                 text="Add Image"
                 onChange={onSelectFile}
               />
-              <button
-                type="button"
-                onClick={() => (
-                  setForm({ ...form, image: undefined }), setPreview(undefined)
-                )}
-              >
+              <button type="button" onClick={handleRemoveImage}>
                 Remove
               </button>
             </div>
