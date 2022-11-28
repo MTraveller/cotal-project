@@ -156,11 +156,15 @@ export const UserPost = (props) => {
               {dataPost.map((string, idx) =>
                 string !== `` ? <p key={idx}>{string}</p> : <br key={idx} />
               )}
-              <div className="mt-6 flex flex-row flex-wrap gap-3 italic opacity-50">
-                {tags.map((obj) => (
-                  <span key={obj.tag.label}>#{obj.tag.label}</span>
-                ))}
-              </div>
+              {tags ? (
+                <div className="mt-6 flex flex-row flex-wrap gap-3 italic opacity-50">
+                  {tags.map((obj) => (
+                    <span key={obj.tag.label}>#{obj.tag.label}</span>
+                  ))}
+                </div>
+              ) : (
+                ``
+              )}
             </div>
             {dataPostComments ? (
               <>
