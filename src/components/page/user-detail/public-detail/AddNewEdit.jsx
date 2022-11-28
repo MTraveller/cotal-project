@@ -135,7 +135,9 @@ export const AddNewEdit = ({
         setObjectDB(null);
       } else {
         response[0].length > 1
-          ? toast.warn(response[0])
+          ? response[0] === `image`
+            ? toast.warn(response[1])
+            : toast.warn(response[0])
           : toast.warn(response[0][0]);
       }
       displayLoader(`${model.toLowerCase()}-submit`);
