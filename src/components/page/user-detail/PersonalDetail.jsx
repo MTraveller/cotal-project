@@ -182,6 +182,15 @@ export const PersonalDetail = () => {
                     text="Add Image"
                     onChange={onSelectFile}
                   />
+                  <button
+                    type="button"
+                    onClick={() => (
+                      setPersonal({ ...personal, image: undefined }),
+                      setPreview(undefined)
+                    )}
+                  >
+                    Remove
+                  </button>
                 </div>
               </div>
               <FlipSelectTwo
