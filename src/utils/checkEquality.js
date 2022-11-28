@@ -95,6 +95,15 @@ export const checkEquality = (data, dataTwo, server) => {
       }
     } else {
       Object.entries(data).forEach((item) => {
+        if (item[0] === `tag`) {
+          const addTags = [];
+
+          item[1].forEach((tag) => {
+            addTags.push(tag[1]);
+          });
+
+          serverChanges[`addTags`] = addTags;
+        }
         serverChanges[item[0]] = item[1];
       });
     }
