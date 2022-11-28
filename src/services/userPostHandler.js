@@ -5,6 +5,7 @@ import http from './httpService';
 export async function userProfileHandler({ data, token }) {
   const formData = new FormData();
 
+  if (typeof data.image !== `object`) delete data.image;
   if (data.image) formData.append(`image`, data.image, data.image.name);
   if (data.status) formData.append(`status`, data.status);
   if (data.location) formData.append(`location`, data.location);
@@ -132,11 +133,13 @@ export async function userPostContentHander({
 
   const formData = new FormData();
 
+  if (typeof data.image !== `object`) delete data.image;
   if (data.image) formData.append(`image`, data.image, data.image.name);
   if (data.title) formData.append(`title`, data.title);
   if (isPost ? data.post : data.description)
     formData.append(type, isPost ? data.post : data.description);
   if (data.link) formData.append(`link`, data.link);
+  if (data.addTags) formData.append(`add_tags`, JSON.stringify(data.addTags));
 
   const error = [];
 
