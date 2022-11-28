@@ -72,7 +72,9 @@ export const checkEquality = (data, dataTwo, server) => {
 
       serverEntries.forEach((serverEntry, idx) => {
         if (serverEntry[0] === `image`) {
-          serverChanges[formEntries[idx][0]] = formEntries[idx][1];
+          if (!serverEntry[1].startsWith(`https`)) {
+            serverChanges[formEntries[idx][0]] = formEntries[idx][1];
+          }
         } else {
           if (serverEntry[1] && formEntries[idx]) {
             if (serverEntry[1] !== formEntries[idx][1])
@@ -80,6 +82,17 @@ export const checkEquality = (data, dataTwo, server) => {
           }
         }
       });
+
+      const newTags = formEntries[formEntries.length - 1];
+
+      if (newTags[0] === `tag` && newTags[1].length) {
+        const addTags = [];
+        newTags[1].forEach((tag) => {
+          addTags.push(tag[1]);
+        });
+
+        serverChanges[`addTags`] = addTags;
+      }
     } else {
       Object.entries(data).forEach((item) => {
         serverChanges[item[0]] = item[1];
