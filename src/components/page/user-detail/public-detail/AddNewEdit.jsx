@@ -174,7 +174,9 @@ export const AddNewEdit = ({
               />
               <button
                 type="button"
-                onClick={() => setForm({ ...form, image: undefined })}
+                onClick={() => (
+                  setForm({ ...form, image: undefined }), setPreview(undefined)
+                )}
               >
                 Remove
               </button>
