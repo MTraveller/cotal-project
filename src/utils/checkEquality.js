@@ -71,12 +71,11 @@ export const checkEquality = (data, dataTwo, server) => {
       const serverEntries = Object.entries(dataTwo);
 
       serverEntries.forEach((serverEntry, idx) => {
-        if (serverEntry[0] === `image`) {
-          if (serverEntry[1] !== null) {
-            if (!serverEntry[1].startsWith(`https`) && formEntries[idx][1]) {
-              serverChanges[formEntries[idx][0]] = formEntries[idx][1];
-            }
-          }
+        if (
+          serverEntry[0] === `image` &&
+          typeof formEntries[idx][1] === `object`
+        ) {
+          serverChanges[formEntries[idx][0]] = formEntries[idx][1];
         } else {
           if (serverEntry[1] && formEntries[idx]) {
             if (serverEntry[1] !== formEntries[idx][1])
