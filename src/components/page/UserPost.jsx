@@ -17,7 +17,7 @@ export const UserPost = (props) => {
   const [pageProps, setPageProps] = useState();
   const [data, setData] = useState(null);
   const [dataPost, setDataPost] = useState();
-  const [tag, setTags] = useState();
+  const [tags, setTags] = useState();
   const [count, setCount] = useState();
   const [dataPostComments, setDataPostComments] = useState();
 
@@ -120,8 +120,11 @@ export const UserPost = (props) => {
               {dataPostComments ? (
                 <div className="w-1/3 flex flex-row self-end justify-end items-center gap-x-3">
                   <GoCommentDiscussion />
-                  <span className="text-xs">
-                    {count === 1 ? `${count} comments` : `${count} comments`}
+                  <span className="w-auto text-xs">
+                    {count}
+                    <span className="hidden sm:inline">
+                      {count === 1 ? `${` `}comment` : `${` `}comments`}
+                    </span>
                   </span>
                 </div>
               ) : (
@@ -153,6 +156,11 @@ export const UserPost = (props) => {
               {dataPost.map((string, idx) =>
                 string !== `` ? <p key={idx}>{string}</p> : <br key={idx} />
               )}
+              <div className="mt-6 flex flex-row flex-wrap gap-3 italic opacity-50">
+                {tags.map((obj) => (
+                  <span key={obj.tag.label}>#{obj.tag.label}</span>
+                ))}
+              </div>
             </div>
             {dataPostComments ? (
               <>
