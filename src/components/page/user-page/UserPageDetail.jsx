@@ -55,7 +55,7 @@ export const UserPageDetail = ({ user }) => {
                 image={data.profile.image}
                 addedModelName="profile"
                 slug={data.profile.slug}
-                className="rounded-full w-32 h-32 mx-auto"
+                className="rounded-full w-28 h-28 mx-auto"
                 alt={`${data.profile.user.first_name} ${data.profile.user.last_name}`}
               />
             ) : (
