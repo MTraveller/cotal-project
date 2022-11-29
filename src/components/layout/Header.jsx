@@ -185,10 +185,10 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
                     )}
                   </div>
                   <div className="ml-3">
-                    <div className="text-base font-medium leading-none text-zinc-600   dark:text-white">
+                    <div className="text-base font-medium leading-none text-zinc-900 dark:text-white">
                       {userData?.user?.first_name} {userData?.user?.last_name}
                     </div>
-                    <div className="text-sm font-medium leading-none text-zinc-600 dark:text-gray-400">
+                    <div className="text-sm font-medium leading-none text-zinc-700 dark:text-gray-400">
                       {userData?.slug}
                     </div>
                   </div>
@@ -199,7 +199,7 @@ const Header = ({ siteTitle, location, isLoggedIn }) => {
                       key={item.name}
                       as="a"
                       to={item.href}
-                      className="block rounded-md px-3 py-2 text-base font-medium text-zinc-600 dark:text-gray-400 hover:bg-gray-600 dark:hover:bg-gray-700 hover:text-zinc-300 dark:hover:text-white"
+                      className="block rounded-md px-3 py-2 text-base font-medium text-zinc-900 dark:text-gray-400 hover:bg-gray-600 dark:hover:bg-gray-700 hover:text-zinc-300 dark:hover:text-white"
                       onClick={handleClick}
                     >
                       {item.name}
