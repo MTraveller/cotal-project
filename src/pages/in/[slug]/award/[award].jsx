@@ -8,9 +8,9 @@ import Seo from '../../../../components/Seo';
 export default function Post({ params }) {
   return (
     <ThreeSection
-      leftStyles="hidden lg:block flex-1 max-w-60"
+      leftStyles="hidden xl:block flex-none w-60"
       middleStyles="flex-auto w-[500px] max-w-[782px]"
-      rightStyles="hidden lg:block flex-1 max-w-60"
+      rightStyles="hidden xl:block flex-none w-60"
       componentLeft={SideBarLeft}
       componentMiddle={UserPost}
       componentRight={SideBarRight}
