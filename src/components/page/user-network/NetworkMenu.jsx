@@ -11,7 +11,7 @@ export const NetworkMenu = ({ setMenu }) => {
         <button
           id="request"
           type="button"
-          className="py-2 fancy-button"
+          className="basis-1/2 sm:w-full py-2 fancy-button"
           onClick={handleClick}
         >
           View Requests
@@ -19,7 +19,7 @@ export const NetworkMenu = ({ setMenu }) => {
         <button
           id="network"
           type="button"
-          className="py-2 fancy-button"
+          className="basis-1/2 sm:w-full py-2 fancy-button"
           onClick={handleClick}
         >
           View Network
