@@ -54,7 +54,7 @@ const Wrapper = ({ data, children, location }) => {
       {htmlTags(data, children, location, isLoggedIn)}
     </IndexDivStyles>
   ) : (
-    <div className="w-full h-max min-h-full flex flex-col">
+    <div className="w-full h-max min-h-full flex flex-col scroll-smooth">
       {htmlTags(data, children, location, isLoggedIn)}
     </div>
   );
