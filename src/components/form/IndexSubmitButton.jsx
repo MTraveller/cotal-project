@@ -2,7 +2,7 @@ import React from 'react';
 
 import Loader from '../layout/element/loader';
 
-export const SubmitButton = ({ buttonText }) => (
+export const IndexSubmitButton = ({ buttonText }) => (
   <button
     id="index-submit"
     type="submit"
