@@ -7,7 +7,6 @@ export const ImageInput = ({ id, onChange }) => (
     name="image"
     type="file"
     accept="image/*"
-    encType="multipart/form-data"
     onChange={onChange}
   />
 );
