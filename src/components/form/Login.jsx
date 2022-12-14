@@ -6,7 +6,7 @@ import { addLoader } from '../layout/element/button/addLoader';
 import { handleLogin } from '../../services/authService';
 import { removeLoader } from '../layout/element/button/removeLoader';
 import { Input } from './input/Input';
-import { SubmitButton } from './indexButton';
+import { IndexSubmitButton } from './IndexSubmitButton';
 
 const Login = ({ form }) => {
   const previousPath = globalHistory.location.pathname;
@@ -111,7 +111,7 @@ const Login = ({ form }) => {
       </div>
 
       <div>
-        <SubmitButton buttonText="Sign in" />
+        <IndexSubmitButton buttonText="Sign in" />
       </div>
     </form>
   );

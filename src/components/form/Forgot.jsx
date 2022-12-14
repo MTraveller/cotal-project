@@ -4,7 +4,7 @@ import { addLoader } from '../layout/element/button/addLoader';
 import { handleResetPassword } from '../../services/authService';
 import { removeLoader } from '../layout/element/button/removeLoader';
 import { Input } from './input/Input';
-import { SubmitButton } from './indexButton';
+import { IndexSubmitButton } from './IndexSubmitButton';
 
 const Forgot = ({ form }) => {
   const [account, setAccount] = useState({ email: '' });
@@ -87,7 +87,7 @@ const Forgot = ({ form }) => {
       </div>
 
       <div>
-        <SubmitButton buttonText="Submit" />
+        <IndexSubmitButton buttonText="Submit" />
       </div>
     </form>
   ) : (
