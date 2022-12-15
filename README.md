@@ -186,7 +186,7 @@ Throughout the development of Cotal, the concept of reusing components was of hi
 | [userData.js](./src/services/userData.js) | To get the current user information from database. |
 | [UserPost.jsx](./src/components/page/UserPost.jsx) | To display a user post, portfolio, award, certificate and creative. |
 | [SideBarLeft.jsx](./src/components/page/side-bar/three-section/SideBarLeft.jsx) | To display left sidebar on different page for three section page layout. |
-| [SideBarRight.jsx](./src/components/page/side-bar/three-section/SideBarRight.jsx) | To display left sidebar on different page for three section page layout. |
+| [SideBarRight.jsx](./src/components/page/side-bar/three-section/SideBarRight.jsx) | To display right sidebar on different page for three section page layout. |
 | [SideBar.jsx](./src/components/page/side-bar/two-section/SideBar.jsx) | To display left/right sidebar on different page for two section page layout. |
 | [OneSection.jsx](./src/components/layout/template/public-route/OneSection.jsx) | To display a one section page layout. For not logged in users. |
 | [OneSection.jsx](./src/components/layout/template/private-route/OneSection.jsx) | To display a one section page layout. For logged in users. |
