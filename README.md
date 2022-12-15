@@ -224,8 +224,8 @@ Throughout the development of Cotal, the concept of reusing components was of hi
 3. [GitHub:](https://github.com/ 'github.com')
 - GitHub is used to store the project's code after being pushed from Git.
 
-4. [Render](https://www.render.com 'render.com')
-- Render is a unified cloud to build and run all your apps and websites with free TLS certificates, a global CDN, DDoS protection, private networks, and auto deploys from Git.
+4. [Netlify](https://www.netlify.com 'netlify.com')
+- The fastest way to combine your favorite tools and APIs to build the fastest sites, stores, and apps for the web.
 
 6. [VisualStudioCode](https://code.visualstudio.com 'code.visualstudio.com')
 - Visual Studio Code is a code editor redefined and optimized for building and debugging modern web and cloud applications.
