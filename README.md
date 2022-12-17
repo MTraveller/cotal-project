@@ -327,11 +327,12 @@ First install [gatsby-cli](https://www.gatsbyjs.com/docs/reference/gatsby-cli/ "
 
 Then clone the repo if you haven't done so already and [install or initiate yarn](https://yarnpkg.com/getting-started/install). Then using the terminal inside the cloned folder write `yarn install` and yarn will install all dependencies. Thereafter you can do one of the following.
 
+In the base folder, the files .env.development-RENAME and .env.production-RENAME must be edited before using any of the commands below.
+
 yarn start to start the development<br>
 yarn build to build an optimized version<br>
 yarn serve to serve as production.<br>
 
-the env.development and env.production needs edit.
 
 ### Deploy
 
