@@ -175,32 +175,43 @@ The site's goal is to bring young people together and encourage them to work tog
 
 #### Component Reuse
 
-Throughout the development of Cotal, the concept of reusing components was of high importance, and while it is clearly evident that components were reused in this project, it was not appreciated. This section is to document some of the reused components.
+Throughout the development of Cotal, the concept of reusing components was of high importance, and it is clearly evident that this project displays understanding of the React architecture. This section is to document the reused components.
+
+<br>
 
 |                         Component                      |                       Explanation                   |
 | :----------------------------------------------------: | :-------------------------------------------------: |
-| [Input.jsx](./src/components/form/input/Input.jsx) | Allowing to use one `<input />` for all inputs. |
-| [checkEquality.js](./src/utils/checkEquality.js) | To check input values against database values and detect changes. |
-| [httpService.js](./src/services/httpService.js) | To allow communication bwtween frontend and backend. |
-| [authService.js](./src/services/authService.js) | To allow loggin in/loggin out, storing user token and more. |
-| [userData.js](./src/services/userData.js) | To get the current user information from database. |
+| [Input.jsx](./src/components/form/input/Input.jsx) | Allowing to use one `<input />` for all text based inputs. |
+| [Loader.jsx](./src/components/Loader.jsx) | To display a spinning loader to indicate processing. |
 | [UserPost.jsx](./src/components/page/UserPost.jsx) | To display a user post, portfolio, award, certificate and creative. |
-| [SideBarLeft.jsx](./src/components/page/side-bar/three-section/SideBarLeft.jsx) | To display left sidebar on different page for three section page layout. |
-| [SideBarRight.jsx](./src/components/page/side-bar/three-section/SideBarRight.jsx) | To display right sidebar on different page for three section page layout. |
-| [SideBar.jsx](./src/components/page/side-bar/two-section/SideBar.jsx) | To display left/right sidebar on different page for two section page layout. |
-| [OneSection.jsx](./src/components/layout/template/public-route/OneSection.jsx) | To display a one section page layout. For not logged in users. |
-| [OneSection.jsx](./src/components/layout/template/private-route/OneSection.jsx) | To display a one section page layout. For logged in users. |
-| [TwoSectionLeft.jsx](./src/components/layout/template/private-route/TwoSectionLeft.jsx) | To display a two section page layout with left sidebar. |
-| [TwoSectionRight.jsx](./src/components/layout/template/private-route/TwoSectionRight.jsx) | To display a two section page layout with right sidebar. |
-| [ThreeSection.jsx](./src/components/layout/template/private-route/ThreeSection.jsx) | To display a three section page layout with left and right sidebars. |
-| [LoggedInContext.jsx](./src/context/LoggedInContext.jsx) | To allow easy check if visitor is logged in |
-| [UserDataContext.jsx](./src/context/UserDataContext.jsx) | To allow easy access no matter component depth of userData |
+| [SideBarLeft.jsx](./src/components/page/side-bar/three-section/SideBarLeft.jsx) | To display the left sidebar on different pages for a three-section page layout. |
+| [SideBarRight.jsx](./src/components/page/side-bar/three-section/SideBarRight.jsx) | To display the right sidebar on different pages for a three-section page layout. |
+| [SideBar.jsx](./src/components/page/side-bar/two-section/SideBar.jsx) | To display the left or right sidebar on different pages for a two-section page layout. |
+| [OneSection.jsx](./src/components/layout/template/public-route/OneSection.jsx) | To display a one-section page layout for non-logged-in users. |
+| [OneSection.jsx](./src/components/layout/template/private-route/OneSection.jsx) | To display a one-section page layout for logged-in users. |
+| [ThreeSection.jsx](./src/components/layout/template/private-route/ThreeSection.jsx) | To display a three-section page layout with left and right sidebars. |
+| [TwoSectionLeft.jsx](./src/components/layout/template/private-route/TwoSectionLeft.jsx) | To display a two-section page layout with a left sidebar. |
+| [TwoSectionRight.jsx](./src/components/layout/template/private-route/TwoSectionRight.jsx) | To display a two-section page layout with a right sidebar. |
 | [Seo.jsx](./src/components/Seo.jsx) | To inject meta tags to `<head>` |
-| [InputEditButton.jsx](./src/components/form/InputEditButton.jsx) | To allow to swap between span and input in PersonalDetail.jsx |
-| [FlipTwo.jsx](./src/components/form/input/FlipTwo.jsx) | To allow to swap between social icons and input in PersonalDetail.jsx |
-| [Textarea.jsx](./src/components/form/input/Textarea.jsx) | To use one `<textarea>` input on multiple components. |
-| [UploadSvg.jsx](./src/components/form/input/UploadSvg.jsx) | To use a unified upload icon on multiple places but with different width and height. |
+| [InputEditButton.jsx](./src/components/form/InputEditButton.jsx) | To swap between span and input in PersonalDetail.jsx |
+| [FlipTwo.jsx](./src/components/form/input/FlipTwo.jsx) | To swap between social icons and input in PersonalDetail.jsx |
+| [Textarea.jsx](./src/components/form/input/Textarea.jsx) | To use one `<textarea>` input in multiple components. |
+| [UploadSvg.jsx](./src/components/form/input/UploadSvg.jsx) | To use a unified upload icon in multiple locations but with different width and height. |
 | [SocialInput.jsx](./src/components/form/input/profile/SocialInput.jsx) | To allow one component to be reused for different social icons. |
+| [LessThanTwo.jsx](./src/components/page/user-page/grid/LessThanTwo.jsx) | To display a section with one post. |
+| [LessThanThree.jsx](./src/components/page/user-page/grid/LessThanThree.jsx) | To display a section with up to two posts. |
+| [MoreThanTwo.jsx](./src/components/page/user-page/grid/MoreThanTwo.jsx) | To display a section with more than two posts. |
+| [ProfileImageSvg.jsx](./src/components/layout/element/ProfileImageSvg.jsx) | To display an avatar icon. |
+| [Image.jsx](./src/components/layout/element/Image.jsx) | To display an optimized and lazy-loaded cloudinary image. |
+| [IndexSubmitButton.jsx](./src/components/form/IndexSubmitButton.jsx) | To display the form submit button on the index page in Login, Register and Forgot components. |
+| [InputEditButton.jsx](./src/components/form/InputEditButton.jsx) | To display the edit button to allow editing of the personal details objects. |
+| [ImageInput.jsx](./src/components/form/input/ImageInput.jsx) | To display a hidden file input. |
+| [ButtonImageInput.jsx](./src/components/form/input/ButtonImageInput.jsx) | To display a file input field as an image. |
+| [ButtonLabelInput.jsx](./src/components/form/input/ButtonLabelInput.jsx) | To display a file input field as a label with an icon. |
+| [OpenLinkExternal.jsx](./src/components/layout/element/OpenLinkExternal.jsx) | To display a button that programmatically opens external links. |
+| [ServerError.jsx](./src/components/ServerError.jsx) | To display an server error message to the user. |
+
+<br>
 
 #### Languages Used
 
@@ -312,9 +323,9 @@ How to clone this project:
 
 ### Development
 
-Download the repo and install yarn. Then write yarn install and yarn will install all dependencies. There after you can do one of the following.
+First install [gatsby-cli](https://www.gatsbyjs.com/docs/reference/gatsby-cli/ "gatsbyjs.com/docs").
 
-First install [gatsby-cli](https://www.gatsbyjs.com/docs/reference/gatsby-cli/ "gatsbyjs.com/docs")
+Then clone the repo if you haven't done so already and [install or initiate yarn](https://yarnpkg.com/getting-started/install). Then using the terminal inside the cloned folder write `yarn install` and yarn will install all dependencies. Thereafter you can do one of the following.
 
 yarn start to start the development<br>
 yarn build to build an optimized version<br>
