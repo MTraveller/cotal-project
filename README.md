@@ -303,7 +303,7 @@ JS validator through VSCode, eslint.
 
 How to fork this repository:
 
-1. Log in to GitHub and navigate to [this repository](https://github.com/MTraveller/cotal).
+1. Log in to GitHub and navigate to [this repository](https://github.com/MTraveller/cotal-project).
 2. You'll see a button called <b>Fork</b> on the top right side of the page. Click the button to create a copy of this repository to your own GitHub account.
 
 <br>
@@ -316,7 +316,7 @@ How to clone this project:
 2. In the <b>HTTPS</b> tap, click on the clipboard icon to copy the given URL.
 3. In your IDE of choice, open <b>**git bash**</b>.
 4. Change the current working directory to where you want the cloned directory to be.
-5. Type <b>**git clone**</b>, paste the URL copied from GitHub - https://github.com/MTraveller/cotal.git.
+5. Type <b>**git clone**</b>, paste the URL copied from GitHub - https://github.com/MTraveller/cotal-project.git.
 6. Press <b>**enter**</b>, and you are done.
 
 <br>
