@@ -7,7 +7,7 @@ import postDataHandler from '../../../../services/postData';
 import { Image } from '../../../layout/element/Image';
 import { OpenLinkExternal } from '../../../layout/element/OpenLinkExternal';
 import { ProfileImageSvg } from '../../../layout/element/ProfileImageSvg';
-import Loader from '../../../layout/element/loader';
+import Loader from '../../../Loader';
 
 export const Network = ({ userData }) => {
   const [data, setData] = useState();

@@ -7,7 +7,7 @@ import getUserDataHandler from '../../services/userData';
 import { Image } from '../layout/element/Image';
 import { ProfileImageSvg } from '../layout/element/ProfileImageSvg';
 import { Comment } from './user-post/Comment';
-import Loader from '../layout/element/loader';
+import Loader from '../Loader';
 import NotFoundPage from '../../pages/404';
 
 export const UserPost = (props) => {

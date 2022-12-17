@@ -9,7 +9,7 @@ import {
   LoggedInContext,
 } from '../context/LoggedInContext';
 import { getUser } from '../services/authService';
-import ClientOnly from '../hooks/ClientOnly';
+import ClientOnly from '../components/ClientOnly';
 import Wrapper from '../components/layout/Wrapper';
 
 const Layout = ({ children, location }) => {

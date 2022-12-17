@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import { addLoader } from '../layout/element/button/addLoader';
+import { addLoader } from '../../utils/addLoader';
 import { handleResetPassword } from '../../services/authService';
-import { removeLoader } from '../layout/element/button/removeLoader';
+import { removeLoader } from '../../utils/removeLoader';
 import { Input } from './input/Input';
 import { IndexSubmitButton } from './IndexSubmitButton';
 

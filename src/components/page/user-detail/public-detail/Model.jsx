@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import getUserDataHandler from '../../../../services/userData';
 import { getUser } from '../../../../services/authService';
 import { Card } from './Card';
-import Loader from '../../../layout/element/loader';
+import Loader from '../../../Loader';
 
 export const Model = ({ userSlug, model, setObject, handleObjectEdit }) => {
   const [slug, setSlug] = useState();

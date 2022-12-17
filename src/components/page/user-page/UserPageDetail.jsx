@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { allUserDataHandler } from '../../../services/userData';
-import { ServerError } from '../../ServerError';
+import {
+  Image,
+  ProfileImageSvg,
+  socialIcon,
+  LessThanTwo,
+  LessThanThree,
+  MoreThanTwo,
+  allUserDataHandler,
+  ServerError,
+} from '../../../export/userPageDetail';
 import NotFoundPage from '../../../pages/404';
-import { Image } from '../../layout/element/Image';
-import { ProfileImageSvg } from '../../export/personalDetail';
-import { socialIcon } from '../../layout/element/socialIcons';
-import { LessThanTwo } from './grid/LessThanTwo';
-import { LessThanThree } from './grid/LessThanThree';
-import { MoreThanTwo } from './grid/MoreThanTwo';
-import Loader from '../../layout/element/loader';
+import Loader from '../../Loader';
 
 const IconDivStyles = styled.div`
   display: flex;

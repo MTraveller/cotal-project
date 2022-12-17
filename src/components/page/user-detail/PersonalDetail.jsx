@@ -16,10 +16,10 @@ import {
   FlipSelectTwo,
   FlipTwo,
   getUser,
-} from '../../export/personalDetail';
+} from '../../../export/personalDetail';
 import postDataHandler from '../../../services/postData';
-import Loader from '../../layout/element/loader';
-import { removeLoader } from '../../layout/element/button/removeLoader';
+import Loader from '../../Loader';
+import { removeLoader } from '../../../utils/removeLoader';
 
 export const PersonalDetail = () => {
   const { userData, setUserData } = useUserDataContext();

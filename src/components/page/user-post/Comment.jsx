@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import postDataHandler from '../../../services/postData';
-import { getUser } from '../../export/personalDetail';
+import { getUser } from '../../../services/authService';
 import { Textarea } from '../../form/input/Textarea';
 import { FormButton } from '../../form/FormButton';
 import { toast } from 'react-toastify';

@@ -7,7 +7,7 @@ import {
   checkEquality,
   displayLoader,
   getUser,
-} from '../../../export/personalDetail';
+} from '../../../../export/personalDetail';
 import { ButtonLabelInput } from '../../../form/input/ButtonLabelInput';
 import { UploadSvg } from '../../../form/input/UploadSvg';
 import { Post } from './add-new/Post';

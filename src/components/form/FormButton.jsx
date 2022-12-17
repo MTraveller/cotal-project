@@ -1,5 +1,5 @@
 import React from 'react';
-import Loader from '../layout/element/loader';
+import Loader from '../Loader';
 
 export const FormButton = ({ id, extraStyles, handleSubmit, buttonText }) => (
   <button

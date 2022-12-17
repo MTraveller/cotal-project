@@ -4,9 +4,9 @@ import { Link } from 'gatsby';
 
 import { getUser } from '../../../services/authService';
 import getFeedDataHandler from '../../../services/feedData';
-import { ProfileImageSvg } from '../../export/personalDetail';
+import { ProfileImageSvg } from '../../layout/element/ProfileImageSvg';
 import { Image } from '../../layout/element/Image';
-import Loader from '../../layout/element/loader';
+import Loader from '../../Loader';
 
 import Seo from '../../Seo';
 

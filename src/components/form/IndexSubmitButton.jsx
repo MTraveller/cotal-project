@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Loader from '../layout/element/loader';
+import Loader from '../Loader';
 
 export const IndexSubmitButton = ({ buttonText }) => (
   <button
